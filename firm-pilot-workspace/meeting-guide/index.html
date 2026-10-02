@@ -3,260 +3,377 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FirmPilot Meeting Guide — v2 (private)</title>
+  <title>FirmPilot Meeting Guide — cockpit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0e1318;
-      --bg-raise: #161c24;
-      --bg-soft: #1a212b;
-      --line: #2c3748;
-      --text: #edf2f8;
-      --muted: #b0bdc9;
-      --dim: #7a8a9c;
-      --accent: #8bbcff;
-      --accent-soft: rgba(139, 188, 255, 0.14);
-      --warn: #ebc67a;
-      --warn-soft: rgba(235, 198, 122, 0.14);
-      --ok: #8fd4a8;
-      --bad: #f0a0a0;
-      --focus: #b5d0ff;
-      --radius: 12px;
+      --bg: #0c1015;
+      --bg-raise: #151b24;
+      --bg-soft: #1a222d;
+      --line: #334155;
+      --text: #f1f5f9;
+      --muted: #cbd5e1;
+      --dim: #94a3b8;
+      --accent: #7db4ff;
+      --accent-soft: rgba(125, 180, 255, 0.14);
+      --warn: #f0c674;
+      --warn-soft: rgba(240, 198, 116, 0.14);
+      --ok: #86d9a5;
+      --bad: #f5a5a5;
+      --focus: #b8d4ff;
+      --radius: 14px;
       --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-      --measure: 40rem;
+      --body: 1.3125rem;
     }
     * { box-sizing: border-box; }
-    html { font-size: 18px; scroll-behavior: smooth; }
+    html { font-size: 16px; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
     body {
       margin: 0;
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      font-size: var(--body);
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent); }
-    .wrap { max-width: 50rem; margin: 0 auto; padding: 1.4rem 1.4rem 4rem; }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(9, 13, 18, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.5rem;
+      align-items: center;
+    }
+    .top-nav .brand {
+      font-weight: 650;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      color: var(--text);
+    }
+    .top-nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.98rem;
+      font-weight: 500;
+      padding: 0.4rem 0.7rem;
+      border-radius: 8px;
+    }
+    .top-nav a:hover { background: var(--bg-raise); color: var(--text); }
+    .top-nav a.os {
+      margin-left: auto;
+      background: var(--accent-soft);
+      border: 1px solid rgba(125, 180, 255, 0.4);
+      color: #d4e6ff;
+    }
+
+    .wrap { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1.35rem 4rem; }
+
     .eyebrow {
       font-family: var(--mono);
-      font-size: 0.66rem;
+      font-size: 0.78rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--dim);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.3rem;
     }
-    header.top {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem 1rem;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.9rem;
-      border-bottom: 1px solid var(--line);
+    h1 {
+      margin: 0 0 0.4rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
-    .title-line { font-size: 1.2rem; font-weight: 650; letter-spacing: -0.015em; }
-    .meta { color: var(--dim); font-size: 0.82rem; }
-    .link-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.15rem; }
-    .chip {
-      display: inline-block;
-      font-size: 0.78rem;
-      text-decoration: none;
+    .sub {
       color: var(--muted);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.28rem 0.7rem;
-      background: var(--bg-raise);
+      font-size: 1.08rem;
+      margin: 0 0 1.25rem;
+      max-width: 38rem;
     }
-    .chip:hover { color: var(--text); border-color: #4a5d78; }
-    .chip.primary {
-      background: var(--accent-soft);
-      border-color: rgba(139, 188, 255, 0.4);
-      color: #d4e6ff;
-    }
+
     .listen {
       background: var(--warn-soft);
-      border: 1px solid rgba(235, 198, 122, 0.32);
+      border: 1px solid rgba(240, 198, 116, 0.35);
       border-radius: var(--radius);
-      padding: 0.95rem 1.1rem;
-      margin-bottom: 1.15rem;
-      color: #f3e4bf;
-      max-width: var(--measure);
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 1.25rem;
+      color: #f5e6c0;
     }
     .listen strong { color: var(--warn); }
-    .thesis {
-      background: var(--bg-raise);
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--accent);
+
+    .walk {
+      background: var(--accent-soft);
+      border: 1px solid rgba(125, 180, 255, 0.35);
       border-radius: var(--radius);
       padding: 1.1rem 1.2rem;
       margin-bottom: 1.5rem;
     }
-    .thesis h1 {
+    .walk h2 {
       margin: 0 0 0.75rem;
-      font-size: 0.7rem;
+      font-size: 1.2rem;
+    }
+    .walk ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+    }
+    .walk li {
+      display: grid;
+      grid-template-columns: 1.75rem 1fr;
+      gap: 0.5rem;
+      font-size: 1.08rem;
+    }
+    .walk .n {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .thesis {
+      display: grid;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 700px) {
+      .thesis { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .thesis .t {
+      background: var(--bg-raise);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.95rem 1rem;
+    }
+    .thesis .t h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.78rem;
       font-family: var(--mono);
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--accent);
       font-weight: 500;
     }
-    .thesis-points { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.75rem; max-width: var(--measure); }
-    .thesis-points li {
-      font-size: 1rem;
-      padding-left: 1rem;
-      border-left: 2px solid #314257;
-    }
-    .section { margin-bottom: 1.75rem; }
-    h2 { margin: 0 0 0.85rem; font-size: 1.12rem; font-weight: 650; letter-spacing: -0.015em; }
-    .mission {
-      background: var(--accent-soft);
-      border: 1px solid rgba(139, 188, 255, 0.3);
-      border-radius: var(--radius);
-      padding: 0.9rem 1rem;
-      margin-bottom: 1.5rem;
-      max-width: var(--measure);
-      font-size: 0.95rem;
-    }
-    details.panel {
-      background: var(--bg-raise);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      margin-bottom: 0.55rem;
-      overflow: hidden;
-    }
-    details.panel[open] { border-color: #3d4f68; background: var(--bg-soft); }
-    details.panel summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 0.85rem 1rem;
-      font-weight: 600;
-      font-size: 0.98rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      user-select: none;
-    }
-    details.panel summary::-webkit-details-marker { display: none; }
-    details.panel summary::before {
-      content: "▸";
-      color: var(--accent);
-      font-size: 0.8rem;
-      width: 1ch;
-      transition: transform 0.12s ease;
-    }
-    details.panel[open] summary::before { transform: rotate(90deg); }
-    details.panel summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
-    .tag {
-      margin-left: auto;
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--dim);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.15rem 0.45rem;
-    }
-    .panel-body {
-      padding: 0 1rem 1.05rem 2.2rem;
-      border-top: 1px solid var(--line);
+    .thesis .t p {
+      margin: 0;
+      font-size: 1.02rem;
       color: var(--muted);
-      font-size: 0.92rem;
-      max-width: 44rem;
     }
-    .panel-body p { margin: 0.75rem 0 0; }
-    .panel-body p:first-child { margin-top: 0.8rem; }
-    .panel-body ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
-    .panel-body li { margin-bottom: 0.4rem; }
-    .panel-body strong { color: var(--text); }
+    .thesis .t strong { color: var(--text); }
+
+    .section { margin-bottom: 2.25rem; scroll-margin-top: 4.5rem; }
+    h2.sec {
+      margin: 0 0 0.85rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .lede {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-size: 1.05rem;
+    }
+
+    /* Audience tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+    .tabs button {
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 550;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--bg-raise);
+      color: var(--muted);
+      padding: 0.55rem 0.85rem;
+      cursor: pointer;
+    }
+    .tabs button:hover { color: var(--text); border-color: #4a5d78; }
+    .tabs button.active {
+      background: var(--accent-soft);
+      border-color: rgba(125, 180, 255, 0.5);
+      color: #d4e6ff;
+    }
+    .tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+    .audience-panel {
+      display: none;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.2rem 1.25rem;
+    }
+    .audience-panel.active { display: block; }
+    .audience-panel h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1.2rem;
+    }
+    .audience-panel ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+    .audience-panel li { margin-bottom: 0.55rem; }
+    .audience-panel strong { color: var(--text); }
     .why {
       display: block;
       color: var(--dim);
-      font-size: 0.82rem;
+      font-size: 0.92rem;
       margin-top: 0.15rem;
     }
     .os-link {
       display: inline-block;
-      margin-top: 0.55rem;
-      font-size: 0.82rem;
+      margin-top: 0.9rem;
+      font-size: 0.95rem;
       font-family: var(--mono);
     }
-    .flag {
-      background: var(--bg);
+
+    /* Red flag chips */
+    .flag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .flag-chip {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 0.98rem;
+      color: var(--text);
+      background: var(--bg-raise);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.7rem 0.8rem;
-      margin-top: 0.55rem;
+      border-left: 4px solid var(--bad);
+      border-radius: 10px;
+      padding: 0.55rem 0.85rem;
+      max-width: 100%;
+      line-height: 1.35;
     }
-    .flag .heard {
-      color: var(--bad);
-      font-weight: 600;
-      font-size: 0.92rem;
+    .flag-chip:hover {
+      border-color: #4a5d78;
+      border-left-color: var(--bad);
+      background: var(--bg-soft);
     }
-    .flag .go {
-      margin-top: 0.35rem;
-      font-size: 0.84rem;
+    .flag-chip .go {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 0.25rem;
+      letter-spacing: 0.02em;
+    }
+    .flag-group-label {
+      width: 100%;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin: 0.85rem 0 0.35rem;
+    }
+    .flag-group-label:first-child { margin-top: 0; }
+
+    .deep-cards {
+      display: grid;
+      gap: 0.65rem;
+    }
+    @media (min-width: 700px) {
+      .deep-cards { grid-template-columns: 1fr 1fr; }
+    }
+    .deep-card {
+      background: var(--bg-raise);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.05rem;
+    }
+    .deep-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.05rem;
+    }
+    .deep-card p {
+      margin: 0;
       color: var(--muted);
+      font-size: 1rem;
     }
+    .deep-card a {
+      display: inline-block;
+      margin-top: 0.55rem;
+      font-size: 0.9rem;
+      font-family: var(--mono);
+    }
+
     .notes {
       background: var(--bg-soft);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.1rem 1.05rem 1.2rem;
+      padding: 1.25rem 1.15rem 1.35rem;
     }
     .notes-head {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.7rem;
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 1rem;
-      padding-bottom: 0.8rem;
+      padding-bottom: 0.9rem;
       border-bottom: 1px solid var(--line);
     }
-    .notes-head h2 { margin: 0 0 0.2rem; }
-    .save-status { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); }
+    .notes-head h2 { margin: 0 0 0.25rem; font-size: 1.35rem; }
+    .save-status { font-family: var(--mono); font-size: 0.78rem; color: var(--dim); }
     .save-status.saved { color: var(--ok); }
-    .actions-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-    button {
+    .actions-row { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+
+    button.action {
       font: inherit;
-      font-size: 0.82rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid var(--line);
       background: var(--bg-raise);
       color: var(--text);
-      padding: 0.4rem 0.7rem;
+      padding: 0.5rem 0.85rem;
       cursor: pointer;
     }
-    button.primary {
+    button.action.primary {
       background: var(--accent-soft);
-      border-color: rgba(139, 188, 255, 0.45);
+      border-color: rgba(125, 180, 255, 0.5);
       color: #d4e6ff;
     }
-    button.ghost { color: var(--muted); }
-    button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-    .field { margin-bottom: 0.95rem; }
+    button.action.ghost { color: var(--muted); }
+    button.action:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+    .field { margin-bottom: 1rem; }
     label {
       display: block;
-      font-size: 0.9rem;
+      font-size: 1.02rem;
       font-weight: 600;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
     }
-    .hint { display: block; font-weight: 400; color: var(--dim); font-size: 0.76rem; margin-top: 0.1rem; }
+    .hint {
+      display: block;
+      font-weight: 400;
+      color: var(--dim);
+      font-size: 0.88rem;
+      margin-top: 0.1rem;
+    }
     textarea, input[type="text"] {
       width: 100%;
       font: inherit;
-      font-size: 0.92rem;
+      font-size: 1.05rem;
       color: var(--text);
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.6rem 0.7rem;
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
       resize: vertical;
     }
     textarea:focus, input[type="text"]:focus {
@@ -264,231 +381,225 @@
       outline-offset: 1px;
       border-color: transparent;
     }
-    textarea { min-height: 4.75rem; }
-    textarea.tall { min-height: 6.5rem; }
+    textarea { min-height: 5rem; }
+    textarea.tall { min-height: 7rem; }
+
     footer.page-foot {
-      margin-top: 1.75rem;
-      padding-top: 0.9rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--line);
       color: var(--dim);
-      font-size: 0.76rem;
+      font-size: 0.9rem;
     }
     .kbd-help {
-      margin-top: 1.25rem;
+      margin-top: 1.15rem;
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 0.82rem;
       color: var(--dim);
     }
     kbd {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.78rem;
       border: 1px solid var(--line);
       border-radius: 4px;
-      padding: 0.05rem 0.28rem;
+      padding: 0.05rem 0.3rem;
       background: var(--bg-raise);
     }
+
     @media (max-width: 640px) {
-      .panel-body { padding-left: 1rem; }
-      .tag { display: none; }
+      .top-nav a.os { margin-left: 0; width: 100%; text-align: center; }
+      h1 { font-size: 1.5rem; }
+      .tabs button { font-size: 0.92rem; padding: 0.45rem 0.65rem; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="top">
-      <div>
-        <div class="eyebrow">Private · local only · not for FirmPilot</div>
-        <div class="title-line">Meeting guide</div>
-      </div>
-      <div class="meta">Talk tracks · listen first</div>
-    </header>
+  <nav class="top-nav" aria-label="Primary">
+    <span class="brand">Meeting guide</span>
+    <a href="#start">Start</a>
+    <a href="#by-audience">Audience</a>
+    <a href="#red-flags">Red flags</a>
+    <a href="#notes">Notes</a>
+    <a class="os" href="../paid-media-os/index.html">Paid Media OS →</a>
+  </nav>
 
-    <div class="link-row">
-      <a class="chip primary" href="../paid-media-os/index.html">Open Paid Media OS →</a>
-      <a class="chip" href="../paid-media-os/index.html#s-pilot">First 10 pilot</a>
-      <a class="chip" href="../paid-media-os/index.html#s-conversion">Conversion audit</a>
-      <a class="chip" href="../paid-media-os/index.html#s-unknowns">Unknowns</a>
-    </div>
+  <div class="wrap">
+    <header id="start">
+      <div class="eyebrow">Private · local only · not for FirmPilot</div>
+      <h1>Meeting guide</h1>
+      <p class="sub">Talk tracks by audience. Listen first. Deep checklists live in the OS.</p>
+    </header>
 
     <div class="listen">
       <strong>Listen first.</strong>
-      Let them describe the department, portfolio pain, and what paid media is supposed to become.
-      Ask before prescribing. Respond to bottlenecks they name — don’t dump a 100-account agent pitch.
+      Let them describe the department and pain. Ask before prescribing. Don’t dump a 100-account agent pitch.
     </div>
 
-    <div class="mission">
-      <strong>What I’m walking in to do:</strong>
-      Get access → baseline ~10 accounts → prove whether Google is learning truth or garbage → fix conversion signals before structure theater → pilot, measure, then automate repetitive audits.
-      Deep checklists live in the <a href="../paid-media-os/index.html">Paid Media OS</a>.
+    <div class="walk">
+      <h2>What I’m walking in to do</h2>
+      <ol>
+        <li><span class="n">1</span><span>Get access</span></li>
+        <li><span class="n">2</span><span>Baseline ~10 accounts</span></li>
+        <li><span class="n">3</span><span>Prove Google is learning truth or garbage</span></li>
+        <li><span class="n">4</span><span>Fix signals before structure theater</span></li>
+        <li><span class="n">5</span><span>Pilot, measure, then automate</span></li>
+      </ol>
     </div>
 
-    <section class="thesis" aria-labelledby="thesis-title">
-      <h1 id="thesis-title">Thesis — share if the door opens</h1>
-      <ul class="thesis-points">
-        <li>
-          FirmPilot already develops intelligence about each firm’s desired cases, markets, competitors, demand, content, local presence, and site performance. That same intelligence should guide SEO, paid, social, local, pages, and follow-up — with call/intake outcomes flowing back to every channel.
-        </li>
-        <li>
-          Paid should reinforce and distribute FirmPilot’s work — not become a disconnected PPC agency. Biggest risk is often <strong>conversion signal quality</strong>, not campaign cosmetics.
-        </li>
-        <li>
-          Show direct channel attribution <em>and</em> blended cost per qualified new matter / retained case. Do not claim one channel created every case. A call or form is not automatically valuable.
-        </li>
-      </ul>
-    </section>
+    <div class="thesis" aria-label="Thesis">
+      <div class="t">
+        <h3>Platform</h3>
+        <p>FirmPilot intelligence about desired cases, markets, and site performance should guide <strong>every</strong> channel — with call/intake flowing back.</p>
+      </div>
+      <div class="t">
+        <h3>Paid’s job</h3>
+        <p>Reinforce FirmPilot’s work — not a disconnected PPC agency. Biggest risk: <strong>conversion signal quality</strong>.</p>
+      </div>
+      <div class="t">
+        <h3>Economics</h3>
+        <p>Show channel attribution <em>and</em> blended cost per qualified matter / retained case. A call ≠ valuable.</p>
+      </div>
+    </div>
 
     <section class="section" id="by-audience">
-      <h2>Questions by who I’m talking to</h2>
+      <h2 class="sec">Who I’m talking to</h2>
+      <p class="lede">Pick one audience. One panel at a time.</p>
 
-      <details class="panel" open>
-        <summary>Owner / leadership<span class="tag">mandate</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>Why paid media in-house now — fill gaps, defend brand, replace outside PPC, or own the whole acquisition decision?<span class="why">Why: service economics and role scope.</span></li>
-            <li>What does a successful first quarter look like in your words?<span class="why">Why: avoid optimizing to vanity calls.</span></li>
-            <li>Reportedly no separate PPC fee / some firms have outside PPC — how does paid pay for itself?<span class="why">Why: viability of the function.</span></li>
-            <li>What does “7–8× return” mean — numerator, lag, paid-only vs blended?<span class="why">Why: undefined ROI kills later debate.</span></li>
-            <li>Who decides budgets, conversion goals, bid strategy, exceptions, engineering priority?<span class="why">Why: authority vs execution.</span></li>
-            <li>Can we pilot ~10 accounts before touching ~100?<span class="why">Why: prove signal OS first.</span></li>
-          </ul>
-          <a class="os-link" href="../paid-media-os/index.html#s-pilot">OS → First 10 · Unknowns · Impact</a>
-        </div>
-      </details>
+      <div class="tabs" role="tablist" aria-label="Audience">
+        <button type="button" role="tab" aria-selected="true" class="active" data-tab="leadership">Leadership</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="aieng">AI eng</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="ppc">PPC</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="cs">CS / AM</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="web">Web</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="intake">Intake</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="crm">CRM</button>
+      </div>
 
-      <details class="panel">
-        <summary>AI engineering<span class="tag">infra</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>What have you already automated? What is a “skill” here?</li>
-            <li>Ads API / developer token access level? Read vs write for agents?</li>
-            <li>How are clients separated? Secrets, logging, retained agent sessions?</li>
-            <li>CRM + CallRail APIs/webhooks? Transcripts? Anything uploading conversions to Google today?</li>
-          </ul>
-          <p>Frame: AI should industrialize proven PPC logic — not invent strategy.</p>
-          <a class="os-link" href="../paid-media-os/index.html#s-aieng">OS → AI eng questions · AI / skills</a>
-        </div>
-      </details>
+      <div class="audience-panel active" id="tab-leadership" role="tabpanel">
+        <h3>Owner / leadership</h3>
+        <ul>
+          <li>Why paid in-house now — fill gaps, defend brand, replace outside PPC, or own acquisition?<span class="why">Service economics and role scope.</span></li>
+          <li>What does a successful first quarter look like in your words?<span class="why">Avoid optimizing to vanity calls.</span></li>
+          <li>Reportedly no separate PPC fee / some firms have outside PPC — how does paid pay for itself?</li>
+          <li>What does “7–8× return” mean — numerator, lag, paid-only vs blended?</li>
+          <li>Who decides budgets, conversion goals, bid strategy, exceptions, engineering priority?</li>
+          <li>Can we pilot ~10 accounts before touching ~100?</li>
+        </ul>
+        <a class="os-link" href="../paid-media-os/index.html#s-pilot">OS → First 10 · Unknowns · Impact</a>
+      </div>
 
-      <details class="panel">
-        <summary>PPC team<span class="tag">ops</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>What do you touch daily? Who owns strategy vs maintenance?</li>
-            <li>What conversion actions train bidding today?</li>
-            <li>Manual bidding vs Smart Bidding / PMax / AI Max — where and why?</li>
-            <li>Biggest account messes you keep fighting?</li>
-          </ul>
-          <p>Direction: operators move toward QA, call review, search terms, intake feedback, anomalies — not reinventing strategy in every account.</p>
-          <a class="os-link" href="../paid-media-os/index.html#s-roles">OS → Team roles · Campaign audit · Look-for</a>
-        </div>
-      </details>
+      <div class="audience-panel" id="tab-aieng" role="tabpanel" hidden>
+        <h3>AI engineering</h3>
+        <ul>
+          <li>What have you already automated? What is a “skill” here?</li>
+          <li>Ads API / developer token access level? Read vs write for agents?</li>
+          <li>How are clients separated? Secrets, logging, retained agent sessions?</li>
+          <li>CRM + CallRail APIs/webhooks? Transcripts? Anything uploading conversions to Google today?</li>
+        </ul>
+        <p style="margin:0.85rem 0 0;color:var(--muted)">Frame: AI industrializes proven PPC logic — not invents strategy.</p>
+        <a class="os-link" href="../paid-media-os/index.html#s-aieng">OS → AI eng · AI / skills</a>
+      </div>
 
-      <details class="panel">
-        <summary>Client success / account managers<span class="tag">clients</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>How often do attorneys change case priorities or geos?</li>
-            <li>How are “leads suck” complaints handled today?</li>
-            <li>Who explains spend and results to the firm?</li>
-            <li>Which clients already have an outside PPC person?</li>
-          </ul>
-          <a class="os-link" href="../paid-media-os/index.html#s-bidding">OS → Client governance (in bidding section)</a>
-        </div>
-      </details>
+      <div class="audience-panel" id="tab-ppc" role="tabpanel" hidden>
+        <h3>PPC team</h3>
+        <ul>
+          <li>What do you touch daily? Who owns strategy vs maintenance?</li>
+          <li>What conversion actions train bidding today?</li>
+          <li>Manual vs Smart Bidding / PMax / AI Max — where and why?</li>
+          <li>Biggest account messes you keep fighting?</li>
+        </ul>
+        <p style="margin:0.85rem 0 0;color:var(--muted)">Direction: QA, call review, search terms, intake feedback, anomalies — not reinventing strategy in every account.</p>
+        <a class="os-link" href="../paid-media-os/index.html#s-roles">OS → Team roles · Campaign audit</a>
+      </div>
 
-      <details class="panel">
-        <summary>Web / development<span class="tag">pages</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>Who owns WordPress vs ability to ship paid microsites (GitHub/Vercel/DNS)?</li>
-            <li>Can we put clean PPC tracking on a paid subdomain without rewriting the main site?</li>
-            <li>Legal/disclaimer approval path for new pages?</li>
-          </ul>
-          <a class="os-link" href="../paid-media-os/index.html#s-lp">OS → Landing pages · GTM · Access</a>
-        </div>
-      </details>
+      <div class="audience-panel" id="tab-cs" role="tabpanel" hidden>
+        <h3>Client success / account managers</h3>
+        <ul>
+          <li>How often do attorneys change case priorities or geos?</li>
+          <li>How are “leads suck” complaints handled today?</li>
+          <li>Who explains spend and results to the firm?</li>
+          <li>Which clients already have an outside PPC person?</li>
+        </ul>
+        <a class="os-link" href="../paid-media-os/index.html#s-bidding">OS → Client governance (bidding)</a>
+      </div>
 
-      <details class="panel">
-        <summary>Intake / call handling<span class="tag">truth</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>Who labels qualified new matter vs existing client / spam / wrong practice?</li>
-            <li>Answer rate, missed calls, speed-to-lead?</li>
-            <li>Do dispositions reach CRM consistently?</li>
-            <li>Would AI transcript tags help — if humans review uncertain ones?</li>
-          </ul>
-          <a class="os-link" href="../paid-media-os/index.html#s-callrail">OS → CallRail · Conversion ladder · CRM</a>
-        </div>
-      </details>
+      <div class="audience-panel" id="tab-web" role="tabpanel" hidden>
+        <h3>Web / development</h3>
+        <ul>
+          <li>Who owns WordPress vs ability to ship paid microsites (GitHub/Vercel/DNS)?</li>
+          <li>Can we put clean PPC tracking on a paid subdomain without rewriting the main site?</li>
+          <li>Legal/disclaimer approval path for new pages?</li>
+        </ul>
+        <a class="os-link" href="../paid-media-os/index.html#s-lp">OS → Landing pages · GTM · Access</a>
+      </div>
 
-      <details class="panel">
-        <summary>CRM / data people<span class="tag">loop</span></summary>
-        <div class="panel-body">
-          <ul>
-            <li>One CRM or many? Tenant/location keys?</li>
-            <li>GCLID / source / campaign stored? Offline upload path?</li>
-            <li>Can we normalize to Lead → Qualified → Consultation → Retained?</li>
-            <li>Historical completeness and who updates stages?</li>
-          </ul>
-          <a class="os-link" href="../paid-media-os/index.html#s-crm">OS → CRM audit · Conversion audit</a>
-        </div>
-      </details>
+      <div class="audience-panel" id="tab-intake" role="tabpanel" hidden>
+        <h3>Intake / call handling</h3>
+        <ul>
+          <li>Who labels qualified new matter vs existing client / spam / wrong practice?</li>
+          <li>Answer rate, missed calls, speed-to-lead?</li>
+          <li>Do dispositions reach CRM consistently?</li>
+          <li>Would AI transcript tags help — if humans review uncertain ones?</li>
+        </ul>
+        <a class="os-link" href="../paid-media-os/index.html#s-callrail">OS → CallRail · Conversion · CRM</a>
+      </div>
+
+      <div class="audience-panel" id="tab-crm" role="tabpanel" hidden>
+        <h3>CRM / data</h3>
+        <ul>
+          <li>One CRM or many? Tenant/location keys?</li>
+          <li>GCLID / source / campaign stored? Offline upload path?</li>
+          <li>Can we normalize to Lead → Qualified → Consultation → Retained?</li>
+          <li>Historical completeness and who updates stages?</li>
+        </ul>
+        <a class="os-link" href="../paid-media-os/index.html#s-crm">OS → CRM · Conversion audit</a>
+      </div>
     </section>
 
     <section class="section" id="red-flags">
-      <h2>Red flags I hear → where to dig</h2>
-      <details class="panel" open>
-        <summary>Signal &amp; measurement<span class="tag">common</span></summary>
-        <div class="panel-body">
-          <div class="flag"><div class="heard">“We optimize to every phone call.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-conversion">Conversion audit</a> · <a href="../paid-media-os/index.html#s-callrail">CallRail</a></div></div>
-          <div class="flag"><div class="heard">“We don’t know which calls became cases.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-crm">CRM</a> · <a href="../paid-media-os/index.html#s-baseline">Baseline (business outcomes)</a></div></div>
-          <div class="flag"><div class="heard">“CallRail isn’t connected” / “We don’t have GCLIDs.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-callrail">CallRail</a> · <a href="../paid-media-os/index.html#s-gtm">GTM</a> · <a href="../paid-media-os/index.html#s-access">Access</a></div></div>
-          <div class="flag"><div class="heard">“Lots of conversions, not many signed cases.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-conversion">Conversion integrity</a> · signal ladder</div></div>
-          <div class="flag"><div class="heard">“We can’t tell whether the firm answered.”</div><div class="go">→ Intake section · CallRail answer/missed rates</div></div>
-          <div class="flag"><div class="heard">“We can’t access the CRM.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-access">Access</a> · <a href="../paid-media-os/index.html#s-unknowns">Unknowns</a></div></div>
-        </div>
-      </details>
-      <details class="panel">
-        <summary>Structure &amp; bidding<span class="tag">common</span></summary>
-        <div class="panel-body">
-          <div class="flag"><div class="heard">“We use Max Clicks on everything.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-bidding">Bidding roadmap</a> (baseline OK; not destination)</div></div>
-          <div class="flag"><div class="heard">“We use PMax because Google recommended it.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-bidding">Expansion after signal</a> · <a href="../paid-media-os/index.html#s-campaign">Campaign audit</a></div></div>
-          <div class="flag"><div class="heard">“We spread $2,000 across 10 campaigns.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-lowbudget">Low-budget</a> · <a href="../paid-media-os/index.html#s-structure">Structure rules</a></div></div>
-          <div class="flag"><div class="heard">“One landing page for everything.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-lp">Landing pages</a></div></div>
-          <div class="flag"><div class="heard">“The client says leads suck.”</div><div class="go">→ Signal quality + intake + geo + query mix — not just “add budget”</div></div>
-        </div>
-      </details>
+      <h2 class="sec">Red flags → dig here</h2>
+      <p class="lede">Tap a chip to open the matching OS section.</p>
+      <div class="flag-grid">
+        <div class="flag-group-label">Signal &amp; measurement</div>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-conversion">“We optimize to every phone call.”<span class="go">Conversion · CallRail</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-crm">“We don’t know which calls became cases.”<span class="go">CRM · Baseline</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-callrail">“CallRail isn’t connected” / no GCLIDs<span class="go">CallRail · GTM · Access</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-conversion">“Lots of conversions, not many signed cases.”<span class="go">Conversion integrity</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-callrail">“We can’t tell whether the firm answered.”<span class="go">CallRail answer / missed</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-access">“We can’t access the CRM.”<span class="go">Access · Unknowns</span></a>
+
+        <div class="flag-group-label">Structure &amp; bidding</div>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-bidding">“We use Max Clicks on everything.”<span class="go">Bidding roadmap</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-bidding">“We use PMax because Google recommended it.”<span class="go">Expansion after signal</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-lowbudget">“We spread $2,000 across 10 campaigns.”<span class="go">Low-budget · Structure</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-lp">“One landing page for everything.”<span class="go">Landing pages</span></a>
+        <a class="flag-chip" href="../paid-media-os/index.html#s-signal">“The client says leads suck.”<span class="go">Signal · Intake · Geo · Queries</span></a>
+      </div>
     </section>
 
     <section class="section" id="deeper">
-      <h2>Short deeper notes (meeting-safe)</h2>
-      <details class="panel">
-        <summary>Cross-channel &amp; blended economics</summary>
-        <div class="panel-body">
-          <p>SEO/content/social may create demand while outside PPC takes the branded click. Measure channel attribution and blended acquisition. Larger play: help the attorney govern the whole marketing budget with comparable case economics.</p>
-          <a class="os-link" href="../paid-media-os/index.html#s-thesis">OS → Signal thesis</a>
+      <h2 class="sec">Short notes (meeting-safe)</h2>
+      <div class="deep-cards">
+        <div class="deep-card">
+          <h3>Cross-channel economics</h3>
+          <p>SEO/content may create demand while outside PPC takes the branded click. Measure channel and blended acquisition.</p>
+          <a href="../paid-media-os/index.html#s-thesis">OS → Thesis</a>
         </div>
-      </details>
-      <details class="panel">
-        <summary>Intake as silent budget drain</summary>
-        <div class="panel-body">
-          <p>Missed calls, slow follow-up, bad dispositions, shifting appetite waste every channel. A 30-minute existing-client call ≠ new matter. Duration is a filter.</p>
-          <a class="os-link" href="../paid-media-os/index.html#s-callrail">OS → CallRail / calls</a>
+        <div class="deep-card">
+          <h3>Intake as budget drain</h3>
+          <p>Missed calls, slow follow-up, bad dispositions waste every channel. A long existing-client call ≠ new matter.</p>
+          <a href="../paid-media-os/index.html#s-callrail">OS → CallRail</a>
         </div>
-      </details>
-      <details class="panel">
-        <summary>Human trust vs AI assembly</summary>
-        <div class="panel-body">
-          <p>Attorneys need a credible human who explains the money and coordinates execution. AI assembles evidence. Relationship + transparent results = fortress — not proprietary lock-in.</p>
-          <a class="os-link" href="../paid-media-os/index.html#s-roles">OS → Team roles</a>
+        <div class="deep-card">
+          <h3>Human trust vs AI</h3>
+          <p>Attorneys need a credible human who explains the money. AI assembles evidence. Relationship + results = fortress.</p>
+          <a href="../paid-media-os/index.html#s-roles">OS → Team roles</a>
         </div>
-      </details>
-      <details class="panel">
-        <summary>Optional opening line</summary>
-        <div class="panel-body">
-          <p>“I understand the ambition is to make paid media work across a much larger law-firm portfolio and connect spend to actual matters. I’d like to hear how you see the department and platform working before I prescribe a build.”</p>
+        <div class="deep-card">
+          <h3>Optional opening</h3>
+          <p>“I’d like to hear how you see the department and platform working before I prescribe a build.”</p>
         </div>
-      </details>
+      </div>
     </section>
 
     <section class="notes" id="notes" aria-labelledby="notes-title">
@@ -498,8 +609,8 @@
           <div class="save-status" id="saveStatus">Saves in this browser only</div>
         </div>
         <div class="actions-row">
-          <button type="button" class="primary" id="btnDownload">Download Markdown</button>
-          <button type="button" class="ghost" id="btnClear">Clear notes</button>
+          <button type="button" class="action primary" id="btnDownload">Download Markdown</button>
+          <button type="button" class="action ghost" id="btnClear">Clear notes</button>
         </div>
       </div>
       <div class="field">
@@ -543,6 +654,26 @@
       const fields = Array.from(document.querySelectorAll("[data-note]"));
       const statusEl = document.getElementById("saveStatus");
       let saveTimer = null;
+
+      // Audience tabs
+      const tabs = Array.from(document.querySelectorAll(".tabs [data-tab]"));
+      const panels = Array.from(document.querySelectorAll(".audience-panel"));
+      tabs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          const id = btn.getAttribute("data-tab");
+          tabs.forEach(function (b) {
+            const on = b === btn;
+            b.classList.toggle("active", on);
+            b.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          panels.forEach(function (p) {
+            const on = p.id === "tab-" + id;
+            p.classList.toggle("active", on);
+            if (on) p.removeAttribute("hidden");
+            else p.setAttribute("hidden", "");
+          });
+        });
+      });
 
       function collect() {
         const data = {};
@@ -625,7 +756,7 @@
       });
 
       document.addEventListener("keydown", function (e) {
-        if (e.target.matches("textarea, input, summary")) return;
+        if (e.target.matches("textarea, input, button")) return;
         if (e.key === "/") {
           e.preventDefault();
           document.getElementById("nWho").focus();

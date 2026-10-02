@@ -3,45 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FirmPilot Paid Media OS — v2 (private)</title>
+  <title>FirmPilot Paid Media OS — cockpit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0e1318;
-      --bg-raise: #161c24;
-      --bg-soft: #1a212b;
-      --line: #2c3748;
-      --text: #edf2f8;
-      --muted: #b0bdc9;
-      --dim: #7a8a9c;
-      --accent: #8bbcff;
-      --accent-soft: rgba(139, 188, 255, 0.14);
-      --warn: #ebc67a;
-      --warn-soft: rgba(235, 198, 122, 0.14);
-      --ok: #8fd4a8;
-      --ok-soft: rgba(143, 212, 168, 0.12);
-      --bad: #f0a0a0;
-      --bad-soft: rgba(240, 160, 160, 0.12);
-      --focus: #b5d0ff;
-      --radius: 12px;
+      --bg: #0c1015;
+      --bg-raise: #151b24;
+      --bg-soft: #1a222d;
+      --bg-card: #121820;
+      --line: #334155;
+      --text: #f1f5f9;
+      --muted: #cbd5e1;
+      --dim: #94a3b8;
+      --accent: #7db4ff;
+      --accent-soft: rgba(125, 180, 255, 0.14);
+      --warn: #f0c674;
+      --warn-soft: rgba(240, 198, 116, 0.14);
+      --ok: #86d9a5;
+      --ok-soft: rgba(134, 217, 165, 0.12);
+      --bad: #f5a5a5;
+      --bad-soft: rgba(245, 165, 165, 0.12);
+      --focus: #b8d4ff;
+      --radius: 14px;
       --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-      --nav-w: 13.5rem;
+      --nav-w: 11.5rem;
+      --body: 1.3125rem; /* 21px */
     }
     * { box-sizing: border-box; }
-    html { font-size: 17px; scroll-behavior: smooth; }
+    html { font-size: 16px; scroll-behavior: smooth; scroll-padding-top: 1rem; }
     body {
       margin: 0;
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      font-size: var(--body);
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent); }
     .shell { display: flex; min-height: 100vh; }
+
+    /* —— Sticky nav (few destinations) —— */
     .side-nav {
       position: sticky;
       top: 0;
@@ -49,131 +54,328 @@
       width: var(--nav-w);
       max-height: 100vh;
       overflow-y: auto;
-      padding: 1rem 0.75rem 2rem;
+      padding: 1.25rem 0.85rem 2rem;
       border-right: 1px solid var(--line);
-      background: #0c1015;
+      background: #090d12;
       flex-shrink: 0;
     }
     .side-nav .brand {
       font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.05em;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--dim);
       margin-bottom: 0.35rem;
     }
     .side-nav .nav-title {
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 0.85rem;
-      line-height: 1.3;
+      font-size: 1.05rem;
+      font-weight: 650;
+      margin-bottom: 1.15rem;
+      line-height: 1.25;
     }
     .side-nav a {
       display: block;
       text-decoration: none;
       color: var(--muted);
-      font-size: 0.72rem;
-      padding: 0.28rem 0.45rem;
-      border-radius: 6px;
-      line-height: 1.35;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.55rem 0.65rem;
+      border-radius: 8px;
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
     }
-    .side-nav a:hover { background: var(--bg-raise); color: var(--text); }
-    .side-nav .nav-group {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin: 0.75rem 0.45rem 0.25rem;
+    .side-nav a:hover,
+    .side-nav a:focus-visible {
+      background: var(--bg-raise);
+      color: var(--text);
     }
+    .side-nav a.cross {
+      margin-top: 1.25rem;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 0.92rem;
+    }
+
     .main {
       flex: 1;
       min-width: 0;
-      padding: 1.35rem 1.5rem 4rem;
-      max-width: 54rem;
+      padding: 1.75rem 1.75rem 4.5rem;
+      max-width: 58rem;
     }
+
     .eyebrow {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.78rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--dim);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
     h1 {
-      margin: 0 0 0.4rem;
-      font-size: 1.4rem;
-      font-weight: 650;
+      margin: 0 0 0.5rem;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 40rem;
+      margin: 0 0 1.35rem;
+    }
+    h2.sec {
+      margin: 0 0 0.85rem;
+      font-size: 1.45rem;
+      font-weight: 700;
       letter-spacing: -0.02em;
     }
-    .sub { color: var(--muted); font-size: 0.95rem; max-width: 42rem; margin: 0 0 1rem; }
-    .link-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+    h3.subsec {
+      margin: 1.5rem 0 0.65rem;
+      font-size: 1.1rem;
+      font-weight: 650;
+      color: var(--muted);
+    }
+    .lede {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      max-width: 42rem;
+    }
+
+    .link-row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-bottom: 1.5rem; }
     .chip {
-      display: inline-block;
-      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.95rem;
       text-decoration: none;
       color: var(--muted);
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 0.28rem 0.7rem;
+      padding: 0.4rem 0.9rem;
       background: var(--bg-raise);
     }
     .chip:hover { color: var(--text); border-color: #4a5d78; }
-    .principle {
+    .chip.primary {
       background: var(--accent-soft);
-      border: 1px solid rgba(139, 188, 255, 0.35);
-      border-radius: var(--radius);
-      padding: 1rem 1.15rem;
-      margin-bottom: 1.25rem;
-      font-size: 1.02rem;
-      max-width: 44rem;
+      border-color: rgba(125, 180, 255, 0.45);
+      color: #d4e6ff;
     }
-    .principle strong { color: var(--accent); }
-    .thesis-box {
+
+    /* —— Walk-in —— */
+    .walk-in {
+      background: var(--accent-soft);
+      border: 1px solid rgba(125, 180, 255, 0.4);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.35rem;
+      margin-bottom: 1.5rem;
+    }
+    .walk-in h2 {
+      margin: 0 0 0.85rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .walk-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .walk-list li {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .walk-list .n {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
+      padding-top: 0.1rem;
+    }
+
+    /* —— Thesis cards —— */
+    .thesis-grid {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 720px) {
+      .thesis-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .t-card {
       background: var(--bg-raise);
       border: 1px solid var(--line);
-      border-left: 5px solid var(--warn);
       border-radius: var(--radius);
-      padding: 1rem 1.15rem;
-      margin-bottom: 1.5rem;
-      max-width: 44rem;
+      padding: 1rem 1.1rem;
     }
-    .thesis-box h2 {
-      margin: 0 0 0.55rem;
-      font-size: 0.72rem;
+    .t-card.full { grid-column: 1 / -1; border-left: 4px solid var(--warn); }
+    .t-card h3 {
+      margin: 0 0 0.45rem;
+      font-size: 0.82rem;
       font-family: var(--mono);
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--warn);
       font-weight: 500;
     }
-    .thesis-box p { margin: 0 0 0.65rem; color: var(--text); }
-    .thesis-box p:last-child { margin-bottom: 0; }
-    .thesis-box ul { margin: 0.4rem 0 0; padding-left: 1.15rem; color: var(--muted); }
-    .section-block { margin-bottom: 1.75rem; }
-    .section-block > h2 {
-      margin: 0 0 0.75rem;
-      font-size: 1.15rem;
-      font-weight: 650;
-      letter-spacing: -0.015em;
+    .t-card p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+    .t-card strong { color: var(--text); }
+    .junk-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
     }
+    .junk-chips span {
+      font-size: 0.88rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.65rem;
+      background: var(--bg);
+      color: var(--muted);
+    }
+    .junk-chips span.good {
+      border-color: rgba(134, 217, 165, 0.35);
+      color: var(--ok);
+      background: var(--ok-soft);
+    }
+
+    .section-block {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+
+    /* —— First 10 board —— */
+    .board-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .status-pill {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--line);
+      color: var(--dim);
+      background: var(--bg-raise);
+    }
+    .slot-grid {
+      display: grid;
+      gap: 0.65rem;
+      margin-bottom: 1.35rem;
+    }
+    @media (min-width: 640px) {
+      .slot-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 980px) {
+      .slot-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .slot {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem 0.9rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+    .slot .slot-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem;
+    }
+    .slot .slot-num {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .slot input[type="text"] {
+      width: 100%;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.45rem 0.55rem;
+    }
+    .slot select.phase-select {
+      width: 100%;
+      font: inherit;
+      font-size: 0.88rem;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.35rem 0.45rem;
+    }
+    .slot.done { border-color: rgba(134, 217, 165, 0.4); }
+    .slot.active { border-color: rgba(125, 180, 255, 0.5); }
+
+    .phase-cards {
+      display: grid;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 720px) {
+      .phase-cards { grid-template-columns: 1fr 1fr; }
+    }
+    .phase-card {
+      background: var(--bg-raise);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+    }
+    .phase-card .ph {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .phase-card h4 {
+      margin: 0 0 0.35rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+    .phase-card p {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    /* —— Panels (progressive disclosure) —— */
     details.panel {
       background: var(--bg-raise);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.65rem;
       overflow: hidden;
     }
-    details.panel[open] { border-color: #3d4f68; background: var(--bg-soft); }
+    details.panel[open] {
+      border-color: #475569;
+      background: var(--bg-soft);
+    }
     details.panel summary {
       cursor: pointer;
       list-style: none;
-      padding: 0.85rem 1rem;
-      font-weight: 600;
-      font-size: 0.98rem;
+      padding: 1rem 1.1rem;
+      font-weight: 650;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
       user-select: none;
       line-height: 1.35;
     }
@@ -181,93 +383,107 @@
     details.panel summary::before {
       content: "▸";
       color: var(--accent);
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       width: 1ch;
       flex-shrink: 0;
-      transition: transform 0.12s ease;
     }
-    details.panel[open] summary::before { transform: rotate(90deg); }
-    details.panel summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
-    .num {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--dim);
-      margin-right: 0.1rem;
+    details.panel[open] summary::before { content: "▾"; }
+    details.panel summary:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
     }
     .tag {
       display: inline-block;
       font-family: var(--mono);
-      font-size: 0.58rem;
+      font-size: 0.68rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--dim);
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 0.15rem 0.45rem;
+      padding: 0.2rem 0.5rem;
       margin-left: auto;
       font-weight: 500;
       white-space: nowrap;
     }
     .body {
-      padding: 0 1rem 1.1rem 2.1rem;
+      padding: 0 1.1rem 1.2rem 1.1rem;
       border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 1.05rem;
     }
-    .body p { margin: 0.8rem 0 0; max-width: 44rem; }
-    .body p:first-child { margin-top: 0.85rem; }
-    .body ul, .body ol { margin: 0.55rem 0 0; padding-left: 1.15rem; max-width: 44rem; }
-    .body li { margin-bottom: 0.35rem; }
+    .body p { margin: 0.85rem 0 0; max-width: 44rem; }
+    .body p:first-child { margin-top: 0.95rem; }
+    .body ul, .body ol { margin: 0.6rem 0 0; padding-left: 1.25rem; max-width: 44rem; }
+    .body li { margin-bottom: 0.4rem; }
     .body strong { color: var(--text); font-weight: 600; }
+
     .why {
-      margin-top: 0.85rem;
-      padding: 0.7rem 0.85rem;
-      border-radius: 8px;
+      margin-top: 0.95rem;
+      padding: 0.8rem 0.95rem;
+      border-radius: 10px;
       background: var(--accent-soft);
-      border: 1px solid rgba(139, 188, 255, 0.28);
-      color: #cfe3ff;
+      border: 1px solid rgba(125, 180, 255, 0.3);
+      color: #d4e6ff;
       max-width: 44rem;
-      font-size: 0.88rem;
+      font-size: 1rem;
     }
     .why::before {
-      content: "Why this matters · ";
+      content: "Why · ";
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--accent);
     }
     .callout {
-      margin-top: 0.85rem;
-      padding: 0.7rem 0.85rem;
-      border-radius: 8px;
+      margin-top: 0.95rem;
+      padding: 0.8rem 0.95rem;
+      border-radius: 10px;
       background: var(--warn-soft);
-      border: 1px solid rgba(235, 198, 122, 0.28);
-      color: #f0dfb8;
+      border: 1px solid rgba(240, 198, 116, 0.3);
+      color: #f5e6c0;
       max-width: 44rem;
     }
+
     .decision {
-      margin-top: 0.85rem;
+      margin-top: 0.95rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.45rem;
       max-width: 44rem;
     }
-    .decision span {
+    .decision button, .decision span {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.78rem;
       letter-spacing: 0.03em;
       text-transform: uppercase;
       border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 0.35rem 0.55rem;
+      border-radius: 8px;
+      padding: 0.45rem 0.65rem;
       background: var(--bg);
       color: var(--text);
+      cursor: default;
     }
+    .decision button {
+      cursor: pointer;
+      font: inherit;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .decision button:hover { border-color: var(--accent); color: var(--accent); }
+    .decision button.picked {
+      background: var(--accent-soft);
+      border-color: rgba(125, 180, 255, 0.5);
+      color: #d4e6ff;
+    }
+
     .split {
       display: grid;
-      gap: 0.65rem;
-      margin-top: 0.85rem;
+      gap: 0.75rem;
+      margin-top: 0.95rem;
       max-width: 44rem;
     }
     @media (min-width: 720px) {
@@ -276,11 +492,11 @@
     .card {
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.75rem 0.85rem;
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
     }
     .card h4 {
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.45rem;
       font-size: 0.82rem;
       font-family: var(--mono);
       letter-spacing: 0.04em;
@@ -288,345 +504,375 @@
       color: var(--accent);
       font-weight: 500;
     }
-    .card ul { margin: 0; padding-left: 1.05rem; font-size: 0.88rem; }
-    .ladder {
-      margin: 0.85rem 0 0;
+    .card ul { margin: 0; padding-left: 1.1rem; font-size: 1rem; }
+
+    .steps {
+      margin: 0.95rem 0 0;
       padding: 0;
       list-style: none;
-      max-width: 28rem;
-    }
-    .ladder li {
-      position: relative;
-      padding: 0.4rem 0 0.4rem 1.05rem;
-      border-left: 2px solid #3a4d66;
-      color: var(--text);
-      font-size: 0.92rem;
-    }
-    .ladder li::before {
-      content: "";
-      position: absolute;
-      left: -5px;
-      top: 0.8rem;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    .tree { margin: 0.8rem 0 0; display: grid; gap: 0.5rem; max-width: 44rem; }
-    .tree-row {
       display: grid;
-      grid-template-columns: 7.2rem 1fr;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      max-width: 36rem;
+    }
+    .steps li {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0.55rem;
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.6rem 0.7rem;
-      font-size: 0.88rem;
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
+      color: var(--text);
+      font-size: 1.02rem;
+    }
+    .steps .sn {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .tree { margin: 0.9rem 0 0; display: grid; gap: 0.55rem; max-width: 44rem; }
+    .tree-row {
+      display: grid;
+      gap: 0.35rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      font-size: 1rem;
     }
     .tree-row .label {
       font-family: var(--mono);
-      font-size: 0.66rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--accent);
-      padding-top: 0.12rem;
     }
+
     .phase-grid {
       display: grid;
-      gap: 0.55rem;
-      margin-top: 0.85rem;
+      gap: 0.6rem;
+      margin-top: 0.95rem;
       max-width: 44rem;
+    }
+    @media (min-width: 640px) {
+      .phase-grid { grid-template-columns: 1fr 1fr; }
     }
     .phase {
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.75rem 0.85rem;
+      border-radius: 10px;
+      padding: 0.85rem 0.95rem;
       background: var(--bg);
     }
     .phase .ph {
       font-family: var(--mono);
-      font-size: 0.68rem;
+      font-size: 0.75rem;
       color: var(--accent);
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
-    .phase h4 { margin: 0 0 0.35rem; font-size: 0.95rem; color: var(--text); }
-    .phase ul { margin: 0; padding-left: 1.05rem; font-size: 0.88rem; }
+    .phase h4 { margin: 0 0 0.35rem; font-size: 1.05rem; color: var(--text); }
+    .phase ul { margin: 0; padding-left: 1.1rem; font-size: 0.98rem; }
+
     .checks {
-      margin: 0.8rem 0 0;
+      margin: 0.9rem 0 0;
       padding: 0;
       list-style: none;
       display: grid;
-      gap: 0.35rem;
+      gap: 0.45rem;
       max-width: 44rem;
     }
     .checks li {
       display: grid;
-      grid-template-columns: 1.25rem 1fr auto;
-      gap: 0.4rem;
+      grid-template-columns: 1.4rem 1fr auto;
+      gap: 0.5rem;
       align-items: start;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 1.02rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.55rem 0.7rem;
     }
-    .checks input { margin-top: 0.22rem; accent-color: var(--accent); }
+    .checks input { margin-top: 0.28rem; accent-color: var(--accent); width: 1.1rem; height: 1.1rem; }
     .checks label { cursor: pointer; color: var(--muted); }
     .badge-select {
       font-family: var(--mono);
-      font-size: 0.62rem;
+      font-size: 0.7rem;
       border: 1px solid var(--line);
-      border-radius: 4px;
+      border-radius: 6px;
       background: var(--bg-raise);
       color: var(--dim);
-      padding: 0.1rem 0.25rem;
+      padding: 0.2rem 0.3rem;
     }
     .badge-select.unknown { color: var(--dim); }
-    .badge-select.healthy { color: var(--ok); border-color: rgba(143,212,168,0.35); }
-    .badge-select.warning { color: var(--warn); border-color: rgba(235,198,122,0.35); }
-    .badge-select.broken { color: var(--bad); border-color: rgba(240,160,160,0.35); }
+    .badge-select.healthy { color: var(--ok); border-color: rgba(134,217,165,0.4); }
+    .badge-select.warning { color: var(--warn); border-color: rgba(240,198,116,0.4); }
+    .badge-select.broken { color: var(--bad); border-color: rgba(245,165,165,0.4); }
+
     .roadmap {
       display: grid;
-      gap: 0.55rem;
-      margin-top: 0.85rem;
-      max-width: 44rem;
+      gap: 0.65rem;
+      margin-top: 0.5rem;
     }
     @media (min-width: 800px) {
       .roadmap { grid-template-columns: 1fr 1fr 1fr; }
     }
     .roadmap .r-card {
-      background: var(--bg);
+      background: var(--bg-raise);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.8rem;
+      border-radius: 12px;
+      padding: 1rem;
     }
     .roadmap .r-card .ph {
       font-family: var(--mono);
-      font-size: 0.66rem;
+      font-size: 0.75rem;
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
-    .roadmap .r-card h4 { margin: 0.25rem 0 0.4rem; font-size: 0.95rem; color: var(--text); }
-    .roadmap .r-card ul { margin: 0; padding-left: 1rem; font-size: 0.84rem; }
+    .roadmap .r-card h4 { margin: 0.3rem 0 0.5rem; font-size: 1.1rem; color: var(--text); }
+    .roadmap .r-card ul { margin: 0; padding-left: 1.1rem; font-size: 0.98rem; color: var(--muted); }
+
     .findings {
-      margin-top: 1.5rem;
+      margin-top: 0.5rem;
       background: var(--bg-soft);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.1rem 1.05rem 1.2rem;
+      padding: 1.25rem 1.15rem 1.35rem;
     }
     .findings-head {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.7rem;
       align-items: flex-start;
       justify-content: space-between;
-      margin-bottom: 0.95rem;
-      padding-bottom: 0.8rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.9rem;
       border-bottom: 1px solid var(--line);
     }
-    .findings-head h2 { margin: 0 0 0.2rem; font-size: 1.1rem; }
-    .save-status { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); }
+    .findings-head h2 { margin: 0 0 0.25rem; font-size: 1.35rem; }
+    .save-status { font-family: var(--mono); font-size: 0.78rem; color: var(--dim); }
     .save-status.saved { color: var(--ok); }
+
     button {
       font: inherit;
-      font-size: 0.82rem;
+      font-size: 0.95rem;
       font-weight: 500;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid var(--line);
       background: var(--bg-raise);
       color: var(--text);
-      padding: 0.4rem 0.7rem;
+      padding: 0.5rem 0.85rem;
       cursor: pointer;
     }
     button.primary {
       background: var(--accent-soft);
-      border-color: rgba(139, 188, 255, 0.45);
+      border-color: rgba(125, 180, 255, 0.5);
       color: #d4e6ff;
     }
     button.ghost { color: var(--muted); }
     button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-    .actions-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-    .field { margin-bottom: 0.9rem; }
+    .actions-row { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+
+    .field { margin-bottom: 1rem; }
     .field:last-child { margin-bottom: 0; }
     label.field-label {
       display: block;
-      font-size: 0.88rem;
+      font-size: 1.02rem;
       font-weight: 600;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
       color: var(--text);
     }
     .hint {
       display: block;
       font-weight: 400;
       color: var(--dim);
-      font-size: 0.74rem;
+      font-size: 0.88rem;
       margin-top: 0.1rem;
     }
-    textarea, input[type="text"] {
+    .findings input[type="text"],
+    .findings textarea,
+    textarea {
       width: 100%;
       font: inherit;
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       color: var(--text);
       background: var(--bg);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.6rem 0.7rem;
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
       resize: vertical;
     }
-    textarea:focus, input[type="text"]:focus {
+    textarea:focus, input[type="text"]:focus, .slot input:focus, .slot select:focus {
       outline: 2px solid var(--focus);
       outline-offset: 1px;
       border-color: transparent;
     }
-    textarea { min-height: 4.5rem; }
-    textarea.tall { min-height: 6.5rem; }
+    textarea { min-height: 5rem; }
+    textarea.tall { min-height: 7rem; }
+
     .toolbar {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-bottom: 1rem;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
       align-items: center;
     }
     .toolbar input[type="search"] {
       flex: 1;
       min-width: 12rem;
       font: inherit;
-      font-size: 0.88rem;
+      font-size: 1rem;
       color: var(--text);
       background: var(--bg-raise);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.45rem 0.7rem;
+      border-radius: 10px;
+      padding: 0.55rem 0.8rem;
     }
+
     footer.page-foot {
-      margin-top: 1.75rem;
-      padding-top: 0.9rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--line);
       color: var(--dim);
-      font-size: 0.74rem;
+      font-size: 0.9rem;
     }
     .hidden-panel { display: none !important; }
+
     @media (max-width: 900px) {
       .shell { flex-direction: column; }
       .side-nav {
-        position: relative;
+        position: sticky;
+        top: 0;
+        z-index: 20;
         width: 100%;
         max-height: none;
         border-right: none;
         border-bottom: 1px solid var(--line);
         display: flex;
         flex-wrap: wrap;
-        gap: 0.2rem;
-        padding: 0.75rem;
+        gap: 0.25rem;
+        padding: 0.75rem 0.85rem;
+        align-items: center;
       }
-      .side-nav .brand, .side-nav .nav-title, .side-nav .nav-group { width: 100%; }
-      .side-nav a { font-size: 0.7rem; }
-      .body { padding-left: 1rem; }
-      .tree-row { grid-template-columns: 1fr; }
+      .side-nav .brand { display: none; }
+      .side-nav .nav-title {
+        width: 100%;
+        margin-bottom: 0.35rem;
+        font-size: 0.95rem;
+      }
+      .side-nav a {
+        font-size: 0.92rem;
+        padding: 0.4rem 0.55rem;
+        margin-bottom: 0;
+      }
+      .side-nav a.cross { margin-top: 0; }
+      .main { padding: 1.25rem 1rem 3.5rem; }
       .tag { display: none; }
+      h1 { font-size: 1.55rem; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <nav class="side-nav" aria-label="OS sections">
+    <nav class="side-nav" aria-label="Primary">
       <div class="brand">Private · draft</div>
       <div class="nav-title">Paid Media OS</div>
-      <div class="nav-group">Start</div>
-      <a href="#s-mission">What I do day one</a>
-      <a href="#s-thesis">Signal thesis</a>
-      <a href="#s-pilot">First 10 pilot</a>
-      <a href="#s-access">Access / entry</a>
-      <a href="#s-aieng">AI eng questions</a>
-      <div class="nav-group">Audits</div>
-      <a href="#s-baseline">Baseline</a>
-      <a href="#s-conversion">Conversions</a>
-      <a href="#s-callrail">CallRail / calls</a>
-      <a href="#s-crm">CRM</a>
-      <a href="#s-gtm">GTM</a>
-      <a href="#s-ga4">GA4</a>
-      <a href="#s-lp">Landing pages</a>
-      <a href="#s-campaign">Campaigns</a>
-      <div class="nav-group">Playbook</div>
-      <a href="#s-lowbudget">Low-budget</a>
-      <a href="#s-structure">Structure rules</a>
-      <a href="#s-match">Match / negatives</a>
-      <a href="#s-comp">Competitors / DKI</a>
-      <a href="#s-geo">Geo / creative</a>
-      <a href="#s-bidding">Bidding roadmap</a>
-      <div class="nav-group">Scale</div>
-      <a href="#s-ai">AI / skills</a>
-      <a href="#s-roles">Team roles</a>
-      <a href="#s-exceptions">Exceptions</a>
-      <a href="#s-roadmap">30 / 60 / 90</a>
-      <a href="#s-impact">My impact</a>
-      <a href="#s-unknowns">Unknowns</a>
-      <a href="#findings">Findings</a>
-      <div class="nav-group">Also</div>
-      <a href="../meeting-guide/index.html">Meeting guide →</a>
+      <a href="#start">Start here</a>
+      <a href="#s-pilot">First 10</a>
+      <a href="#s-signal">Signal</a>
+      <a href="#s-access">Access</a>
+      <a href="#s-roadmap">Roadmap</a>
+      <a href="#findings">Notes</a>
+      <a class="cross" href="../meeting-guide/index.html">Meeting guide</a>
     </nav>
 
     <main class="main">
-      <header>
-        <div class="eyebrow">George’s private operating manual · not FirmPilot policy</div>
-        <h1>FirmPilot Paid Media Operating System — v2</h1>
-        <p class="sub">
-          Practical cockpit for onboarding, first-10 audits, conversion repair, and turning proven PPC logic into AI-assisted portfolio ops across ~100 legal clients.
-          Living draft — refine from real account data. Do not invent FirmPilot production facts.
-        </p>
+      <header id="start">
+        <div class="eyebrow">George’s private cockpit · not FirmPilot policy</div>
+        <h1>Paid Media Operating System</h1>
+        <p class="sub">Onboarding + First 10 audits. Fix signals before structure theater. Living draft from real accounts only.</p>
         <div class="link-row">
-          <a class="chip" href="../meeting-guide/index.html">Meeting guide (talk tracks)</a>
-          <a class="chip" href="#s-pilot">Jump to First 10</a>
-          <a class="chip" href="#s-unknowns">Things I still need</a>
+          <a class="chip primary" href="../meeting-guide/index.html">Meeting guide</a>
+          <a class="chip" href="#s-pilot">First 10 board</a>
+          <a class="chip" href="#s-unknowns">Open unknowns</a>
         </div>
       </header>
 
+      <div class="walk-in" id="s-mission">
+        <h2>When I walk in</h2>
+        <ol class="walk-list">
+          <li><span class="n">1</span><span>Get approved access (Ads, CallRail, CRM, GTM/GA4, pages).</span></li>
+          <li><span class="n">2</span><span>Baseline ~10 accounts — Google metrics and business outcomes, separately.</span></li>
+          <li><span class="n">3</span><span>Prove whether Google is learning truth or garbage.</span></li>
+          <li><span class="n">4</span><span>Fix conversion signals before campaign cosmetics.</span></li>
+          <li><span class="n">5</span><span>Pilot, measure, then automate only proven audits.</span></li>
+        </ol>
+      </div>
+
+      <div class="thesis-grid" id="s-thesis">
+        <div class="t-card full">
+          <h3>Central thesis</h3>
+          <p>Biggest risk is often <strong>conversion signal quality</strong>, not campaign structure. Legal: expensive clicks, low volume, noisy leads. A call or form is <strong>not</strong> automatically valuable.</p>
+          <div class="junk-chips">
+            <span>junk / spam</span>
+            <span>wrong practice</span>
+            <span>wrong geo</span>
+            <span>existing client</span>
+            <span>vendor / job</span>
+            <span class="good">prospect</span>
+            <span class="good">qualified</span>
+            <span class="good">consult</span>
+            <span class="good">retained</span>
+          </div>
+        </div>
+        <div class="t-card">
+          <h3>Loop (conceptual)</h3>
+          <p>Click → paid LP → GTM/GA4 → CallRail/form → CRM → AI + human review → CRM outranks guess → qualified signal back to Google.</p>
+        </div>
+        <div class="t-card">
+          <h3>Hard rule</h3>
+          <p>AI must <strong>not</strong> invent giant conversion values because a transcript “sounds good.”</p>
+        </div>
+      </div>
+
       <div class="toolbar">
-        <input type="search" id="panelFilter" placeholder="Filter sections…" aria-label="Filter sections" />
-        <button type="button" class="ghost" id="btnExpandAll">Expand all</button>
+        <input type="search" id="panelFilter" placeholder="Filter panels…" aria-label="Filter panels" />
         <button type="button" class="ghost" id="btnCollapseAll">Collapse all</button>
       </div>
 
-      <div class="principle" id="s-mission">
-        <strong>Day-one question:</strong>
-        What exactly do I do when I walk in?
-        Get access → baseline 10 accounts → prove whether Google is learning truth or garbage → fix signals before structure theater → pilot, measure, then automate repetitive audits.
-      </div>
-
-      <div class="thesis-box" id="s-thesis">
-        <h2>Central thesis — conversion signal quality</h2>
-        <p>
-          The biggest issue may not be campaign structure. It may be <strong>conversion signal quality</strong>.
-          Legal accounts often have expensive clicks, low volume, small budgets, and noisy leads.
-        </p>
-        <p>A phone call or form is <strong>not</strong> automatically a valuable conversion. Distinguish:</p>
-        <ul>
-          <li>junk / spam · wrong practice · wrong geo · existing client · vendor / job seeker</li>
-          <li>legitimate prospect · qualified lead · consultation · retained / signed · high-value matter</li>
-        </ul>
-        <p style="margin-top:0.75rem">
-          Long-term loop: Ads click → paid LP/microsite → GTM/GA4 → CallRail or form → CRM → AI classifies with confidence → human reviews uncertainty → CRM outcome outranks AI guess → qualified conversion / value back to Google → then broaden matching and bidding.
-        </p>
-        <p>AI must <strong>not</strong> invent giant conversion values because a transcript “sounds good.”</p>
-      </div>
-
-      <!-- FIRST 10 -->
+      <!-- ===== FIRST 10 BOARD ===== -->
       <section class="section-block" id="s-pilot">
-        <h2>First 10 account pilot</h2>
-        <details class="panel" open data-panel>
-          <summary><span class="num">01</span> Pilot purpose &amp; workflow<span class="tag">do this first</span></summary>
+        <h2 class="sec">First 10 — working board</h2>
+        <p class="lede">Prove the OS on ~10 accounts before ~100. Name slots as you get them. Track phase per account.</p>
+        <div class="board-meta">
+          <span class="status-pill" id="boardProgress">0 / 10 named</span>
+          <span class="status-pill">Read-only until authorized</span>
+        </div>
+
+        <div class="slot-grid" id="accountSlots">
+          <!-- slots filled by JS for cleaner markup; noscript fallback below -->
+        </div>
+        <noscript>
+          <p class="lede">Enable JavaScript for the account board (localStorage).</p>
+        </noscript>
+
+        <h3 class="subsec">Pilot phases</h3>
+        <div class="phase-cards">
+          <div class="phase-card"><div class="ph">Phase 1</div><h4>Access map</h4><p>Company vs client systems; read vs write.</p></div>
+          <div class="phase-card"><div class="ph">Phase 2</div><h4>Baseline both sides</h4><p>Google metrics ≠ retained cases. Capture both.</p></div>
+          <div class="phase-card"><div class="ph">Phase 3</div><h4>Signal audits</h4><p>Conversions, CallRail, CRM, GTM, GA4, LP, campaigns.</p></div>
+          <div class="phase-card"><div class="ph">Phase 4</div><h4>Patterns</h4><p>Recurring failures across the ten.</p></div>
+          <div class="phase-card"><div class="ph">Phase 5</div><h4>Clean framework</h4><p>One signal model + limited structural fixes.</p></div>
+          <div class="phase-card"><div class="ph">Phase 6</div><h4>Compare &amp; expand</h4><p>Before/after → scale only what worked.</p></div>
+        </div>
+
+        <details class="panel" data-panel data-accordion="pilot">
+          <summary>Pilot gates checklist<span class="tag">save</span></summary>
           <div class="body">
-            <p>Use <strong>10 representative accounts</strong> before touching all ~100. Prove the operating system on a tractable set: budgets that vary, at least one messy conversion setup, at least one stronger account if available.</p>
-            <ol>
-              <li>Access &amp; ownership map (company vs client systems)</li>
-              <li>Baseline Google metrics <em>and</em> business outcomes — separately</li>
-              <li>Conversion / CallRail / CRM / GTM / GA4 / LP / campaign audits</li>
-              <li>Recurring failure patterns across the ten</li>
-              <li>One clean signal framework + limited structural fixes</li>
-              <li>Compare before/after → expand only what worked</li>
-            </ol>
-            <div class="why">A portfolio of 100 without a proven pilot just multiplies garbage at scale.</div>
+            <div class="why">A portfolio of 100 without a proven pilot multiplies garbage at scale.</div>
             <ul class="checks" data-check-group="pilot">
               <li><input type="checkbox" id="p1" /><label for="p1">Pilot account list agreed with sponsor</label><select class="badge-select" data-badge data-for="p1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="p2" /><label for="p2">Read-only access confirmed for all 10</label><select class="badge-select" data-badge data-for="p2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
@@ -637,17 +883,184 @@
         </details>
       </section>
 
-      <!-- ACCESS -->
-      <section class="section-block" id="s-access">
-        <h2>Entry / access phase</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">02</span> Systems, ownership, permissions</summary>
+      <!-- ===== SIGNAL ===== -->
+      <section class="section-block" id="s-signal">
+        <h2 class="sec">Signal &amp; measurement</h2>
+        <p class="lede">Open one panel at a time. Deep checklists stay collapsed until you need them.</p>
+
+        <details class="panel" data-panel data-accordion="signal">
+          <summary>Baseline — Google vs business<span class="tag">before changes</span></summary>
+          <div class="body" id="s-baseline">
+            <div class="split two">
+              <div class="card">
+                <h4>Google metrics</h4>
+                <ul>
+                  <li>Spend · clicks · CPC · CTR</li>
+                  <li>Ads conversions · CPA · CVR</li>
+                  <li>Budget · bidding · campaign types</li>
+                  <li>Keywords · search terms · IS</li>
+                  <li>Geo · device · LPs · conversion actions</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>Business outcomes</h4>
+                <ul>
+                  <li>CallRail calls · form leads</li>
+                  <li>Qualified leads · consultations</li>
+                  <li>Retained / signed cases</li>
+                  <li>Qualified lead CPA · retained CPA</li>
+                </ul>
+              </div>
+            </div>
+            <div class="callout">Never conflate Google “conversions” with retained cases.</div>
+            <ul class="checks" data-check-group="baseline">
+              <li><input type="checkbox" id="b1" /><label for="b1">Google metrics snapshot saved (date-stamped)</label><select class="badge-select" data-badge data-for="b1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="b2" /><label for="b2">Business outcomes snapshot saved (or gaps noted)</label><select class="badge-select" data-badge data-for="b2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-conversion">
+          <summary>Conversion audit<span class="tag">deep</span></summary>
           <div class="body">
-            <p>For each system: who owns it, company vs client, read vs write, and how I get in.</p>
+            <p>Inspect Primary/Secondary actions, GA4 imports, CallRail, forms, click-to-call vs connected, duplicates, micro-conversions training Smart Bidding, double-counting, campaign goals vs defaults.</p>
+            <p><strong>Signal depth</strong> — deeper verified outcome = stronger signal. Use the deepest event with enough volume.</p>
+            <ol class="steps">
+              <li><span class="sn">1</span><span>Raw lead / raw call</span></li>
+              <li><span class="sn">2</span><span>AI-qualified (confidence + human review)</span></li>
+              <li><span class="sn">3</span><span>Actual qualified lead</span></li>
+              <li><span class="sn">4</span><span>Consultation</span></li>
+              <li><span class="sn">5</span><span>Retained case</span></li>
+              <li><span class="sn">6</span><span>Expected value → realized fee</span></li>
+            </ol>
+            <div class="decision" data-decision="conv">
+              <button type="button">Trust</button>
+              <button type="button">Keep but modify</button>
+              <button type="button">Move to secondary</button>
+              <button type="button">Replace</button>
+              <button type="button">Investigate</button>
+            </div>
+            <div class="callout">Do <strong>not</strong> delete old conversions immediately. Preserve history while validating replacements.</div>
+            <ul class="checks" data-check-group="conv">
+              <li><input type="checkbox" id="c1" /><label for="c1">Primary actions inventoried with bidding impact noted</label><select class="badge-select" data-badge data-for="c1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="c2" /><label for="c2">Secondary / micro actions reviewed</label><select class="badge-select" data-badge data-for="c2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="c3" /><label for="c3">Campaign goals checked vs account defaults</label><select class="badge-select" data-badge data-for="c3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="c4" /><label for="c4">Duplicate / double-count risk assessed</label><select class="badge-select" data-badge data-for="c4"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-callrail">
+          <summary>CallRail / call quality</summary>
+          <div class="body">
+            <p>Audit DNI, pools, source, recording, transcript, duration, answer/missed, geo, tags, API/webhooks, GCLID linkage, CRM reach.</p>
+            <p><strong>AI classification</strong> uses transcript content, not duration alone:</p>
+            <ul>
+              <li>Valid prospect? Relevant practice / geo?</li>
+              <li>Legal intent? Already represented? Viable?</li>
+              <li>Consultation-worthy? Obviously junk?</li>
+              <li><strong>Confidence</strong> — humans review uncertain; sample high-confidence early</li>
+            </ul>
+            <div class="why">CRM outcomes should outrank AI guesses. Duration is a filter, not qualification.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-crm">
+          <summary>CRM audit</summary>
+          <div class="body">
+            <p>CRM(s), stages, update quality, GCLID/source/campaign, CallRail fields, value fields, API, offline upload reliability.</p>
+            <p><strong>Standard funnel</strong> (map client words into this):</p>
+            <ol class="steps">
+              <li><span class="sn">1</span><span>Lead</span></li>
+              <li><span class="sn">2</span><span>Qualified lead</span></li>
+              <li><span class="sn">3</span><span>Consultation</span></li>
+              <li><span class="sn">4</span><span>Retained case</span></li>
+            </ol>
+            <div class="callout">Different CRMs are fine. Unnormalized reporting across 100 firms is not.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-gtm">
+          <summary>GTM audit</summary>
+          <div class="body">
+            <p>Ownership, duplicates, unused tags, custom HTML, triggers, Google tag, GA4, Ads, CallRail, forms, consent, click-ID capture.</p>
+            <div class="decision" data-decision="gtm">
+              <button type="button">Keep existing</button>
+              <button type="button">Clean existing</button>
+              <button type="button">Clean PPC GTM for paid env</button>
+            </div>
+            <div class="why">Don’t rebuild WordPress analytics by default. A paid microsite can have clean tracking while the main site stays messy.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-ga4">
+          <summary>GA4 audit</summary>
+          <div class="body">
+            <p>Correct property, streams, Ads links, key events, duplicates, custom dims, referrals, forms, call events, paid LP measurement.</p>
+            <div class="callout">Don’t automatically create a new GA4 property if useful history exists. New stream only when justified.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-lp">
+          <summary>Landing pages / microsites</summary>
+          <div class="body">
+            <p>Speed, mobile, message match, practice/geo specificity, CTA, sticky phone, form friction, trust, disclaimers, CallRail swap, click IDs, CRM routing.</p>
+            <div class="decision" data-decision="lp">
+              <button type="button">Keep</button>
+              <button type="button">Improve</button>
+              <button type="button">New paid page</button>
+              <button type="button">New microsite</button>
+            </div>
+            <p><strong>First-stage pattern:</strong> one client → one Cursor project → one repo → one paid host. Templates later — don’t mash firms into one mega-project on day one.</p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-campaign">
+          <summary>Campaign audit</summary>
+          <div class="body">
+            <p>Structure, budget fragmentation, bidding, match types, negatives, search terms, RSAs, LP mapping, IS, qualified CPL, cost/retained.</p>
+            <div class="decision" data-decision="camp">
+              <button type="button">Keep</button>
+              <button type="button">Clean up</button>
+              <button type="button">Consolidate</button>
+              <button type="button">Rebuild</button>
+              <button type="button">Test vs new</button>
+            </div>
+            <div class="callout">Ugly naming ≠ bad performance. Don’t burn campaigns just because you dislike inherited systems.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="signal" id="s-lookfor">
+          <summary>Quick “look for” across accounts</summary>
+          <div class="body">
+            <ul class="checks" data-check-group="lookfor">
+              <li><input type="checkbox" id="l1" /><label for="l1">Too many campaigns for spend</label><select class="badge-select" data-badge data-for="l1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l2" /><label for="l2">Brand masking weak nonbrand</label><select class="badge-select" data-badge data-for="l2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l3" /><label for="l3">Optimizing to raw calls</label><select class="badge-select" data-badge data-for="l3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l4" /><label for="l4">Mega-brand competitor sinkholes</label><select class="badge-select" data-badge data-for="l4"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l5" /><label for="l5">Useful local competitors over-negated</label><select class="badge-select" data-badge data-for="l5"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l6" /><label for="l6">Bad geo / near-me outside footprint</label><select class="badge-select" data-badge data-for="l6"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l7" /><label for="l7">Weak call tracking / sparse retained uploads as sole signal</label><select class="badge-select" data-badge data-for="l7"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l8" /><label for="l8">AI Max/broad volume with quality dilution</label><select class="badge-select" data-badge data-for="l8"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l9" /><label for="l9">Client-driven category churn</label><select class="badge-select" data-badge data-for="l9"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="l10" /><label for="l10">Good terms / bad downstream · weird terms / strong downstream</label><select class="badge-select" data-badge data-for="l10"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== ACCESS ===== -->
+      <section class="section-block" id="s-access">
+        <h2 class="sec">Access &amp; entry</h2>
+        <p class="lede">Map owners. Ask for approved paths. Never store credentials on this page.</p>
+
+        <details class="panel" data-panel data-accordion="access">
+          <summary>Systems checklist<span class="tag">entry</span></summary>
+          <div class="body">
             <ul class="checks" data-check-group="access">
-              <li><input type="checkbox" id="ac1" /><label for="ac1">Company Google account / Workspace access</label><select class="badge-select" data-badge data-for="ac1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="ac2" /><label for="ac2">Google Ads MCC + client account hierarchy</label><select class="badge-select" data-badge data-for="ac2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="ac3" /><label for="ac3">Google Ads API / developer token + access level</label><select class="badge-select" data-badge data-for="ac3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="ac1" /><label for="ac1">Company Google account / Workspace</label><select class="badge-select" data-badge data-for="ac1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="ac2" /><label for="ac2">Google Ads MCC + client hierarchy</label><select class="badge-select" data-badge data-for="ac2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="ac3" /><label for="ac3">Ads API / developer token + access level</label><select class="badge-select" data-badge data-for="ac3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac4" /><label for="ac4">Google Ads Editor</label><select class="badge-select" data-badge data-for="ac4"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac5" /><label for="ac5">GTM containers</label><select class="badge-select" data-badge data-for="ac5"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac6" /><label for="ac6">GA4 properties / streams</label><select class="badge-select" data-badge data-for="ac6"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
@@ -658,413 +1071,35 @@
               <li><input type="checkbox" id="ac11" /><label for="ac11">DNS / domain access</label><select class="badge-select" data-badge data-for="ac11"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac12" /><label for="ac12">GitHub</label><select class="badge-select" data-badge data-for="ac12"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac13" /><label for="ac13">Vercel (or host)</label><select class="badge-select" data-badge data-for="ac13"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="ac14" /><label for="ac14">Cursor / Codex / AI environment FirmPilot uses</label><select class="badge-select" data-badge data-for="ac14"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+              <li><input type="checkbox" id="ac14" /><label for="ac14">Cursor / Codex / AI environment</label><select class="badge-select" data-badge data-for="ac14"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac15" /><label for="ac15">Internal reporting / dashboards</label><select class="badge-select" data-badge data-for="ac15"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="ac16" /><label for="ac16">Existing AI skills / agents inventory</label><select class="badge-select" data-badge data-for="ac16"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
             </ul>
-            <div class="callout">Never store credentials in this local page. Map owners and ask for approved access paths.</div>
+            <div class="callout">Never store credentials here. Map owners and ask for approved access paths.</div>
           </div>
         </details>
-      </section>
 
-      <!-- AI ENG -->
-      <section class="section-block" id="s-aieng">
-        <h2>Questions for the AI engineering team</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">03</span> What exists before I invent anything</summary>
+        <details class="panel" data-panel data-accordion="access" id="s-aieng">
+          <summary>Questions for AI engineering</summary>
           <div class="body">
             <ul>
-              <li>What have you already automated?</li>
-              <li>What exactly do you mean internally by a “skill”?</li>
-              <li>What APIs are already connected?</li>
-              <li>Do you already have Google Ads API access? Developer-token access level?</li>
-              <li>How do you separate clients / tenants?</li>
-              <li>What CRM(s)? Same CRM for most firms? How is client/tenant/location identified?</li>
-              <li>Are CallRail calls available via API/webhook? Transcripts?</li>
-              <li>Are lead statuses standardized?</li>
-              <li>Is anything already sending downstream conversions back to Google?</li>
-              <li>How are secrets stored? What gets logged?</li>
-              <li>Are AI / agent sessions retained internally?</li>
-              <li>What can existing agents safely <strong>WRITE</strong> vs only <strong>READ</strong>?</li>
+              <li>What have you already automated? What is a “skill” here?</li>
+              <li>Ads API / developer token access level? Read vs write for agents?</li>
+              <li>How are clients separated? Secrets, logging, retained sessions?</li>
+              <li>CRM + CallRail APIs/webhooks? Transcripts? Offline conversions today?</li>
+              <li>Lead statuses standardized? What can agents safely WRITE vs READ?</li>
             </ul>
-            <div class="why">AI should industrialize proven PPC logic — not invent PPC strategy blindly.</div>
+            <div class="why">AI should industrialize proven PPC logic — not invent strategy.</div>
           </div>
         </details>
       </section>
 
-      <!-- BASELINE -->
-      <section class="section-block" id="s-baseline">
-        <h2>Baseline audit (before major changes)</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">04</span> Google metrics vs business outcomes</summary>
-          <div class="body">
-            <div class="split two">
-              <div class="card">
-                <h4>Google performance metrics</h4>
-                <ul>
-                  <li>Spend · clicks · CPC · CTR</li>
-                  <li>Ads conversions · reported CPA · CVR</li>
-                  <li>Budget · bidding strategy · campaign types</li>
-                  <li>Keyword / match structure · search terms</li>
-                  <li>IS · lost IS budget · lost IS rank</li>
-                  <li>Geo · device · day/hour</li>
-                  <li>Landing pages · conversion actions</li>
-                </ul>
-              </div>
-              <div class="card">
-                <h4>Actual business outcomes</h4>
-                <ul>
-                  <li>CallRail calls · form leads</li>
-                  <li>Qualified leads (if known)</li>
-                  <li>Consultations</li>
-                  <li>Retained / signed cases</li>
-                  <li>Qualified lead CPA</li>
-                  <li>Retained case CPA</li>
-                </ul>
-              </div>
-            </div>
-            <div class="callout">Never conflate Google “conversions” with retained cases. Capture both sides before changing the account.</div>
-            <ul class="checks" data-check-group="baseline">
-              <li><input type="checkbox" id="b1" /><label for="b1">Google metrics snapshot saved (date-stamped)</label><select class="badge-select" data-badge data-for="b1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="b2" /><label for="b2">Business outcomes snapshot saved (or gaps noted)</label><select class="badge-select" data-badge data-for="b2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            </ul>
-          </div>
-        </details>
-      </section>
-
-      <!-- CONVERSION -->
-      <section class="section-block" id="s-conversion">
-        <h2>Conversion audit</h2>
-        <details class="panel" data-panel open>
-          <summary><span class="num">05</span> Integrity of every conversion action<span class="tag">deep</span></summary>
-          <div class="body">
-            <p>Inspect Primary and Secondary actions, GA4 imports, native Ads, CallRail, forms, click-to-call vs connected calls, duplicates, obsolete actions, micro-conversions used for bidding, page views / button clicks as “business outcomes,” double-counting, attribution, campaign goals vs account defaults, and whether Smart Bidding trains on garbage.</p>
-            <p><strong>Signal ladder (conceptual):</strong></p>
-            <ol class="ladder">
-              <li>Raw lead / raw call</li>
-              <li>AI-qualified lead (confidence + human review)</li>
-              <li>Actual qualified lead</li>
-              <li>Consultation</li>
-              <li>Retained case</li>
-              <li>Expected case value → realized fee</li>
-            </ol>
-            <p>Deeper verified outcome = stronger signal. Find the deepest event that still has enough volume to optimize against.</p>
-            <div class="decision">
-              <span>TRUST</span>
-              <span>KEEP BUT MODIFY</span>
-              <span>MOVE TO SECONDARY</span>
-              <span>REPLACE</span>
-              <span>INVESTIGATE</span>
-            </div>
-            <div class="callout">Do <strong>not</strong> delete old conversions immediately. Preserve history while validating cleaner replacements.</div>
-            <ul class="checks" data-check-group="conv">
-              <li><input type="checkbox" id="c1" /><label for="c1">Primary actions inventoried with bidding impact noted</label><select class="badge-select" data-badge data-for="c1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="c2" /><label for="c2">Secondary / micro actions reviewed</label><select class="badge-select" data-badge data-for="c2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="c3" /><label for="c3">Campaign goals checked vs account defaults</label><select class="badge-select" data-badge data-for="c3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-              <li><input type="checkbox" id="c4" /><label for="c4">Duplicate / double-count risk assessed</label><select class="badge-select" data-badge data-for="c4"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            </ul>
-          </div>
-        </details>
-      </section>
-
-      <!-- CALLRAIL -->
-      <section class="section-block" id="s-callrail">
-        <h2>CallRail / call quality</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">06</span> Tracking + AI classification concept</summary>
-          <div class="body">
-            <p>Audit: DNI, pools, source attribution, recording, transcription, duration, answer rate, missed calls, caller geo, tags/dispositions, API/webhooks, GCLID / landing / campaign linkage, CRM reach.</p>
-            <p><strong>AI call classification</strong> evaluates transcript <em>content</em>, not duration alone:</p>
-            <ul>
-              <li>Valid prospective client? Relevant practice? Relevant geo?</li>
-              <li>Legal intent? Already represented? Viable matter?</li>
-              <li>Consultation-worthy? Obviously junk?</li>
-              <li><strong>Confidence score</strong> — humans review uncertain; initially sample high-confidence too</li>
-            </ul>
-            <div class="why">CRM outcomes should eventually outrank AI guesses. Duration is a filter, not qualification.</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- CRM -->
-      <section class="section-block" id="s-crm">
-        <h2>CRM audit</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">07</span> Pipeline truth + FirmPilot standard funnel</summary>
-          <div class="body">
-            <p>Inspect CRM(s), whether they differ by client, stages, stage consistency, intake update quality, GCLID / source / campaign storage, phone/email, CallRail fields, qualified / consult / retained, case type, value fields, API/webhooks, history, offline upload reliability.</p>
-            <p><strong>FirmPilot standard funnel</strong> (map client words into this):</p>
-            <ol class="ladder">
-              <li>Lead</li>
-              <li>Qualified Lead</li>
-              <li>Consultation</li>
-              <li>Retained Case</li>
-            </ol>
-            <div class="callout">Different CRMs are fine. Unnormalized reporting across 100 firms is not.</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- GTM -->
-      <section class="section-block" id="s-gtm">
-        <h2>GTM audit</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">08</span> Containers, tags, paid isolation</summary>
-          <div class="body">
-            <p>Ownership, tag count, duplicates, unused, custom HTML, naming, triggers, variables, Google tag, GA4, Ads conversions, CallRail, forms, phone, consent, click-ID capture, CRM handoff.</p>
-            <div class="decision">
-              <span>KEEP EXISTING GTM</span>
-              <span>CLEAN EXISTING GTM</span>
-              <span>CREATE CLEAN PPC GTM FOR NEW PAID ENV</span>
-            </div>
-            <div class="why">Do not rebuild the whole WordPress analytics world by default. A clean paid microsite can have clean PPC tracking while the main site stays messy.</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- GA4 -->
-      <section class="section-block" id="s-ga4">
-        <h2>GA4 audit</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">09</span> Property, events, Ads link</summary>
-          <div class="body">
-            <p>Correct property, streams, Ads links, key events, duplicates, custom dims/metrics, referrals, forms, call-related events, paid LP measurement.</p>
-            <div class="callout">Do not automatically create a new GA4 property if useful history already exists. New stream only when justified.</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- LP -->
-      <section class="section-block" id="s-lp">
-        <h2>Landing page / microsite audit</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">10</span> Control the paid funnel</summary>
-          <div class="body">
-            <p>Destinations, speed, mobile, message match, KW→ad→page, practice/geo specificity, headline, CTA, phone/sticky call, form friction, credibility, testimonials, results (if appropriate), trust, disclaimers, length, CVR, CallRail swap, GTM/GA4, click IDs, CRM routing.</p>
-            <div class="decision">
-              <span>KEEP CURRENT PAGE</span>
-              <span>IMPROVE CURRENT PAGE</span>
-              <span>BUILD NEW PAID PAGE</span>
-              <span>BUILD NEW PAID MICROSITE</span>
-            </div>
-            <p><strong>First-stage build pattern:</strong> one client → one Cursor project → one GitHub repo → one Vercel (or host) paid deploy. Reusable templates later — don’t mash all firms into one mega-project on day one.</p>
-          </div>
-        </details>
-      </section>
-
-      <!-- CAMPAIGN -->
-      <section class="section-block" id="s-campaign">
-        <h2>Campaign audit</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">11</span> Structure vs performance honesty</summary>
-          <div class="body">
-            <p>Structure, budget fragmentation, practice/geo splits, types, bidding, match types, KW duplication, negatives/lists, search terms, RSAs/assets, LP mapping, device/schedule/geo, goals, IS / lost IS, CPC, CVR, qualified lead rate, cost/qualified, cost/retained.</p>
-            <div class="decision">
-              <span>KEEP</span>
-              <span>CLEAN UP</span>
-              <span>CONSOLIDATE</span>
-              <span>REBUILD</span>
-              <span>TEST AGAINST NEW STRUCTURE</span>
-            </div>
-            <div class="callout">Ugly naming ≠ bad performance. Preserve useful history. Don’t burn campaigns solely because you dislike inherited systems.</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- LOW BUDGET -->
-      <section class="section-block" id="s-lowbudget">
-        <h2>Low-budget legal accounts ($1.5K–$5K)</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">12</span> Signal-volume reality</summary>
-          <div class="body">
-            <p>Small budgets cannot support many campaigns, practice splits, and experiments. Signal density is the scarce resource.</p>
-            <ul>
-              <li>Consolidate; highest-intent traffic first</li>
-              <li>Clean conversion signals; realistic geography</li>
-              <li>Avoid fragmentation</li>
-              <li>Use the highest-quality conversion that still has enough volume</li>
-              <li>Do not optimize only to retained cases if there are too few</li>
-              <li>AI-qualified conversations can be an intermediate bidding signal</li>
-              <li>Still feed retained outcomes downstream for calibration</li>
-            </ul>
-            <div class="callout">A $2,000 budget across 10 campaigns teaches Google almost nothing useful.</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- STRUCTURE (preserved) -->
-      <section class="section-block" id="s-structure">
-        <h2>Structure rules (starter architecture)</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">13</span> Brand + consolidated nonbrand<span class="tag">$20–30K PI</span></summary>
-          <div class="body">
-            <p><strong>Do not standardize campaign counts. Standardize decision rules.</strong></p>
-            <p>Typical starting shape for a mid legal budget:</p>
-            <ul>
-              <li><strong>A. Brand Search</strong> — separates demand FirmPilot SEO/GBP may create; stops brand from masking weak nonbrand</li>
-              <li><strong>B. Consolidated Nonbrand Acquisition</strong> — split only when economics/geo/budget earn it</li>
-            </ul>
-            <p>Within nonbrand: few tightly themed ad groups by true case category — not dozens of campaigns.</p>
-            <div class="callout">New practice area does not automatically earn a campaign. Same budget → something else loses allocation.</div>
-          </div>
-        </details>
-      </section>
-
-      <section class="section-block" id="s-match">
-        <h2>Match types &amp; negatives</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">14</span> Controlled keywords + negative taxonomy</summary>
-          <div class="body">
-            <ul>
-              <li>Start: Core Exact + Core Phrase; highest-intent commercial terms first</li>
-              <li>No 80 permutations — modern exact/phrase already expand</li>
-              <li>Broad / AI Max earned by signal quality — not Google’s recommendation alone</li>
-            </ul>
-            <p>Three negative classes:</p>
-            <ol>
-              <li><strong>Universal junk</strong> — jobs, salary, law school, wrong practice/geo, unusable intent</li>
-              <li><strong>Routing</strong> — brand vs nonbrand; categories routed only when volume earns separation</li>
-              <li><strong>Learned performance</strong> — terms that repeatedly fail downstream qualification</li>
-            </ol>
-            <div class="callout">Do not auto-negative informational PI language (insurance, settlement, rear-ended). Let call/intake outcomes decide.</div>
-          </div>
-        </details>
-      </section>
-
-      <section class="section-block" id="s-comp">
-        <h2>Competitors &amp; DKI</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">15</span> Decision trees</summary>
-          <div class="body">
-            <div class="tree">
-              <div class="tree-row"><div class="label">Block hard</div><div>Pure navigation (“phone number,” “address”) on mega-brands — budget sinkholes</div></div>
-              <div class="tree-row"><div class="label">Keep / classify</div><div>Local/mid competitor + case intent; remembered name as marketplace breadcrumb</div></div>
-              <div class="tree-row"><div class="label">At $20–30K</div><div>Separate conquest often not justified — classify inside consolidated structure first</div></div>
-            </div>
-            <p style="margin-top:1rem"><strong>DKI</strong> inserts the matched keyword from the account — not the user query. Only in tightly controlled ad groups where every keyword is safe as copy. Never in competitor/catch-all/broad exploration sets. Manual creative for intentional conquest.</p>
-          </div>
-        </details>
-      </section>
-
-      <section class="section-block" id="s-geo">
-        <h2>Geography &amp; creative</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">16</span> Near-me honesty · RSA testing</summary>
-          <div class="body">
-            <ul>
-              <li>“Near me” only works when the attorney is perceived as near the searcher</li>
-              <li>Don’t manufacture city creative just because targeting includes a city</li>
-              <li>Service area ≠ equally valuable geography — track retained outcomes by geo</li>
-            </ul>
-            <p>At legal CPCs: one control LP (maybe one challenger); one meaningful hypothesis at a time. RSAs with real messaging differences — not 15 “Call Today” clones. DKI is one RSA component, not the whole strategy.</p>
-          </div>
-        </details>
-      </section>
-
-      <!-- BIDDING -->
-      <section class="section-block" id="s-bidding">
-        <h2>Bidding / expansion roadmap</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">17</span> Stronger expansion after stronger signal</summary>
-          <div class="body">
-            <div class="phase-grid">
-              <div class="phase"><div class="ph">Phase 1</div><h4>Measurement clean</h4><ul><li>Tracking verified</li><li>Structure sane</li><li>High intent captured</li></ul></div>
-              <div class="phase"><div class="ph">Phase 2</div><h4>Qualified signal reliable</h4><ul><li>Smart Bidding gets better inputs</li><li>Manual / Max Clicks only as baseline</li></ul></div>
-              <div class="phase"><div class="ph">Phase 3</div><h4>Broader matching</h4><ul><li>Test broad / AI Max where appropriate</li><li>Watch junk-call burden</li></ul></div>
-              <div class="phase"><div class="ph">Phase 4</div><h4>Value optimization</h4><ul><li>Downstream value when data supports it</li><li>No invented transcript values</li></ul></div>
-              <div class="phase"><div class="ph">Phase 5</div><h4>Other inventory</h4><ul><li>PMax / other only when it solves a real problem</li></ul></div>
-            </div>
-            <div class="callout"><strong>Stronger targeting expansion comes after stronger signal.</strong> Do not change five major variables at once if you need to know what caused the result.</div>
-            <p>Channel expansion order (none automatic): broader Search → AI Max tests → Search Partners → competitor conquest → Microsoft → other Google → Meta/video → other. Search gets money first if it can consume budget efficiently.</p>
-            <p><strong>Client governance:</strong> committed categories / geo / budget / expected acquisition range for a period. New category → more budget or something else loses allocation.</p>
-          </div>
-        </details>
-      </section>
-
-      <!-- AI -->
-      <section class="section-block" id="s-ai">
-        <h2>AI / automation</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">18</span> Assist → skills → portfolio</summary>
-          <div class="body">
-            <p><strong>Initially:</strong> AI assists me — reads exports, audits, patterns, search terms, transcripts, recommendations. I review.</p>
-            <p><strong>Then:</strong> repetitive audit logic becomes automation / skills, e.g.:</p>
-            <ul>
-              <li>account health · conversion integrity · search terms · negatives</li>
-              <li>budget pacing · lead quality · CallRail · landing pages</li>
-              <li>tracking integrity · CRM outcomes · new-account setup · weekly PPC review</li>
-            </ul>
-            <div class="why">Do not automate a decision until I’ve done it manually enough times to know the rules. AI eng industrializes proven logic.</div>
-            <p>Scale needs reliable data, QA, API capacity, and manageable exceptions — not merely more tokens. People still own client expectations, judgment, policy exceptions, and hard measurement.</p>
-          </div>
-        </details>
-      </section>
-
-      <!-- ROLES -->
-      <section class="section-block" id="s-roles">
-        <h2>Human / team roles</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">19</span> Leverage — not “fire everybody”</summary>
-          <div class="body">
-            <div class="split two">
-              <div class="card">
-                <h4>PPC operators → increasingly</h4>
-                <ul>
-                  <li>QA · call listening · uncertain classifications</li>
-                  <li>Tracking checks · search-term review</li>
-                  <li>Client context · intake feedback</li>
-                  <li>Policy / disapproval investigation</li>
-                  <li>Confirm case appetite still valid</li>
-                  <li>Basic maintenance · escalate anomalies</li>
-                </ul>
-              </div>
-              <div class="card">
-                <h4>I increasingly own</h4>
-                <ul>
-                  <li>PPC + measurement architecture</li>
-                  <li>Conversion + campaign strategy</li>
-                  <li>Landing-page strategy · experiments</li>
-                  <li>Bidding roadmap · automation logic</li>
-                  <li>AI skill definition · cross-account learning</li>
-                </ul>
-              </div>
-            </div>
-            <div class="card" style="margin-top:0.65rem">
-              <h4>AI engineers help with</h4>
-              <ul>
-                <li>Reliable APIs · automation · credentials · permissions · logging</li>
-                <li>Deployment · retries · pipelines · CRM/CallRail/Google integrations · safe agent execution</li>
-              </ul>
-            </div>
-            <p>Operators should <strong>not</strong> all independently reinvent strategy inside accounts.</p>
-          </div>
-        </details>
-      </section>
-
-      <!-- EXCEPTIONS -->
-      <section class="section-block" id="s-exceptions">
-        <h2>Daily / weekly exception system</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">20</span> 100 accounts · 7 need attention</summary>
-          <div class="body">
-            <p>Exception-driven health checks:</p>
-            <ul>
-              <li>Spend / CPC / traffic / conversion anomalies</li>
-              <li>Qualified lead rate · retained rate · CPL · qualified CPL · retained CPA</li>
-              <li>Budget limits · IS changes · search-term / bad query clusters</li>
-              <li>Broken conversions · GTM / CallRail / CRM failures</li>
-              <li>Missed call rate · lead quality decline · LP decline</li>
-              <li>Policy / disapprovals · unusual account changes</li>
-            </ul>
-            <div class="why">Desired outcome: “100 accounts exist, but only these 7 need a human today.”</div>
-          </div>
-        </details>
-      </section>
-
-      <!-- 30/60/90 -->
+      <!-- ===== ROADMAP / PLAYBOOK ===== -->
       <section class="section-block" id="s-roadmap">
-        <h2>First 30 / 60 / 90 days</h2>
-        <div class="roadmap">
+        <h2 class="sec">Playbook &amp; roadmap</h2>
+        <p class="lede">30 / 60 / 90 first. Structure and bidding rules stay one-click away.</p>
+
+        <div class="roadmap" style="margin-bottom:1.25rem">
           <div class="r-card">
             <div class="ph">Days 1–30</div>
             <h4>See clearly</h4>
@@ -1073,9 +1108,7 @@
               <li>First 10 audits</li>
               <li>Conversion diagnosis</li>
               <li>CallRail / CRM map</li>
-              <li>Tracking + LP audits</li>
               <li>Recurring failure patterns</li>
-              <li>Understand AI infra</li>
             </ul>
           </div>
           <div class="r-card">
@@ -1084,10 +1117,9 @@
             <ul>
               <li>Clean conversion framework</li>
               <li>Pilot AI call qualification</li>
-              <li>Fix/build priority LPs</li>
-              <li>Repair/rebuild selected campaigns</li>
-              <li>CRM downstream feedback</li>
-              <li>PPC standards + start skills</li>
+              <li>Priority LPs</li>
+              <li>Selected campaign repair</li>
+              <li>CRM feedback · start skills</li>
             </ul>
           </div>
           <div class="r-card">
@@ -1095,24 +1127,150 @@
             <h4>Prove &amp; scale</h4>
             <ul>
               <li>Compare pilot results</li>
-              <li>Expand winning structures</li>
+              <li>Expand winners</li>
               <li>Automate repeatable audits</li>
               <li>Exception reporting</li>
-              <li>Train operators</li>
-              <li>Roll more accounts</li>
-              <li>Controlled Smart Bidding / broader match where signal supports</li>
+              <li>Controlled bidding expansion</li>
             </ul>
           </div>
         </div>
-      </section>
 
-      <!-- IMPACT -->
-      <section class="section-block" id="s-impact">
-        <h2>Measurement of my impact</h2>
-        <details class="panel" data-panel>
-          <summary><span class="num">21</span> Before vs after scoreboard</summary>
+        <details class="panel" data-panel data-accordion="play">
+          <summary>Low-budget legal ($1.5K–$5K)<span class="tag" id="s-lowbudget">signal volume</span></summary>
           <div class="body">
-            <p>Track so I can show: what existed → system I designed → pilot results → scaled results.</p>
+            <p>Small budgets can’t support many campaigns and experiments. Signal density is scarce.</p>
+            <ul>
+              <li>Consolidate; highest-intent first</li>
+              <li>Clean signals; realistic geography</li>
+              <li>Highest-quality conversion that still has volume</li>
+              <li>Don’t optimize only to retained if too few</li>
+              <li>AI-qualified conversations can be intermediate; still feed retained downstream</li>
+            </ul>
+            <div class="callout">$2,000 across 10 campaigns teaches Google almost nothing useful.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-structure">
+          <summary>Structure rules</summary>
+          <div class="body">
+            <p><strong>Do not standardize campaign counts. Standardize decision rules.</strong></p>
+            <ul>
+              <li><strong>Brand Search</strong> — separates SEO/GBP demand; stops brand masking weak nonbrand</li>
+              <li><strong>Consolidated Nonbrand</strong> — split only when economics/geo/budget earn it</li>
+            </ul>
+            <p>Few tightly themed ad groups by true case category — not dozens of campaigns.</p>
+            <div class="callout">New practice area ≠ automatic new campaign. Same budget → something else loses allocation.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-match">
+          <summary>Match types &amp; negatives</summary>
+          <div class="body">
+            <ul>
+              <li>Start: Core Exact + Core Phrase; highest-intent commercial first</li>
+              <li>No 80 permutations — modern exact/phrase already expand</li>
+              <li>Broad / AI Max earned by signal quality — not Google’s recommendation alone</li>
+            </ul>
+            <p>Three negative classes:</p>
+            <ol class="steps">
+              <li><span class="sn">1</span><span><strong>Universal junk</strong> — jobs, salary, law school, wrong practice/geo</span></li>
+              <li><span class="sn">2</span><span><strong>Routing</strong> — brand vs nonbrand; categories only when volume earns it</span></li>
+              <li><span class="sn">3</span><span><strong>Learned</strong> — terms that repeatedly fail downstream</span></li>
+            </ol>
+            <div class="callout">Don’t auto-negative informational PI language (insurance, settlement). Let outcomes decide.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-comp">
+          <summary>Competitors &amp; DKI</summary>
+          <div class="body">
+            <div class="tree">
+              <div class="tree-row"><div class="label">Block hard</div><div>Pure navigation (“phone number,” “address”) on mega-brands — budget sinkholes</div></div>
+              <div class="tree-row"><div class="label">Keep / classify</div><div>Local/mid competitor + case intent; remembered name as marketplace breadcrumb</div></div>
+              <div class="tree-row"><div class="label">At $20–30K</div><div>Separate conquest often not justified — classify inside consolidated structure first</div></div>
+            </div>
+            <p><strong>DKI</strong> inserts the matched keyword from the account — not the user query. Only in tightly controlled ad groups. Never in competitor/catch-all/broad sets.</p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-geo">
+          <summary>Geography &amp; creative</summary>
+          <div class="body">
+            <ul>
+              <li>“Near me” only works when the attorney is perceived as near the searcher</li>
+              <li>Don’t manufacture city creative just because targeting includes a city</li>
+              <li>Service area ≠ equally valuable geography — track retained by geo</li>
+            </ul>
+            <p>At legal CPCs: one control LP (maybe one challenger); one hypothesis at a time. RSAs with real messaging differences.</p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-bidding">
+          <summary>Bidding / expansion roadmap</summary>
+          <div class="body">
+            <div class="phase-grid">
+              <div class="phase"><div class="ph">Phase 1</div><h4>Measurement clean</h4><ul><li>Tracking verified</li><li>Structure sane</li><li>High intent captured</li></ul></div>
+              <div class="phase"><div class="ph">Phase 2</div><h4>Qualified signal</h4><ul><li>Smart Bidding gets better inputs</li><li>Manual / Max Clicks only as baseline</li></ul></div>
+              <div class="phase"><div class="ph">Phase 3</div><h4>Broader matching</h4><ul><li>Test broad / AI Max where appropriate</li><li>Watch junk-call burden</li></ul></div>
+              <div class="phase"><div class="ph">Phase 4</div><h4>Value optimization</h4><ul><li>Downstream value when data supports it</li><li>No invented transcript values</li></ul></div>
+              <div class="phase"><div class="ph">Phase 5</div><h4>Other inventory</h4><ul><li>PMax / other only when it solves a real problem</li></ul></div>
+            </div>
+            <div class="callout"><strong>Stronger expansion after stronger signal.</strong> Don’t change five variables at once.</div>
+            <p><strong>Client governance:</strong> committed categories / geo / budget for a period. New category → more budget or something else loses allocation.</p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-ai">
+          <summary>AI / automation</summary>
+          <div class="body">
+            <p><strong>Initially:</strong> AI assists — reads exports, audits, patterns, transcripts, recommendations. I review.</p>
+            <p><strong>Then:</strong> repetitive audit logic becomes skills (health, conversion integrity, search terms, CallRail, CRM, weekly review…).</p>
+            <div class="why">Don’t automate a decision until I’ve done it manually enough times to know the rules.</div>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-roles">
+          <summary>Team roles</summary>
+          <div class="body">
+            <div class="split two">
+              <div class="card">
+                <h4>PPC operators →</h4>
+                <ul>
+                  <li>QA · call listening · uncertain classifications</li>
+                  <li>Tracking checks · search-term review</li>
+                  <li>Client context · intake feedback</li>
+                  <li>Escalate anomalies</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>I increasingly own</h4>
+                <ul>
+                  <li>Measurement + campaign architecture</li>
+                  <li>LP strategy · bidding roadmap</li>
+                  <li>AI skill definition · cross-account learning</li>
+                </ul>
+              </div>
+            </div>
+            <p style="margin-top:0.85rem">Operators should <strong>not</strong> all independently reinvent strategy inside accounts.</p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-exceptions">
+          <summary>Exception system</summary>
+          <div class="body">
+            <p>Desired outcome: “100 accounts exist, but only these 7 need a human today.”</p>
+            <ul>
+              <li>Spend / CPC / conversion anomalies</li>
+              <li>Qualified / retained rate · CPL shifts</li>
+              <li>Broken conversions · GTM / CallRail / CRM failures</li>
+              <li>Missed call rate · LP decline · policy / disapprovals</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-impact">
+          <summary>My impact scoreboard</summary>
+          <div class="body">
             <ul class="checks" data-check-group="impact">
               <li><input type="checkbox" id="i1" /><label for="i1">Raw CPA · qualified lead CPA · retained CPA</label><select class="badge-select" data-badge data-for="i1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
               <li><input type="checkbox" id="i2" /><label for="i2">Qualified call % · retained case rate · LP CVR</label><select class="badge-select" data-badge data-for="i2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
@@ -1124,13 +1282,9 @@
             </ul>
           </div>
         </details>
-      </section>
 
-      <!-- UNKNOWNS -->
-      <section class="section-block" id="s-unknowns">
-        <h2>Things I still need to find out</h2>
-        <details class="panel" data-panel open>
-          <summary><span class="num">22</span> Open discovery list</summary>
+        <details class="panel" data-panel data-accordion="play" id="s-unknowns">
+          <summary>Things I still need to find out<span class="tag">open</span></summary>
           <div class="body">
             <ul class="checks" data-check-group="unknowns">
               <li><input type="checkbox" id="u1" /><label for="u1">Exact CRM(s) · CallRail setup · MCC architecture</label><select class="badge-select" data-badge data-for="u1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
@@ -1145,34 +1299,16 @@
             </ul>
           </div>
         </details>
+
+        <details class="panel" data-panel data-accordion="play" id="s-standard">
+          <summary>What to standardize</summary>
+          <div class="body">
+            <p>Not identical campaign counts. Standardize: audit framework, conversion taxonomy, qualification definitions, negative taxonomy, DKI/geo rules, split thresholds, client change-management, QA, expansion gates, escalation, reporting spend → qualified opportunity → retained case. Then let market/budget/economics set structure.</p>
+          </div>
+        </details>
       </section>
 
-      <!-- STANDARDIZE REMINDER -->
-      <details class="panel" data-panel id="s-standard">
-        <summary><span class="num">23</span> What FirmPilot should standardize</summary>
-        <div class="body">
-          <p>Not identical campaign counts. Standardize: audit framework, conversion taxonomy, qualification definitions, negative taxonomy, DKI/geo rules, split thresholds, client change-management, QA, expansion gates, testing requirements, escalation, reporting spend → qualified opportunity → retained case. Then let market/budget/economics set structure.</p>
-        </div>
-      </details>
-
-      <details class="panel" data-panel id="s-lookfor">
-        <summary><span class="num">24</span> Quick “look for” across accounts</summary>
-        <div class="body">
-          <ul class="checks" data-check-group="lookfor">
-            <li><input type="checkbox" id="l1" /><label for="l1">Too many campaigns for spend</label><select class="badge-select" data-badge data-for="l1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l2" /><label for="l2">Brand masking weak nonbrand</label><select class="badge-select" data-badge data-for="l2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l3" /><label for="l3">Optimizing to raw calls</label><select class="badge-select" data-badge data-for="l3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l4" /><label for="l4">Mega-brand competitor sinkholes</label><select class="badge-select" data-badge data-for="l4"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l5" /><label for="l5">Useful local competitors over-negated</label><select class="badge-select" data-badge data-for="l5"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l6" /><label for="l6">Bad geo / near-me outside footprint</label><select class="badge-select" data-badge data-for="l6"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l7" /><label for="l7">Weak call tracking / sparse retained uploads as sole signal</label><select class="badge-select" data-badge data-for="l7"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l8" /><label for="l8">AI Max/broad volume with quality dilution</label><select class="badge-select" data-badge data-for="l8"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l9" /><label for="l9">Client-driven category churn</label><select class="badge-select" data-badge data-for="l9"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-            <li><input type="checkbox" id="l10" /><label for="l10">Good terms / bad downstream · weird terms / strong downstream</label><select class="badge-select" data-badge data-for="l10"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
-          </ul>
-        </div>
-      </details>
-
+      <!-- ===== NOTES ===== -->
       <section class="findings" id="findings">
         <div class="findings-head">
           <div>
@@ -1211,7 +1347,7 @@
       </section>
 
       <footer class="page-foot">
-        George Aguilar · private draft. Not a FirmPilot deliverable. No credentials or client PII here.
+        George Aguilar · private draft. Not a FirmPilot deliverable. No credentials or client PII.
         Companion: <a href="../meeting-guide/index.html">Meeting guide</a>
       </footer>
     </main>
@@ -1220,18 +1356,66 @@
   <script>
     (function () {
       const STORAGE_KEY = "firmpilot-paid-media-os-v2";
+      const PHASES = [
+        { value: "", label: "Phase…" },
+        { value: "access", label: "1 · Access" },
+        { value: "baseline", label: "2 · Baseline" },
+        { value: "audit", label: "3 · Signal audit" },
+        { value: "patterns", label: "4 · Patterns" },
+        { value: "fix", label: "5 · Fix" },
+        { value: "compare", label: "6 · Compare" },
+        { value: "done", label: "Done" }
+      ];
+
+      const slotsEl = document.getElementById("accountSlots");
+      for (let i = 1; i <= 10; i++) {
+        const div = document.createElement("div");
+        div.className = "slot";
+        div.dataset.slot = String(i);
+        const opts = PHASES.map(function (p) {
+          return '<option value="' + p.value + '">' + p.label + "</option>";
+        }).join("");
+        div.innerHTML =
+          '<div class="slot-top"><span class="slot-num">#' + i + '</span></div>' +
+          '<input type="text" id="slotName' + i + '" data-note placeholder="Firm / account" autocomplete="off" />' +
+          '<select class="phase-select" id="slotPhase' + i + '" data-note aria-label="Phase for slot ' + i + '">' + opts + "</select>";
+        slotsEl.appendChild(div);
+      }
+
       const noteFields = Array.from(document.querySelectorAll("[data-note]"));
       const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
       const badges = Array.from(document.querySelectorAll("[data-badge]"));
-      const panels = Array.from(document.querySelectorAll("details.panel[data-panel], details.panel"));
+      const panels = Array.from(document.querySelectorAll("details.panel[data-panel]"));
       const statusEl = document.getElementById("saveStatus");
+      const boardProgress = document.getElementById("boardProgress");
       let saveTimer = null;
 
+      function updateBoardProgress() {
+        let named = 0;
+        for (let i = 1; i <= 10; i++) {
+          const nameEl = document.getElementById("slotName" + i);
+          const phaseEl = document.getElementById("slotPhase" + i);
+          const slot = slotsEl.querySelector('[data-slot="' + i + '"]');
+          const hasName = !!(nameEl && nameEl.value.trim());
+          if (hasName) named++;
+          if (slot) {
+            slot.classList.toggle("done", phaseEl && phaseEl.value === "done");
+            slot.classList.toggle("active", hasName && phaseEl && phaseEl.value && phaseEl.value !== "done");
+          }
+        }
+        boardProgress.textContent = named + " / 10 named";
+      }
+
       function collect() {
-        const data = { notes: {}, checks: {}, badges: {} };
+        const data = { notes: {}, checks: {}, badges: {}, decisions: {} };
         noteFields.forEach(function (el) { data.notes[el.id] = el.value; });
         checkboxes.forEach(function (el) { data.checks[el.id] = el.checked; });
         badges.forEach(function (el) { data.badges[el.getAttribute("data-for") || el.id] = el.value; });
+        document.querySelectorAll("[data-decision]").forEach(function (group) {
+          const key = group.getAttribute("data-decision");
+          const picked = group.querySelector("button.picked");
+          data.decisions[key] = picked ? picked.textContent.trim() : "";
+        });
         return data;
       }
 
@@ -1245,6 +1429,7 @@
           const raw = localStorage.getItem(STORAGE_KEY);
           if (!raw) {
             badges.forEach(applyBadgeClass);
+            updateBoardProgress();
             return;
           }
           const data = JSON.parse(raw);
@@ -1259,6 +1444,17 @@
             if (data.badges && Object.prototype.hasOwnProperty.call(data.badges, key)) el.value = data.badges[key];
             applyBadgeClass(el);
           });
+          if (data.decisions) {
+            document.querySelectorAll("[data-decision]").forEach(function (group) {
+              const key = group.getAttribute("data-decision");
+              const want = data.decisions[key];
+              if (!want) return;
+              group.querySelectorAll("button").forEach(function (btn) {
+                btn.classList.toggle("picked", btn.textContent.trim() === want);
+              });
+            });
+          }
+          updateBoardProgress();
         } catch (e) {
           statusEl.textContent = "Could not load saved data";
         }
@@ -1282,18 +1478,46 @@
         saveTimer = setTimeout(save, 250);
       }
 
-      noteFields.forEach(function (el) { el.addEventListener("input", scheduleSave); });
+      noteFields.forEach(function (el) {
+        el.addEventListener("input", function () { updateBoardProgress(); scheduleSave(); });
+        el.addEventListener("change", function () { updateBoardProgress(); scheduleSave(); });
+      });
       checkboxes.forEach(function (el) { el.addEventListener("change", scheduleSave); });
       badges.forEach(function (el) {
         el.addEventListener("change", function () { applyBadgeClass(el); scheduleSave(); });
       });
 
+      document.querySelectorAll("[data-decision]").forEach(function (group) {
+        group.querySelectorAll("button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            const on = btn.classList.contains("picked");
+            group.querySelectorAll("button").forEach(function (b) { b.classList.remove("picked"); });
+            if (!on) btn.classList.add("picked");
+            scheduleSave();
+          });
+        });
+      });
+
+      // One panel open at a time within each accordion group
+      panels.forEach(function (panel) {
+        panel.addEventListener("toggle", function () {
+          if (!panel.open) return;
+          const group = panel.getAttribute("data-accordion");
+          if (!group) return;
+          panels.forEach(function (other) {
+            if (other !== panel && other.getAttribute("data-accordion") === group) other.open = false;
+          });
+        });
+      });
+
       document.getElementById("btnClear").addEventListener("click", function () {
-        if (!confirm("Clear findings, checkboxes, and badges stored in this browser?")) return;
+        if (!confirm("Clear findings, checkboxes, board slots, and badges stored in this browser?")) return;
         noteFields.forEach(function (el) { el.value = ""; });
         checkboxes.forEach(function (el) { el.checked = false; });
         badges.forEach(function (el) { el.value = "unknown"; applyBadgeClass(el); });
+        document.querySelectorAll("[data-decision] button").forEach(function (b) { b.classList.remove("picked"); });
         localStorage.removeItem(STORAGE_KEY);
+        updateBoardProgress();
         statusEl.textContent = "Cleared";
         statusEl.classList.remove("saved");
       });
@@ -1310,10 +1534,20 @@
           const badge = data.badges[el.id] || "";
           return "- [x] " + (lab ? lab.textContent.trim() : el.id) + (badge && badge !== "unknown" ? " (" + badge + ")" : "");
         });
+        const slots = [];
+        for (let i = 1; i <= 10; i++) {
+          const n = (data.notes["slotName" + i] || "").trim();
+          const p = (data.notes["slotPhase" + i] || "").trim();
+          if (n || p) slots.push("- #" + i + ": " + (n || "_unnamed_") + (p ? " · " + p : ""));
+        }
         const md = [
           "# FirmPilot Paid Media OS — findings",
           "",
           "_Private local export · " + stamp + "_",
+          "",
+          "### First 10 board",
+          "",
+          slots.length ? slots.join("\n") : "_empty_",
           "",
           block("Account / firm", "fAccount"),
           block("Spend · structure · Google metrics", "fSpend"),
@@ -1339,9 +1573,6 @@
         statusEl.classList.add("saved");
       });
 
-      document.getElementById("btnExpandAll").addEventListener("click", function () {
-        panels.forEach(function (p) { p.open = true; });
-      });
       document.getElementById("btnCollapseAll").addEventListener("click", function () {
         panels.forEach(function (p) { p.open = false; });
       });

@@ -27,3 +27,5 @@ Use the discovery questions with Aaron. Request a read-only view of two represen
 - `AGENTS.md`: Cursor instructions and the first implementation prompt.
 
 The package contains no credentials, customer data, real call recordings, or Google Ads mutations.
+
+Local HTML cockpits (open as `file://`): `paid-media-os/index.html` and `meeting-guide/index.html`. GitHub/Vercel for these is yours when ready — not configured here.
