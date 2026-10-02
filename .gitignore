@@ -1,0 +1,10 @@
+# Private strategy — never publish
+firm-pilot-workspace/PRIVATE_STRATEGY.md
+PRIVATE_STRATEGY.md
+
+# Local / junk
+.DS_Store
+*.zip
+.vercel
+.env
+.env.*

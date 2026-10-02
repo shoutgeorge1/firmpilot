@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FirmPilot — Cockpit</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #1a2332;
+      --text: #e8eef6;
+      --muted: #9aabbc;
+      --accent: #3d8bfd;
+      --border: #2a3a4d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #1e3a5f 0%, transparent 55%),
+                  radial-gradient(900px 500px at 100% 0%, #1a2f28 0%, transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+    main {
+      width: min(560px, 100%);
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+    }
+    p {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+    a {
+      display: block;
+      padding: 1rem 1.15rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    a:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    a strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+    a span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>FirmPilot</h1>
+    <p>Personal cockpit tools for paid media and meeting prep. Sample / synthetic use only.</p>
+    <ul>
+      <li>
+        <a href="/paid-media-os/">
+          <strong>Paid Media OS</strong>
+          <span>Event lineage, reconciliation, and case-quality views</span>
+        </a>
+      </li>
+      <li>
+        <a href="/meeting-guide/">
+          <strong>Meeting Guide</strong>
+          <span>Interview and discovery meeting checklist</span>
+        </a>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

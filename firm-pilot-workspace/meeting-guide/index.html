@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FirmPilot Meeting Guide — v2 (private)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e1318;
+      --bg-raise: #161c24;
+      --bg-soft: #1a212b;
+      --line: #2c3748;
+      --text: #edf2f8;
+      --muted: #b0bdc9;
+      --dim: #7a8a9c;
+      --accent: #8bbcff;
+      --accent-soft: rgba(139, 188, 255, 0.14);
+      --warn: #ebc67a;
+      --warn-soft: rgba(235, 198, 122, 0.14);
+      --ok: #8fd4a8;
+      --bad: #f0a0a0;
+      --focus: #b5d0ff;
+      --radius: 12px;
+      --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      --measure: 40rem;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 50rem; margin: 0 auto; padding: 1.4rem 1.4rem 4rem; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.2rem;
+    }
+    header.top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1rem;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .title-line { font-size: 1.2rem; font-weight: 650; letter-spacing: -0.015em; }
+    .meta { color: var(--dim); font-size: 0.82rem; }
+    .link-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.15rem; }
+    .chip {
+      display: inline-block;
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      background: var(--bg-raise);
+    }
+    .chip:hover { color: var(--text); border-color: #4a5d78; }
+    .chip.primary {
+      background: var(--accent-soft);
+      border-color: rgba(139, 188, 255, 0.4);
+      color: #d4e6ff;
+    }
+    .listen {
+      background: var(--warn-soft);
+      border: 1px solid rgba(235, 198, 122, 0.32);
+      border-radius: var(--radius);
+      padding: 0.95rem 1.1rem;
+      margin-bottom: 1.15rem;
+      color: #f3e4bf;
+      max-width: var(--measure);
+    }
+    .listen strong { color: var(--warn); }
+    .thesis {
+      background: var(--bg-raise);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .thesis h1 {
+      margin: 0 0 0.75rem;
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .thesis-points { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.75rem; max-width: var(--measure); }
+    .thesis-points li {
+      font-size: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid #314257;
+    }
+    .section { margin-bottom: 1.75rem; }
+    h2 { margin: 0 0 0.85rem; font-size: 1.12rem; font-weight: 650; letter-spacing: -0.015em; }
+    .mission {
+      background: var(--accent-soft);
+      border: 1px solid rgba(139, 188, 255, 0.3);
+      border-radius: var(--radius);
+      padding: 0.9rem 1rem;
+      margin-bottom: 1.5rem;
+      max-width: var(--measure);
+      font-size: 0.95rem;
+    }
+    details.panel {
+      background: var(--bg-raise);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin-bottom: 0.55rem;
+      overflow: hidden;
+    }
+    details.panel[open] { border-color: #3d4f68; background: var(--bg-soft); }
+    details.panel summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.85rem 1rem;
+      font-weight: 600;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      user-select: none;
+    }
+    details.panel summary::-webkit-details-marker { display: none; }
+    details.panel summary::before {
+      content: "▸";
+      color: var(--accent);
+      font-size: 0.8rem;
+      width: 1ch;
+      transition: transform 0.12s ease;
+    }
+    details.panel[open] summary::before { transform: rotate(90deg); }
+    details.panel summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+    .tag {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.15rem 0.45rem;
+    }
+    .panel-body {
+      padding: 0 1rem 1.05rem 2.2rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 44rem;
+    }
+    .panel-body p { margin: 0.75rem 0 0; }
+    .panel-body p:first-child { margin-top: 0.8rem; }
+    .panel-body ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+    .panel-body li { margin-bottom: 0.4rem; }
+    .panel-body strong { color: var(--text); }
+    .why {
+      display: block;
+      color: var(--dim);
+      font-size: 0.82rem;
+      margin-top: 0.15rem;
+    }
+    .os-link {
+      display: inline-block;
+      margin-top: 0.55rem;
+      font-size: 0.82rem;
+      font-family: var(--mono);
+    }
+    .flag {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.7rem 0.8rem;
+      margin-top: 0.55rem;
+    }
+    .flag .heard {
+      color: var(--bad);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .flag .go {
+      margin-top: 0.35rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+    .notes {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.05rem 1.2rem;
+    }
+    .notes-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .notes-head h2 { margin: 0 0 0.2rem; }
+    .save-status { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); }
+    .save-status.saved { color: var(--ok); }
+    .actions-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    button {
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--bg-raise);
+      color: var(--text);
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+    }
+    button.primary {
+      background: var(--accent-soft);
+      border-color: rgba(139, 188, 255, 0.45);
+      color: #d4e6ff;
+    }
+    button.ghost { color: var(--muted); }
+    button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .field { margin-bottom: 0.95rem; }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .hint { display: block; font-weight: 400; color: var(--dim); font-size: 0.76rem; margin-top: 0.1rem; }
+    textarea, input[type="text"] {
+      width: 100%;
+      font: inherit;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.6rem 0.7rem;
+      resize: vertical;
+    }
+    textarea:focus, input[type="text"]:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+    textarea { min-height: 4.75rem; }
+    textarea.tall { min-height: 6.5rem; }
+    footer.page-foot {
+      margin-top: 1.75rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--line);
+      color: var(--dim);
+      font-size: 0.76rem;
+    }
+    .kbd-help {
+      margin-top: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--dim);
+    }
+    kbd {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.05rem 0.28rem;
+      background: var(--bg-raise);
+    }
+    @media (max-width: 640px) {
+      .panel-body { padding-left: 1rem; }
+      .tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Private · local only · not for FirmPilot</div>
+        <div class="title-line">Meeting guide</div>
+      </div>
+      <div class="meta">Talk tracks · listen first</div>
+    </header>
+
+    <div class="link-row">
+      <a class="chip primary" href="../paid-media-os/index.html">Open Paid Media OS →</a>
+      <a class="chip" href="../paid-media-os/index.html#s-pilot">First 10 pilot</a>
+      <a class="chip" href="../paid-media-os/index.html#s-conversion">Conversion audit</a>
+      <a class="chip" href="../paid-media-os/index.html#s-unknowns">Unknowns</a>
+    </div>
+
+    <div class="listen">
+      <strong>Listen first.</strong>
+      Let them describe the department, portfolio pain, and what paid media is supposed to become.
+      Ask before prescribing. Respond to bottlenecks they name — don’t dump a 100-account agent pitch.
+    </div>
+
+    <div class="mission">
+      <strong>What I’m walking in to do:</strong>
+      Get access → baseline ~10 accounts → prove whether Google is learning truth or garbage → fix conversion signals before structure theater → pilot, measure, then automate repetitive audits.
+      Deep checklists live in the <a href="../paid-media-os/index.html">Paid Media OS</a>.
+    </div>
+
+    <section class="thesis" aria-labelledby="thesis-title">
+      <h1 id="thesis-title">Thesis — share if the door opens</h1>
+      <ul class="thesis-points">
+        <li>
+          FirmPilot already develops intelligence about each firm’s desired cases, markets, competitors, demand, content, local presence, and site performance. That same intelligence should guide SEO, paid, social, local, pages, and follow-up — with call/intake outcomes flowing back to every channel.
+        </li>
+        <li>
+          Paid should reinforce and distribute FirmPilot’s work — not become a disconnected PPC agency. Biggest risk is often <strong>conversion signal quality</strong>, not campaign cosmetics.
+        </li>
+        <li>
+          Show direct channel attribution <em>and</em> blended cost per qualified new matter / retained case. Do not claim one channel created every case. A call or form is not automatically valuable.
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" id="by-audience">
+      <h2>Questions by who I’m talking to</h2>
+
+      <details class="panel" open>
+        <summary>Owner / leadership<span class="tag">mandate</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>Why paid media in-house now — fill gaps, defend brand, replace outside PPC, or own the whole acquisition decision?<span class="why">Why: service economics and role scope.</span></li>
+            <li>What does a successful first quarter look like in your words?<span class="why">Why: avoid optimizing to vanity calls.</span></li>
+            <li>Reportedly no separate PPC fee / some firms have outside PPC — how does paid pay for itself?<span class="why">Why: viability of the function.</span></li>
+            <li>What does “7–8× return” mean — numerator, lag, paid-only vs blended?<span class="why">Why: undefined ROI kills later debate.</span></li>
+            <li>Who decides budgets, conversion goals, bid strategy, exceptions, engineering priority?<span class="why">Why: authority vs execution.</span></li>
+            <li>Can we pilot ~10 accounts before touching ~100?<span class="why">Why: prove signal OS first.</span></li>
+          </ul>
+          <a class="os-link" href="../paid-media-os/index.html#s-pilot">OS → First 10 · Unknowns · Impact</a>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>AI engineering<span class="tag">infra</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>What have you already automated? What is a “skill” here?</li>
+            <li>Ads API / developer token access level? Read vs write for agents?</li>
+            <li>How are clients separated? Secrets, logging, retained agent sessions?</li>
+            <li>CRM + CallRail APIs/webhooks? Transcripts? Anything uploading conversions to Google today?</li>
+          </ul>
+          <p>Frame: AI should industrialize proven PPC logic — not invent strategy.</p>
+          <a class="os-link" href="../paid-media-os/index.html#s-aieng">OS → AI eng questions · AI / skills</a>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>PPC team<span class="tag">ops</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>What do you touch daily? Who owns strategy vs maintenance?</li>
+            <li>What conversion actions train bidding today?</li>
+            <li>Manual bidding vs Smart Bidding / PMax / AI Max — where and why?</li>
+            <li>Biggest account messes you keep fighting?</li>
+          </ul>
+          <p>Direction: operators move toward QA, call review, search terms, intake feedback, anomalies — not reinventing strategy in every account.</p>
+          <a class="os-link" href="../paid-media-os/index.html#s-roles">OS → Team roles · Campaign audit · Look-for</a>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Client success / account managers<span class="tag">clients</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>How often do attorneys change case priorities or geos?</li>
+            <li>How are “leads suck” complaints handled today?</li>
+            <li>Who explains spend and results to the firm?</li>
+            <li>Which clients already have an outside PPC person?</li>
+          </ul>
+          <a class="os-link" href="../paid-media-os/index.html#s-bidding">OS → Client governance (in bidding section)</a>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Web / development<span class="tag">pages</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>Who owns WordPress vs ability to ship paid microsites (GitHub/Vercel/DNS)?</li>
+            <li>Can we put clean PPC tracking on a paid subdomain without rewriting the main site?</li>
+            <li>Legal/disclaimer approval path for new pages?</li>
+          </ul>
+          <a class="os-link" href="../paid-media-os/index.html#s-lp">OS → Landing pages · GTM · Access</a>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Intake / call handling<span class="tag">truth</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>Who labels qualified new matter vs existing client / spam / wrong practice?</li>
+            <li>Answer rate, missed calls, speed-to-lead?</li>
+            <li>Do dispositions reach CRM consistently?</li>
+            <li>Would AI transcript tags help — if humans review uncertain ones?</li>
+          </ul>
+          <a class="os-link" href="../paid-media-os/index.html#s-callrail">OS → CallRail · Conversion ladder · CRM</a>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>CRM / data people<span class="tag">loop</span></summary>
+        <div class="panel-body">
+          <ul>
+            <li>One CRM or many? Tenant/location keys?</li>
+            <li>GCLID / source / campaign stored? Offline upload path?</li>
+            <li>Can we normalize to Lead → Qualified → Consultation → Retained?</li>
+            <li>Historical completeness and who updates stages?</li>
+          </ul>
+          <a class="os-link" href="../paid-media-os/index.html#s-crm">OS → CRM audit · Conversion audit</a>
+        </div>
+      </details>
+    </section>
+
+    <section class="section" id="red-flags">
+      <h2>Red flags I hear → where to dig</h2>
+      <details class="panel" open>
+        <summary>Signal &amp; measurement<span class="tag">common</span></summary>
+        <div class="panel-body">
+          <div class="flag"><div class="heard">“We optimize to every phone call.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-conversion">Conversion audit</a> · <a href="../paid-media-os/index.html#s-callrail">CallRail</a></div></div>
+          <div class="flag"><div class="heard">“We don’t know which calls became cases.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-crm">CRM</a> · <a href="../paid-media-os/index.html#s-baseline">Baseline (business outcomes)</a></div></div>
+          <div class="flag"><div class="heard">“CallRail isn’t connected” / “We don’t have GCLIDs.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-callrail">CallRail</a> · <a href="../paid-media-os/index.html#s-gtm">GTM</a> · <a href="../paid-media-os/index.html#s-access">Access</a></div></div>
+          <div class="flag"><div class="heard">“Lots of conversions, not many signed cases.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-conversion">Conversion integrity</a> · signal ladder</div></div>
+          <div class="flag"><div class="heard">“We can’t tell whether the firm answered.”</div><div class="go">→ Intake section · CallRail answer/missed rates</div></div>
+          <div class="flag"><div class="heard">“We can’t access the CRM.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-access">Access</a> · <a href="../paid-media-os/index.html#s-unknowns">Unknowns</a></div></div>
+        </div>
+      </details>
+      <details class="panel">
+        <summary>Structure &amp; bidding<span class="tag">common</span></summary>
+        <div class="panel-body">
+          <div class="flag"><div class="heard">“We use Max Clicks on everything.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-bidding">Bidding roadmap</a> (baseline OK; not destination)</div></div>
+          <div class="flag"><div class="heard">“We use PMax because Google recommended it.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-bidding">Expansion after signal</a> · <a href="../paid-media-os/index.html#s-campaign">Campaign audit</a></div></div>
+          <div class="flag"><div class="heard">“We spread $2,000 across 10 campaigns.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-lowbudget">Low-budget</a> · <a href="../paid-media-os/index.html#s-structure">Structure rules</a></div></div>
+          <div class="flag"><div class="heard">“One landing page for everything.”</div><div class="go">→ <a href="../paid-media-os/index.html#s-lp">Landing pages</a></div></div>
+          <div class="flag"><div class="heard">“The client says leads suck.”</div><div class="go">→ Signal quality + intake + geo + query mix — not just “add budget”</div></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section" id="deeper">
+      <h2>Short deeper notes (meeting-safe)</h2>
+      <details class="panel">
+        <summary>Cross-channel &amp; blended economics</summary>
+        <div class="panel-body">
+          <p>SEO/content/social may create demand while outside PPC takes the branded click. Measure channel attribution and blended acquisition. Larger play: help the attorney govern the whole marketing budget with comparable case economics.</p>
+          <a class="os-link" href="../paid-media-os/index.html#s-thesis">OS → Signal thesis</a>
+        </div>
+      </details>
+      <details class="panel">
+        <summary>Intake as silent budget drain</summary>
+        <div class="panel-body">
+          <p>Missed calls, slow follow-up, bad dispositions, shifting appetite waste every channel. A 30-minute existing-client call ≠ new matter. Duration is a filter.</p>
+          <a class="os-link" href="../paid-media-os/index.html#s-callrail">OS → CallRail / calls</a>
+        </div>
+      </details>
+      <details class="panel">
+        <summary>Human trust vs AI assembly</summary>
+        <div class="panel-body">
+          <p>Attorneys need a credible human who explains the money and coordinates execution. AI assembles evidence. Relationship + transparent results = fortress — not proprietary lock-in.</p>
+          <a class="os-link" href="../paid-media-os/index.html#s-roles">OS → Team roles</a>
+        </div>
+      </details>
+      <details class="panel">
+        <summary>Optional opening line</summary>
+        <div class="panel-body">
+          <p>“I understand the ambition is to make paid media work across a much larger law-firm portfolio and connect spend to actual matters. I’d like to hear how you see the department and platform working before I prescribe a build.”</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="notes" id="notes" aria-labelledby="notes-title">
+      <div class="notes-head">
+        <div>
+          <h2 id="notes-title">Meeting notes</h2>
+          <div class="save-status" id="saveStatus">Saves in this browser only</div>
+        </div>
+        <div class="actions-row">
+          <button type="button" class="primary" id="btnDownload">Download Markdown</button>
+          <button type="button" class="ghost" id="btnClear">Clear notes</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="nWho">Who I met / role</label>
+        <input type="text" id="nWho" data-note autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="nVision">Their vision / mandate<span class="hint">What paid media should become</span></label>
+        <textarea id="nVision" data-note class="tall"></textarea>
+      </div>
+      <div class="field">
+        <label for="nSignal">Signal / intake / attribution takeaways</label>
+        <textarea id="nSignal" data-note class="tall"></textarea>
+      </div>
+      <div class="field">
+        <label for="nAccess">Access · systems · team notes</label>
+        <textarea id="nAccess" data-note></textarea>
+      </div>
+      <div class="field">
+        <label for="nFlags">Red flags heard</label>
+        <textarea id="nFlags" data-note></textarea>
+      </div>
+      <div class="field">
+        <label for="nNext">Next step / who owns follow-up</label>
+        <input type="text" id="nNext" data-note autocomplete="off" />
+      </div>
+    </section>
+
+    <p class="kbd-help"><kbd>/</kbd> jump to notes · nothing leaves this machine</p>
+
+    <footer class="page-foot">
+      Personal reference for George Aguilar. Deep technical manual:
+      <a href="../paid-media-os/index.html">Paid Media OS</a>.
+      Do not paste credentials or client PII.
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "firmpilot-meeting-guide-v2";
+      const fields = Array.from(document.querySelectorAll("[data-note]"));
+      const statusEl = document.getElementById("saveStatus");
+      let saveTimer = null;
+
+      function collect() {
+        const data = {};
+        fields.forEach(function (el) { data[el.id] = el.value; });
+        return data;
+      }
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+          fields.forEach(function (el) {
+            if (Object.prototype.hasOwnProperty.call(data, el.id)) el.value = data[el.id] || "";
+          });
+        } catch (e) {
+          statusEl.textContent = "Could not load saved notes";
+        }
+      }
+
+      function save() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(collect()));
+          statusEl.textContent = "Saved locally · " + new Date().toLocaleTimeString();
+          statusEl.classList.add("saved");
+        } catch (e) {
+          statusEl.textContent = "Save failed";
+          statusEl.classList.remove("saved");
+        }
+      }
+
+      function scheduleSave() {
+        statusEl.textContent = "Saving…";
+        statusEl.classList.remove("saved");
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(save, 250);
+      }
+
+      fields.forEach(function (el) { el.addEventListener("input", scheduleSave); });
+
+      document.getElementById("btnClear").addEventListener("click", function () {
+        if (!confirm("Clear meeting notes stored in this browser?")) return;
+        fields.forEach(function (el) { el.value = ""; });
+        localStorage.removeItem(STORAGE_KEY);
+        statusEl.textContent = "Cleared";
+        statusEl.classList.remove("saved");
+      });
+
+      document.getElementById("btnDownload").addEventListener("click", function () {
+        save();
+        const data = collect();
+        const stamp = new Date().toISOString();
+        const block = function (title, id) {
+          return "### " + title + "\n\n" + ((data[id] || "").trim() || "_—_") + "\n";
+        };
+        const md = [
+          "# FirmPilot — meeting notes",
+          "",
+          "_Private local export · " + stamp + "_",
+          "",
+          block("Who I met / role", "nWho"),
+          block("Their vision / mandate", "nVision"),
+          block("Signal / intake / attribution", "nSignal"),
+          block("Access · systems · team", "nAccess"),
+          block("Red flags heard", "nFlags"),
+          block("Next step", "nNext"),
+          ""
+        ].join("\n");
+        const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "firmpilot-meeting-notes-" + new Date().toISOString().slice(0, 10) + ".md";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        statusEl.textContent = "Downloaded Markdown · still saved locally";
+        statusEl.classList.add("saved");
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.target.matches("textarea, input, summary")) return;
+        if (e.key === "/") {
+          e.preventDefault();
+          document.getElementById("nWho").focus();
+          document.getElementById("notes").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      load();
+    })();
+  </script>
+</body>
+</html>
