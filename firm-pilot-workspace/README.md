@@ -1,27 +1,25 @@
-# FirmPilot — personal paid media operating system workspace
+# FirmPilot — personal Director Paid Media OS
 
-**Status:** private Director cockpit (expanded 2 Oct 2026). Interview/discovery context from late September. This is George Aguilar's private working brief — not a FirmPilot repository, approved company architecture, or claim of client-account access.
+**Status:** private Director cockpit. Interview/discovery context from late September. George Aguilar's private working brief — not a FirmPilot repository, approved company architecture, or claim of client-account access.
 
 **Live:** https://firmpilot-ivory.vercel.app/
 
 ## Start here
 
-1. Open the **Command Center** (`index.html` / live `/`).
-2. Read `IMPLEMENTATION_MAP.md` for inventory ↔ mega-prompt module mapping.
+1. Open the **Director OS** homepage (`index.html` / live `/`) — one page: Today · First 10 · Signal Ladder · Triage · Meeting Mode · Reference.
+2. Deep checklists stay in **Playbook** (`paid-media-os/`) and **Meeting Guide** (`meeting-guide/`) — linked from Reference / Future Modules, not competing top nav.
 3. Read `PROJECT_BRIEF.md`, `TECHNICAL_BLUEPRINT.md`, `DISCOVERY_AND_DELIVERY.md` for history.
 4. Read `PRIVATE_STRATEGY.md` for personal role strategy. **Do not put that file in a company repo or public deploy.**
 5. Cursor: follow `AGENTS.md`.
 
-## Cockpit map
+## Map
 
 | Surface | Path |
 | --- | --- |
-| Command Center | `/` |
-| Access · Pre-Start / 30-Day | `/paid-media-os/access/` · `/paid-media-os/prestart/` |
-| Portfolio Radar · Dossier · Audit · Turnarounds | `/paid-media-os/radar/` … |
-| Tracking · Coaching · Productization | under `/paid-media-os/` |
-| Playbook (thesis, First 10, structure/bidding depth) | `/paid-media-os/` |
-| Meeting guide | `/meeting-guide/` |
+| **Director OS (homepage)** | `/` |
+| Playbook depth | `/paid-media-os/` |
+| Meeting guide (full) | `/meeting-guide/` |
+| Future modules (Radar, Access, Dossier, Audit, Turnaround, Tracking, Coaching, Productization, Pre-Start) | under `/paid-media-os/` — via homepage **Future Modules** |
 
 Mock/demo portfolio rows are labeled **DEMO ONLY**. Empty states are intentional until authorized data.
 

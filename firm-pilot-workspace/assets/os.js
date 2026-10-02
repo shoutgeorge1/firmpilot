@@ -2,68 +2,67 @@
 (function (global) {
   "use strict";
 
-  var NAV = [
-    { group: "Hub", items: [
-      { id: "command", href: "../index.html", label: "Command Center", rootHref: "index.html" },
-      { id: "access", href: "access.html", label: "Access" },
-      { id: "prestart", href: "prestart.html", label: "Pre-Start / 30-Day" }
-    ]},
-    { group: "Portfolio", items: [
-      { id: "radar", href: "radar.html", label: "Portfolio Radar" },
-      { id: "dossier", href: "dossier.html", label: "Account Dossier" },
-      { id: "audit", href: "audit.html", label: "Audit Engine" },
-      { id: "turnaround", href: "turnaround.html", label: "Turnarounds" }
-    ]},
-    { group: "Ops", items: [
-      { id: "tracking", href: "tracking.html", label: "Tracking" },
-      { id: "coaching", href: "coaching.html", label: "Coaching" },
-      { id: "productization", href: "productization.html", label: "Productization" },
-      { id: "playbook", href: "index.html", label: "Playbook" }
-    ]}
+  /* Primary destinations stay lean. Deep modules live under Future. */
+  var PRIMARY = [
+    { id: "command", href: "../index.html", label: "Director OS", rootHref: "index.html" },
+    { id: "playbook", href: "index.html", label: "Playbook" },
+    { id: "meeting", href: "../meeting-guide/", label: "Meeting Guide", rootHref: "meeting-guide/" }
+  ];
+
+  var FUTURE = [
+    { id: "access", href: "access.html", label: "Access" },
+    { id: "prestart", href: "prestart.html", label: "Pre-Start" },
+    { id: "radar", href: "radar.html", label: "Radar" },
+    { id: "dossier", href: "dossier.html", label: "Dossier" },
+    { id: "audit", href: "audit.html", label: "Audit" },
+    { id: "turnaround", href: "turnaround.html", label: "Turnaround" },
+    { id: "tracking", href: "tracking.html", label: "Tracking" },
+    { id: "coaching", href: "coaching.html", label: "Coaching" },
+    { id: "productization", href: "productization.html", label: "Productization" }
   ];
 
   function pathDepth() {
-    // pages in paid-media-os/ use ../ for root; root index uses paid-media-os/
     var path = (location.pathname || "").replace(/\\/g, "/");
-    if (path.endsWith("/") || path.endsWith("/index.html") || /\/firm-pilot-workspace\/?$/.test(path) || path.endsWith("firmpilot-ivory.vercel.app/") || /\/$/.test(path) && !/paid-media-os/.test(path)) {
-      // detect root command center
-    }
     return /\/paid-media-os(\/|$)/.test(path) ? "module" : "root";
   }
 
   function resolveHref(item, depth) {
     if (depth === "root") {
+      if (item.rootHref) return item.rootHref;
       if (item.id === "command") return "index.html";
-      if (item.rootHref && item.id === "command") return item.rootHref;
-      return "paid-media-os/" + (item.href.indexOf("../") === 0 ? item.href.replace("../", "") : item.href);
+      if (item.id === "meeting") return "meeting-guide/";
+      if (item.href.indexOf("../") === 0) return item.href.replace("../", "");
+      return "paid-media-os/" + item.href;
     }
-    // module pages live under paid-media-os/
     if (item.id === "command") return "../index.html";
+    if (item.id === "meeting") return "../meeting-guide/";
     return item.href;
-  }
-
-  function meetingHref(depth) {
-    return depth === "root" ? "meeting-guide/" : "../meeting-guide/";
   }
 
   function injectNav(activeId) {
     var el = document.getElementById("os-nav");
     if (!el) return;
     var depth = pathDepth();
-    // Prefer data-depth override
     if (el.getAttribute("data-depth") === "root") depth = "root";
     if (el.getAttribute("data-depth") === "module") depth = "module";
 
-    var html = '<div class="brand">Private · Director OS</div><div class="nav-title">Paid Media</div>';
-    NAV.forEach(function (g) {
-      html += '<div class="nav-group">' + g.group + "</div>";
-      g.items.forEach(function (item) {
-        var href = resolveHref(item, depth);
-        var cls = item.id === activeId ? ' class="active"' : "";
-        html += '<a href="' + href + '"' + cls + ">" + item.label + "</a>";
-      });
+    var html = '<div class="brand">Private · Director OS</div><div class="nav-title">FirmPilot</div>';
+    PRIMARY.forEach(function (item) {
+      var href = resolveHref(item, depth);
+      var cls = item.id === activeId ? ' class="active"' : "";
+      html += '<a href="' + href + '"' + cls + ">" + item.label + "</a>";
     });
-    html += '<a class="cross" href="' + meetingHref(depth) + '">Meeting guide</a>';
+
+    var futureOpen = FUTURE.some(function (f) { return f.id === activeId; });
+    html += '<details class="future-mods"' + (futureOpen ? " open" : "") + ">";
+    html += "<summary>Future Modules</summary>";
+    FUTURE.forEach(function (item) {
+      var href = resolveHref(item, depth);
+      var cls = item.id === activeId ? ' class="active"' : "";
+      html += '<a href="' + href + '"' + cls + ">" + item.label + "</a>";
+    });
+    html += "</details>";
+
     el.innerHTML = html;
   }
 

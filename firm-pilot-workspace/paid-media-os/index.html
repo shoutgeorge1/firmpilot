@@ -795,47 +795,20 @@
 </head>
 <body>
   <div class="shell">
-    <nav class="side-nav" aria-label="Primary">
-      <div class="brand">Private · Director OS</div>
-      <div class="nav-title">Playbook</div>
-      <a href="../index.html">Command Center</a>
-      <a href="access.html">Access</a>
-      <a href="radar.html">Radar</a>
-      <a href="dossier.html">Dossier</a>
-      <a href="audit.html">Audit</a>
-      <a href="turnaround.html">Turnarounds</a>
-      <a href="tracking.html">Tracking</a>
-      <a href="coaching.html">Coaching</a>
-      <a href="productization.html">Productization</a>
-      <a href="prestart.html">Pre-Start</a>
-      <a href="#start">Playbook start</a>
-      <a href="#s-pilot">First 10</a>
-      <a href="#s-signal">Signal</a>
-      <a href="#s-roadmap">Roadmap</a>
-      <a href="#findings">Notes</a>
-      <a class="cross" href="../meeting-guide/">Meeting guide</a>
-    </nav>
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
 
     <main class="main">
       <header id="start">
         <div class="eyebrow">George’s private cockpit · Playbook depth · not FirmPilot policy</div>
         <h1>Paid Media Playbook</h1>
-        <p class="sub">Signal thesis, First 10 board, structure/bidding rules, and deep checklists. Director modules live in the nav — this page keeps the operating substance.</p>
+        <p class="sub">Deep checklists behind the Director OS homepage. Same substance — not competing nav.</p>
         <div class="link-row">
-          <a class="chip primary" href="../index.html">Command Center</a>
-          <a class="chip" href="radar.html">Portfolio Radar</a>
-          <a class="chip" href="audit.html">Audit Engine</a>
-          <a class="chip" href="../meeting-guide/">Meeting guide</a>
+          <a class="chip primary" href="../index.html">← Director OS</a>
           <a class="chip" href="#s-pilot">First 10 board</a>
+          <a class="chip" href="#s-signal">Signal</a>
+          <a class="chip" href="#s-roadmap">Roadmap</a>
           <a class="chip" href="#s-unknowns">Open unknowns</a>
-        </div>
-        <div class="flow" aria-label="Work flow" style="margin-top:0.5rem">
-          <a href="radar.html">Radar</a><span class="arrow">→</span>
-          <a href="dossier.html">Dossier</a><span class="arrow">→</span>
-          <a href="audit.html">Audit</a><span class="arrow">→</span>
-          <a href="turnaround.html">Intervention</a><span class="arrow">→</span>
-          <a href="coaching.html">Coaching</a><span class="arrow">→</span>
-          <a href="productization.html">Productization</a>
+          <a class="chip" href="../meeting-guide/">Meeting guide</a>
         </div>
       </header>
 
@@ -1386,12 +1359,14 @@
 
       <footer class="page-foot">
         George Aguilar · private draft. Not a FirmPilot deliverable. No credentials or client PII.
-        <a href="../index.html">Command Center</a> · <a href="../meeting-guide/">Meeting guide</a>
+        <a href="../index.html">Director OS</a> · <a href="../meeting-guide/">Meeting guide</a>
       </footer>
     </main>
   </div>
 
+  <script src="../assets/os.js"></script>
   <script>
+    FirmPilotOS.injectNav("playbook");
     (function () {
       const STORAGE_KEY = "firmpilot-paid-media-os-v2";
       const PHASES = [
