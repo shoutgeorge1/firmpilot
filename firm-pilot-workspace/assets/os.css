@@ -749,11 +749,109 @@ button.primary {
   margin: 0 0 0.45rem;
 }
 .hero-one {
-  margin: 0;
+  margin: 0 0 0.85rem;
   color: var(--muted);
   font-size: 1.08rem;
-  max-width: 36rem;
+  max-width: 38rem;
 }
+.hyp-badge {
+  margin: 0;
+  display: inline-block;
+  max-width: 40rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(240, 198, 116, 0.4);
+  background: var(--warn-soft);
+  color: #f5e6c0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.thesis-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 720px) {
+  .thesis-grid { grid-template-columns: 1fr 1fr; }
+}
+.thesis-card {
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.05rem 1.1rem;
+}
+.thesis-card.primary {
+  border-color: rgba(125, 180, 255, 0.45);
+  background: linear-gradient(165deg, var(--bg-soft) 0%, var(--bg-raise) 100%);
+}
+@media (min-width: 720px) {
+  .thesis-card.primary { grid-column: 1 / -1; }
+}
+.thesis-card h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.thesis-card > p {
+  margin: 0 0 0.65rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.thesis-card ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+.thesis-card li { margin-bottom: 0.35rem; }
+.thesis-card strong { color: var(--text); }
+.flow-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  counter-reset: none;
+}
+.flow-list li { margin-bottom: 0.3rem; }
+.role-list {
+  list-style: none;
+  margin: 0 0 0.65rem;
+  padding: 0;
+}
+.role-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.65rem;
+  align-items: baseline;
+  margin-bottom: 0.55rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+.role {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  color: var(--dim);
+  flex-shrink: 0;
+}
+.role.soft { background: var(--bg); color: var(--dim); }
+.role.mid {
+  background: var(--accent-soft);
+  border-color: rgba(125, 180, 255, 0.35);
+  color: #cfe0ff;
+}
+.role.top {
+  background: var(--ok-soft);
+  border-color: rgba(134, 217, 165, 0.4);
+  color: var(--ok);
+}
+.micro.tight { margin-top: 0.35rem; }
 .director .sec {
   margin-bottom: 2.35rem;
   scroll-margin-top: 4.5rem;

@@ -6,7 +6,7 @@
 
 ## Start here
 
-1. Open the **Director OS** homepage (`index.html` / live `/`) — one page: Today · First 10 · Signal Ladder · Triage · Meeting Mode · Reference.
+1. Open the **Director OS** homepage (`index.html` / live `/`) — Operating bias (high-spend first · CallRail signal) · Today · First 10 · Signal Ladder · Triage · Meeting Mode · Reference (incl. cited Google volume).
 2. Deep checklists stay in **Playbook** (`paid-media-os/`) and **Meeting Guide** (`meeting-guide/`) — linked from Reference / Future Modules, not competing top nav.
 3. Read `PROJECT_BRIEF.md`, `TECHNICAL_BLUEPRINT.md`, `DISCOVERY_AND_DELIVERY.md` for history.
 4. Read `PRIVATE_STRATEGY.md` for personal role strategy. **Do not put that file in a company repo or public deploy.**
