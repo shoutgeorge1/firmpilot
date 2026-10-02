@@ -6,8 +6,8 @@
 
 ## Start here
 
-1. Open **Dashboard** (`/` ) — Next Actions, First 10 progress, systems waiting, signal mini-ladder. Almost no prose.
-2. Sidebar: **Dashboard · First 10 · Accounts · Conversions · Meetings · Reference · Setup**
+1. Open **Dashboard** (`/` ) — guided visual operating map, WHAT NOW panel, activity log. Drill FirmPilot → Performance Marketing → First 10 → Access. Almost no prose.
+2. Slim sidebar: **Dashboard · First 10 · Accounts · Conversions · Meetings · Reference · Setup**
 3. Deep checklists stay in **Playbook** (`paid-media-os/`) and **Meeting Guide** (`meeting-guide/`) — under Setup / Reference / More, not competing top nav.
 4. Read `PROJECT_BRIEF.md`, `TECHNICAL_BLUEPRINT.md`, `DISCOVERY_AND_DELIVERY.md` for history.
 5. Read `PRIVATE_STRATEGY.md` for personal role strategy. **Do not put that file in a company repo or public deploy.**

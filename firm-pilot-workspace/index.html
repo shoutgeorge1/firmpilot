@@ -3,80 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard — FirmPilot Director OS</title>
+  <title>Operating Map — FirmPilot Director OS</title>
   <link rel="stylesheet" href="assets/os.css" />
 </head>
-<body>
+<body class="map-home">
   <div class="shell">
-    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
-    <main class="main">
-      <header class="page-head">
-        <h1>FirmPilot</h1>
-        <span class="status-chip">Pre-start</span>
-        <p class="sub-line">Director Paid Media OS · private operator cockpit</p>
+    <nav class="side-nav slim" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main map-main">
+      <header class="map-head">
+        <nav class="crumbs" id="mapCrumbs" aria-label="Breadcrumb"></nav>
+        <div class="map-head-row">
+          <h1 id="mapTitle">FirmPilot</h1>
+          <span class="status-chip" id="mapPhaseChip">Pre-start</span>
+        </div>
+        <p class="map-meta" id="mapMeta">Operating map · click a node to drill</p>
       </header>
 
-      <div class="widget-grid dash">
-        <section class="widget">
-          <h2>Next actions</h2>
-          <ul class="check-list" id="dashActions">
-            <li><label><input type="checkbox" id="td1" /> Finish onboarding</label></li>
-            <li><label><input type="checkbox" id="td2" /> Confirm access (Ads, call platform, CRM, GTM/GA4)</label></li>
-            <li><label><input type="checkbox" id="td3" /> Rank best pilot candidates</label></li>
-            <li><label><input type="checkbox" id="td4" /> Don’t rebuild or automate yet</label></li>
-          </ul>
-        </section>
-
-        <section class="widget">
-          <h2>First 10 progress</h2>
-          <div class="progress-bar" aria-hidden="true"><span id="f10Progress" style="width:0%"></span></div>
-          <div class="progress-meta">
-            <span id="f10ProgressMeta">0 / 10 stages</span>
-            <a href="first-10.html">Open →</a>
+      <div class="map-layout">
+        <section class="map-stage" aria-label="System map">
+          <div class="anchor-rail" id="georgeAnchor" hidden>
+            <button type="button" class="node node-anchor" data-node="george" id="nodeGeorge">
+              <span class="node-kicker">You</span>
+              <span class="node-label">George</span>
+              <span class="node-role">Director Paid Media</span>
+              <span class="node-status st-ready">Ready</span>
+            </button>
+            <div class="anchor-line" aria-hidden="true"></div>
           </div>
+
+          <div class="map-canvas" id="mapCanvas" role="tree"></div>
+
+          <p class="map-hint" id="mapHint">Quiet nodes = not the move today.</p>
         </section>
 
-        <section class="widget">
-          <h2>Systems waiting</h2>
-          <div class="sys-grid">
-            <div class="sys-row"><span class="name">Google Ads / MCC</span><span class="status-pill warn">Waiting</span></div>
-            <div class="sys-row"><span class="name">Call platform</span><span class="status-pill warn">Waiting</span></div>
-            <div class="sys-row"><span class="name">CRM / intake</span><span class="status-pill warn">Waiting</span></div>
-            <div class="sys-row"><span class="name">GTM / GA4</span><span class="status-pill warn">Waiting</span></div>
-          </div>
-          <p class="micro"><a href="setup.html">Setup checklist →</a></p>
-        </section>
+        <aside class="map-side">
+          <section class="what-now" id="whatNow" aria-live="polite">
+            <h2>WHAT NOW?</h2>
+            <dl class="wn-grid">
+              <div><dt>Where</dt><dd id="wnWhere">—</dd></div>
+              <div><dt>Done</dt><dd id="wnDone">—</dd></div>
+              <div><dt>Waiting</dt><dd id="wnWaiting">—</dd></div>
+              <div><dt>Next</dt><dd id="wnNext">—</dd></div>
+              <div class="wn-ignore"><dt>Ignore</dt><dd id="wnIgnore">—</dd></div>
+            </dl>
+            <p class="wn-rule" id="wnRule" hidden></p>
+            <a class="wn-reason" id="wnReason" href="reference.html" hidden>Show reasoning →</a>
+          </section>
 
-        <section class="widget">
-          <h2>Signal ladder</h2>
-          <ol class="ladder mini" aria-label="Signal strength">
-            <li><span>Lead</span></li>
-            <li><span>Prospect</span></li>
-            <li><span>Qualified</span></li>
-            <li><span>Consult</span></li>
-            <li class="top"><span>Retained</span></li>
-          </ol>
-          <p class="micro"><a href="conversions.html">Conversions →</a></p>
-        </section>
+          <section class="activity-log">
+            <div class="alog-head">
+              <h2>Activity</h2>
+              <button type="button" class="ghost alog-clear" id="alogClear" title="Clear log">Clear</button>
+            </div>
+            <ul class="alog-list" id="alogList"></ul>
+            <form class="alog-add" id="alogForm">
+              <input type="text" id="alogInput" maxlength="120" placeholder="Quick note…" autocomplete="off" />
+              <button type="submit" class="primary">Log</button>
+            </form>
+          </section>
 
-        <section class="widget">
-          <h2>Needs attention</h2>
-          <ul class="attention-list">
-            <li><span>No live portfolio</span><span class="chip dim">empty</span></li>
-            <li><span>No authorized data contracts</span><span class="chip dim">pre-start</span></li>
-          </ul>
-          <p class="micro">Activates after MCC / API / call platform / CRM.</p>
-        </section>
-
-        <section class="widget">
-          <h2>Operating principles</h2>
-          <ul class="principle-list">
-            <li><strong>Best pilots first</strong> — spend, volume, tracking, call/CRM availability, business importance.</li>
-            <li><strong>Qualified signal is gravity</strong> — calls, forms, CRM; vendor-agnostic.</li>
-            <li><strong>CRM truth &gt; AI</strong> — AI drafts; humans review uncertain; CRM wins conflicts.</li>
-            <li><strong>Strongest reliable signal</strong> — enough volume to bid; Retained is North Star, often too sparse alone.</li>
-          </ul>
-        </section>
+          <section class="status-legend" aria-label="Status key">
+            <span class="leg st-not"><i></i>Not started</span>
+            <span class="leg st-progress"><i></i>In progress</span>
+            <span class="leg st-waiting"><i></i>Waiting</span>
+            <span class="leg st-blocked"><i></i>Blocked</span>
+            <span class="leg st-ready"><i></i>Ready</span>
+            <span class="leg st-done"><i></i>Done</span>
+          </section>
+        </aside>
       </div>
 
       <footer class="page-foot">
@@ -87,8 +81,7 @@
   <script src="assets/os.js"></script>
   <script>
     FirmPilotOS.injectNav("dashboard");
-    FirmPilotOS.bindLocalPersistence("director-today", null);
-    FirmPilotOS.updateFirst10Progress();
+    FirmPilotOS.initOperatingMap();
   </script>
 </body>
 </html>
