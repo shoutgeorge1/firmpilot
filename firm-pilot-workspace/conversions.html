@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conversions — FirmPilot Director OS</title>
+  <link rel="stylesheet" href="assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main">
+      <header class="page-head">
+        <h1>Conversions</h1>
+        <p class="sub-line">Signal ladder · what trains bidding vs what you measure</p>
+      </header>
+
+      <div class="widget" style="margin-bottom:0.85rem">
+        <h2>Rule</h2>
+        <p class="ladder-rule" style="margin:0">Bid toward the strongest reliable signal that still has enough volume.</p>
+      </div>
+
+      <div class="ladder-visual" aria-label="Conversion ladder">
+        <div class="ladder-step soft">
+          <span class="name">Lead</span>
+          <span class="role">Call / form / chat land — density &amp; diagnostics</span>
+          <span class="chip dim">Soft</span>
+        </div>
+        <div class="ladder-step soft">
+          <span class="name">Legitimate prospect</span>
+          <span class="role">Not spam / wrong practice / existing-client noise</span>
+          <span class="chip dim">Filter</span>
+        </div>
+        <div class="ladder-step mid">
+          <span class="name">Qualified lead</span>
+          <span class="role">Gravity for bidding once proven · CRM-backed preferred</span>
+          <span class="chip primary">Stronger</span>
+        </div>
+        <div class="ladder-step mid">
+          <span class="name">Consultation</span>
+          <span class="role">Booked / held intake with real case potential</span>
+          <span class="chip primary">Stronger</span>
+        </div>
+        <div class="ladder-step north">
+          <span class="name">Retained</span>
+          <span class="role">North Star — measure always; often too sparse to bid alone</span>
+          <span class="chip ok">North Star</span>
+        </div>
+      </div>
+
+      <div class="widget-grid two" style="margin-top:0.85rem">
+        <section class="widget">
+          <h2>Roles</h2>
+          <ul class="principle-list">
+            <li><strong>60s / connected</strong> = diagnostic / soft until proven — not auto Primary.</li>
+            <li><strong>Qualified lead signal is gravity</strong> — vendor-agnostic (calls, forms, CRM).</li>
+            <li><strong>CRM truth &gt; AI</strong> — AI drafts; humans review uncertain; CRM wins.</li>
+            <li><strong>Retained</strong> = North Star; often not enough volume alone.</li>
+          </ul>
+        </section>
+        <section class="widget">
+          <h2>Offline / first-party (architecture language)</h2>
+          <ul class="principle-list">
+            <li>GCLID + first-party CRM outcomes</li>
+            <li>Enhanced Conversions for Leads</li>
+            <li>Data Manager / Data Manager API</li>
+            <li>Defensible values — not settlement theater</li>
+          </ul>
+          <p class="micro">No integration built here. Language only until authorized contracts.</p>
+        </section>
+      </div>
+
+      <details class="panel ref-panel" style="margin-top:0.85rem">
+        <summary>Why this matters</summary>
+        <div class="body">
+          <ul>
+            <li>A call or form is <strong>not</strong> automatically valuable (junk, wrong practice, existing client, vendor…).</li>
+            <li>60s / connected helps density and diagnostics; qualified + CRM-backed events should carry bidding.</li>
+            <li>Retained is the North Star but often too sparse in legal to be the only biddable event.</li>
+            <li>AI must not invent conversion values because a transcript “sounds good.”</li>
+          </ul>
+          <a class="deep" href="paid-media-os/index.html#s-signal">Full signal &amp; measurement depth →</a>
+          <a class="deep" href="paid-media-os/tracking.html">Tracking control →</a>
+        </div>
+      </details>
+
+      <footer class="page-foot">
+        Private Director OS · working hypothesis · not FirmPilot policy.
+      </footer>
+    </main>
+  </div>
+  <script src="assets/os.js"></script>
+  <script>FirmPilotOS.injectNav("conversions");</script>
+</body>
+</html>

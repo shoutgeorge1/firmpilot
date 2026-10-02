@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reference — FirmPilot Director OS</title>
+  <link rel="stylesheet" href="assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main">
+      <header class="page-head">
+        <h1>Reference</h1>
+        <p class="sub-line">Long-form depth · collapsed · cite before inventing</p>
+      </header>
+
+      <section class="ref-cat">
+        <h2>Google · volume (cited)</h2>
+        <details class="panel ref-panel">
+          <summary>Smart Bidding / tCPA / tROAS baselines</summary>
+          <div class="body">
+            <p class="micro tight">Pulled from Google Ads Help (Oct 2026 fetch). Legal PPC is sparse vs ecommerce — treat published numbers as <em>evaluation / eligibility baselines</em>, not a promise that retained-case bidding will work at low spend.</p>
+            <ul>
+              <li><strong>Smart Bidding (overview):</strong> You can turn strategies on without prior conversion data; Google recommends evaluating performance over periods with <strong>at least 30 conversions</strong> (e.g. a month or longer); <strong>50 conversions</strong> called out for Target ROAS evaluation. Baselines vary by campaign type — check each strategy article. <a href="https://support.google.com/google-ads/answer/7065882" target="_blank" rel="noopener">About Smart Bidding</a></li>
+              <li><strong>Target CPA:</strong> Can start with no conversion history. For evaluation, Google recommends measuring the last <strong>30 days including at least 30 conversions</strong>. <a href="https://support.google.com/google-ads/answer/6268632" target="_blank" rel="noopener">About Target CPA</a></li>
+              <li><strong>Target ROAS (Search / Shopping):</strong> At least <strong>15 conversions in the past 30 days</strong> at the conversion-tracking level (other campaign types have different floors). Prefer reporting values for <strong>4 weeks or 1–2 conversion cycles</strong> before activating value bidding. <a href="https://support.google.com/google-ads/answer/6268637" target="_blank" rel="noopener">About Target ROAS</a></li>
+              <li><strong>Value-based bidding (Search / Shopping):</strong> Same <strong>≥15 conversions / 30 days</strong> note for Target ROAS; report <strong>two or more unique values</strong>; feed conversions as soon as available; shorter delays preferred. Upload / sync values for <strong>3 weeks or 1–2 conversion cycles</strong> before switching to value bidding. <a href="https://support.google.com/google-ads/answer/15099424" target="_blank" rel="noopener">Value-based bidding</a></li>
+              <li><strong>Display (stability guidance):</strong> If you care about consistently hitting a target over ~30 days, Google recommends driving at least <strong>30 conversions per month per ad group</strong>; lower volume → higher CPA/ROAS fluctuation. <a href="https://support.google.com/google-ads/answer/10285843" target="_blank" rel="noopener">Smart Bidding for Display</a></li>
+              <li><strong>Maximize conversions:</strong> Requires conversion tracking; aims to spend the full daily budget. Strategy-specific volume floors are pointed from the Smart Bidding overview — do not invent a number if the live Max Conv article doesn’t state one for your campaign type. <a href="https://support.google.com/google-ads/answer/7381968" target="_blank" rel="noopener">About Maximize conversions</a></li>
+            </ul>
+            <p class="callout-line"><strong>Legal caveat:</strong> Retained cases and fee realizations are delayed and sparse. Google’s “15 / 30 / 50” figures describe platform learning and evaluation windows — they do not mean a low-spend account can safely bid only to retained. Prefer qualified intermediate signals with defensible values on best pilots.</p>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>George’s density heuristic (operator note)</summary>
+          <div class="body">
+            <p>When spend supports it, George wants enough graded signal density to feel learning (roughly <strong>5–10 qualifying events / day</strong> as a personal feel — not Google doctrine, not FirmPilot policy). Prefer graded events + values over dumping every ring into Primary.</p>
+            <p class="micro">Kept here in Reference on purpose — not on Dashboard / Conversions primary UI.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="ref-cat">
+        <h2>Operating bias (full)</h2>
+        <details class="panel ref-panel">
+          <summary>Best pilot candidates first</summary>
+          <div class="body">
+            <p>Pilot accounts that can actually feed learning — not the “cleanest tracking” on a tiny budget alone. Score candidates by <strong>spend + volume + tracking integrity + call/CRM availability + business importance</strong>.</p>
+            <ul>
+              <li><strong>Do:</strong> Prove the signal machine on best pilots first.</li>
+              <li><strong>Low spend:</strong> Honest scope (brand + narrow test) — not the pilot for qualified signal → value → graduate bidding.</li>
+              <li><strong>Caveat:</strong> High spend with garbage primary conversions is still bad. Fix signal on important accounts; don’t ignore quality.</li>
+              <li><strong>Not policy:</strong> No hard dollar cutoff invented for FirmPilot — this is George’s first-pilot bias.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Qualified lead signal is gravity</summary>
+          <div class="body">
+            <p>Vendor-agnostic loop: connected call or gated form → AI draft score + confidence → human sample / uncertain review → <strong>CRM truth outranks AI</strong> → feed defensible lead/fee values to Google fast (Enhanced Conversions for Leads / Data Manager when authorized — not settlement theater).</p>
+            <ol>
+              <li>Qualified-intent event lands (call answered / form gated)</li>
+              <li>AI scores + flags confidence</li>
+              <li>Humans review uncertain / samples</li>
+              <li>CRM disposition wins when it conflicts</li>
+              <li>Qualified value → Google (dense, timely)</li>
+            </ol>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Forms · bidding · expansion</summary>
+          <div class="body">
+            <ul>
+              <li><strong>Forms:</strong> Gate / score (light qualifying quiz). Raw form ≠ primary — bots spam.</li>
+              <li><strong>Graduate bidding</strong> only after density + quality gates on a defensible primary (or value).</li>
+              <li><strong>Expand after signal kicks:</strong> mid-intent → broad / AI Max → competitors → PMax / Display / YouTube.</li>
+              <li>Still build clean: search terms, ads, LPs, conversions, first-party / offline values — on the best pilots.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <section class="ref-cat">
+        <h2>Checklists</h2>
+        <details class="panel ref-panel">
+          <summary>Conversion</summary>
+          <div class="body">
+            <ul>
+              <li>Inventory Primary/Secondary; what trains Smart Bidding</li>
+              <li>60s / connected as soft secondary until proven; qualified as stronger</li>
+              <li>Duplicates, micro-conversions, GA4 imports, call platform, raw forms</li>
+            </ul>
+            <a class="deep" href="conversions.html">Conversions screen →</a>
+            <a class="deep" href="paid-media-os/index.html#s-conversion">Open full checklist →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Call quality</summary>
+          <div class="body">
+            <ul>
+              <li>DNI, pools, source, recording, answer/missed, GCLID → CRM</li>
+              <li>AI draft score → human uncertain review → CRM outranks AI → value sync</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-callrail">Open full checklist →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>CRM</summary>
+          <div class="body">
+            <ul>
+              <li>Stages, GCLID/source, offline / Enhanced Conversions for Leads reliability</li>
+              <li>Normalize Lead → Qualified → Consultation → Retained</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-crm">Open full checklist →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Forms / landing</summary>
+          <div class="body">
+            <ul>
+              <li>Gate / score before a form counts as a serious signal</li>
+              <li>Raw form submissions are bot-prone — not automatic primary</li>
+              <li>LP: speed, message match, call tracking, click IDs, CRM routing</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-lp">Open LP checklist →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Bidding / expansion</summary>
+          <div class="body">
+            <ul>
+              <li>Graduate bidding only after density + quality gates</li>
+              <li>Then: mid-intent → broad / AI Max → competitors → PMax / Display / YouTube</li>
+              <li>Don’t change five variables at once</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-bidding">Open bidding &amp; expansion →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Offline / first-party / Data Manager</summary>
+          <div class="body">
+            <ul>
+              <li>Only when CRM stages + GCLID / first-party path are reliable</li>
+              <li>Prefer Enhanced Conversions for Leads and Data Manager / Data Manager API language over legacy “upload CSV” framing</li>
+              <li>Defensible lead/fee proxy values — not settlement theater</li>
+              <li>Timely sync beats large delayed batches (see Google value-bidding notes above)</li>
+            </ul>
+            <a class="deep" href="paid-media-os/tracking.html">Tracking control →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>GTM / GA4</summary>
+          <div class="body">
+            <ul>
+              <li>Ownership, duplicates, Ads/GA4/call/forms, click IDs</li>
+              <li>Don’t auto-create a new GA4 property if useful history exists</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-gtm">Open GTM →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Campaign structure / search terms</summary>
+          <div class="body">
+            <ul>
+              <li>Brand Search separates demand; Nonbrand consolidates until economics earn a split</li>
+              <li>Exact + Phrase on highest-intent; three negative classes</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-structure">Open structure →</a>
+          </div>
+        </details>
+      </section>
+
+      <section class="ref-cat">
+        <h2>Roadmap · AI · modules</h2>
+        <details class="panel ref-panel">
+          <summary>30 / 60 / 90</summary>
+          <div class="body">
+            <div class="mini-split three">
+              <div><strong>1–30 See</strong><ul><li>Access · pilot rank</li><li>Best-pilot audits</li><li>Failure patterns</li></ul></div>
+              <div><strong>31–60 Fix</strong><ul><li>Qualified signal → value loop</li><li>Primary cleanup</li><li>Graduate bidding</li></ul></div>
+              <div><strong>61–90 Scale</strong><ul><li>Compare pilots</li><li>Controlled expansion</li><li>Automate repeats</li></ul></div>
+            </div>
+            <a class="deep" href="paid-media-os/index.html#s-roadmap">Open roadmap →</a>
+            <a class="deep" href="paid-media-os/prestart.html">Pre-Start →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Automation / AI skills</summary>
+          <div class="body">
+            <ul>
+              <li>First: AI assists (exports, audits, call scoring drafts)</li>
+              <li>Then: repetitive logic becomes skills — after you’ve done it by hand enough times</li>
+            </ul>
+            <a class="deep" href="paid-media-os/index.html#s-ai">Open AI / automation →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Access / Portfolio / Coaching / Productization</summary>
+          <div class="body">
+            <ul>
+              <li><a href="paid-media-os/access.html">Access map</a> · <a href="paid-media-os/radar.html">Radar</a> · <a href="paid-media-os/coaching.html">Coaching</a> · <a href="paid-media-os/productization.html">Productization</a></li>
+              <li><a href="paid-media-os/dossier.html">Dossier</a> · <a href="paid-media-os/audit.html">Audit</a> · <a href="paid-media-os/turnaround.html">Turnaround</a> · <a href="paid-media-os/tracking.html">Tracking</a></li>
+              <li>Empty until authorized; DEMO only to exercise UI</li>
+            </ul>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Technical architecture</summary>
+          <div class="body">
+            <ul>
+              <li>This cockpit is static HTML — no APIs, no SaaS</li>
+              <li>Connectors stay behind interfaces until verified</li>
+              <li>See workspace docs for history — not live FirmPilot architecture claims</li>
+            </ul>
+            <a class="deep" href="TECHNICAL_BLUEPRINT.md">Technical blueprint (markdown) →</a>
+          </div>
+        </details>
+        <details class="panel ref-panel">
+          <summary>Full playbook · Meeting guide</summary>
+          <div class="body">
+            <ul>
+              <li><a href="paid-media-os/index.html">Paid Media OS playbook</a> — all deep checklists, structure, roles, unknowns</li>
+              <li><a href="meeting-guide/">Full Meeting Guide</a> — all audiences, red flags, local notes</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <footer class="page-foot">
+        Private Director OS · Reference only · strategy docs stay off deploy.
+      </footer>
+    </main>
+  </div>
+  <script src="assets/os.js"></script>
+  <script>FirmPilotOS.injectNav("reference");</script>
+</body>
+</html>

@@ -6,20 +6,26 @@
 
 ## Start here
 
-1. Open the **Director OS** homepage (`index.html` / live `/`) — Operating bias (high-spend first · CallRail signal) · Today · First 10 · Signal Ladder · Triage · Meeting Mode · Reference (incl. cited Google volume).
-2. Deep checklists stay in **Playbook** (`paid-media-os/`) and **Meeting Guide** (`meeting-guide/`) — linked from Reference / Future Modules, not competing top nav.
-3. Read `PROJECT_BRIEF.md`, `TECHNICAL_BLUEPRINT.md`, `DISCOVERY_AND_DELIVERY.md` for history.
-4. Read `PRIVATE_STRATEGY.md` for personal role strategy. **Do not put that file in a company repo or public deploy.**
-5. Cursor: follow `AGENTS.md`.
+1. Open **Dashboard** (`/` ) — Next Actions, First 10 progress, systems waiting, signal mini-ladder. Almost no prose.
+2. Sidebar: **Dashboard · First 10 · Accounts · Conversions · Meetings · Reference · Setup**
+3. Deep checklists stay in **Playbook** (`paid-media-os/`) and **Meeting Guide** (`meeting-guide/`) — under Setup / Reference / More, not competing top nav.
+4. Read `PROJECT_BRIEF.md`, `TECHNICAL_BLUEPRINT.md`, `DISCOVERY_AND_DELIVERY.md` for history.
+5. Read `PRIVATE_STRATEGY.md` for personal role strategy. **Do not put that file in a company repo or public deploy.**
+6. Cursor: follow `AGENTS.md`.
 
 ## Map
 
 | Surface | Path |
 | --- | --- |
-| **Director OS (homepage)** | `/` |
+| **Dashboard** | `/` |
+| First 10 | `/first-10/` |
+| Accounts (future triage) | `/accounts/` |
+| Conversions (ladder) | `/conversions/` |
+| Meetings | `/meetings/` |
+| Reference (long-form) | `/reference/` |
+| Setup | `/setup/` |
 | Playbook depth | `/paid-media-os/` |
 | Meeting guide (full) | `/meeting-guide/` |
-| Future modules (Radar, Access, Dossier, Audit, Turnaround, Tracking, Coaching, Productization, Pre-Start) | under `/paid-media-os/` — via homepage **Future Modules** |
 
 Mock/demo portfolio rows are labeled **DEMO ONLY**. Empty states are intentional until authorized data.
 

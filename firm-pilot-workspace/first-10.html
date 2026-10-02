@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>First 10 — FirmPilot Director OS</title>
+  <link rel="stylesheet" href="assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main">
+      <header class="page-head">
+        <h1>First 10</h1>
+        <span class="status-chip">Pre-start</span>
+        <p class="sub-line">Prove the OS on best pilot candidates · expand a stage for depth</p>
+      </header>
+
+      <div class="board-meta">
+        <span class="status-pill" id="saveStatus">Saves in this browser</span>
+        <span class="status-pill accent" id="f10ProgressMeta">0 / 10 complete</span>
+      </div>
+      <div class="progress-bar" aria-hidden="true"><span id="f10Progress" style="width:0%"></span></div>
+
+      <ol class="stage-list" id="first10Stages" style="margin-top:0.85rem">
+        <li>
+          <details class="stage-row" open>
+            <summary>
+              <span class="n">1</span>
+              <span>Access</span>
+              <span class="stage-status next" id="st1">Next</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_1" /> Mark complete</label>
+              <ul>
+                <li>Map company vs client systems; read vs write</li>
+                <li>MCC, call platform, CRM, GTM/GA4, LP tools — owners + path</li>
+                <li>Never store credentials here</li>
+              </ul>
+              <a class="deep" href="setup.html">Setup · Access map →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">2</span>
+              <span>Pick Pilot</span>
+              <span class="stage-status blocked" id="st2">Blocked</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_2" /> Mark complete</label>
+              <ul>
+                <li><strong>Best pilot candidates first</strong> — not highest spend alone</li>
+                <li>Score: spend + volume + tracking integrity + call/CRM availability + business importance</li>
+                <li>Park tiny budgets in honest scope (brand + narrow) — not the signal-machine pilot</li>
+                <li>High spend with garbage primary still needs signal fix — don’t skip for a pretty low-spend account</li>
+              </ul>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">3</span>
+              <span>Baseline</span>
+              <span class="stage-status" id="st3">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_3" /> Mark complete</label>
+              <div class="mini-split">
+                <div><strong>Google</strong><ul><li>Spend · clicks · CPC</li><li>Ads conversions · CPA</li><li>Structure · keywords · LPs</li></ul></div>
+                <div><strong>Business</strong><ul><li>Calls · forms</li><li>Qualified · consults</li><li>Retained cases · real CPA</li></ul></div>
+              </div>
+              <p class="callout-line">Never conflate Google “conversions” with retained cases.</p>
+              <a class="deep" href="paid-media-os/index.html#s-baseline">Playbook → Baseline →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">4</span>
+              <span>Conversions</span>
+              <span class="stage-status" id="st4">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_4" /> Mark complete</label>
+              <ul>
+                <li>Primary vs Secondary · what trains Smart Bidding</li>
+                <li>60s / connected = diagnostic or soft secondary until proven — not auto-primary</li>
+                <li>Duplicates · micro-conversions · GA4 imports · raw forms</li>
+                <li>Decision: Trust / Modify / Secondary / Replace / Investigate</li>
+              </ul>
+              <a class="deep" href="conversions.html">Conversions screen →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">5</span>
+              <span>Call Quality</span>
+              <span class="stage-status" id="st5">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_5" /> Mark complete</label>
+              <ul>
+                <li>DNI · pools · source · recording · answer/missed · GCLID (whatever call platform is in place)</li>
+                <li>AI draft score + confidence; human review on uncertain</li>
+                <li><strong>CRM outcomes outrank AI</strong> transcript guesses</li>
+                <li>Push defensible qualified values quickly for density (Enhanced Conversions for Leads / Data Manager when ready)</li>
+              </ul>
+              <a class="deep" href="paid-media-os/index.html#s-callrail">Playbook → Call quality →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">6</span>
+              <span>CRM</span>
+              <span class="stage-status" id="st6">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_6" /> Mark complete</label>
+              <ul>
+                <li>Stages · update quality · GCLID / source / campaign</li>
+                <li>Normalize: Lead → Qualified → Consultation → Retained</li>
+                <li>Different CRMs OK — unnormalized reporting across many firms is not</li>
+                <li>First-party CRM outcomes are the truth layer for offline / Enhanced Conversions for Leads</li>
+              </ul>
+              <a class="deep" href="paid-media-os/index.html#s-crm">Playbook → CRM →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">7</span>
+              <span>Tracking / LP</span>
+              <span class="stage-status" id="st7">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_7" /> Mark complete</label>
+              <ul>
+                <li>Ownership · duplicates · click-ID capture · call-number swap</li>
+                <li>Forms gated/scored before they count as serious signal</li>
+                <li>Speed · mobile · message match — keep / improve / new paid page</li>
+              </ul>
+              <a class="deep" href="paid-media-os/index.html#s-gtm">Playbook → GTM / LP →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">8</span>
+              <span>Campaign Hygiene</span>
+              <span class="stage-status" id="st8">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_8" /> Mark complete</label>
+              <ul>
+                <li>Search terms · ads · structure · match · negatives · geo</li>
+                <li>Ugly naming ≠ bad performance — don’t burn inherited systems for aesthetics</li>
+              </ul>
+              <a class="deep" href="paid-media-os/index.html#s-campaign">Playbook → Campaign →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">9</span>
+              <span>Graduate Bidding</span>
+              <span class="stage-status" id="st9">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_9" /> Mark complete</label>
+              <ul>
+                <li>Only after density + quality gates on the chosen primary / value</li>
+                <li>Max Conv / tCPA / value — pick after the event is defensible</li>
+                <li>See Reference → Google volume (cited) for published baselines</li>
+              </ul>
+              <a class="deep" href="paid-media-os/index.html#s-bidding">Playbook → Bidding →</a>
+            </div>
+          </details>
+        </li>
+        <li>
+          <details class="stage-row">
+            <summary>
+              <span class="n">10</span>
+              <span>Expand</span>
+              <span class="stage-status" id="st10">Queued</span>
+            </summary>
+            <div class="stage-body">
+              <label style="display:flex;gap:0.4rem;align-items:center;margin:0.55rem 0 0;font-size:0.85rem"><input type="checkbox" id="f10_10" /> Mark complete</label>
+              <ul>
+                <li>Mid-intent → broad / AI Max → competitors → PMax / Display / YouTube</li>
+                <li>Earned by signal — not Google’s pitch alone</li>
+                <li>Don’t change five variables at once</li>
+              </ul>
+              <a class="deep" href="paid-media-os/index.html#s-bidding">Playbook → Expansion →</a>
+            </div>
+          </details>
+        </li>
+      </ol>
+
+      <footer class="page-foot">
+        Private Director OS · stages persist in this browser only.
+      </footer>
+    </main>
+  </div>
+  <script src="assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("first10");
+    FirmPilotOS.bindExclusiveDetails("#first10Stages");
+
+    function refreshStatuses() {
+      var store = FirmPilotOS.loadStore("director-first10");
+      var checks = store.checks || {};
+      var ids = ["f10_1","f10_2","f10_3","f10_4","f10_5","f10_6","f10_7","f10_8","f10_9","f10_10"];
+      var nextSet = false;
+      ids.forEach(function (id, i) {
+        var el = document.getElementById("st" + (i + 1));
+        if (!el) return;
+        el.className = "stage-status";
+        if (checks[id]) {
+          el.textContent = "Done";
+          el.classList.add("done");
+        } else if (!nextSet) {
+          el.textContent = i === 0 || checks[ids[i - 1]] ? "Next" : "Blocked";
+          el.classList.add(i === 0 || checks[ids[i - 1]] ? "next" : "blocked");
+          nextSet = true;
+        } else {
+          el.textContent = "Queued";
+        }
+      });
+      FirmPilotOS.updateFirst10Progress();
+    }
+
+    FirmPilotOS.onPersist = function (ns) {
+      if (ns === "director-first10") refreshStatuses();
+    };
+    FirmPilotOS.bindLocalPersistence("director-first10", "#saveStatus");
+    refreshStatuses();
+  </script>
+</body>
+</html>

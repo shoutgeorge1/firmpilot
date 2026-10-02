@@ -3,549 +3,92 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FirmPilot · Director Paid Media OS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Dashboard — FirmPilot Director OS</title>
   <link rel="stylesheet" href="assets/os.css" />
 </head>
-<body class="director-home">
-  <header class="topbar" aria-label="Primary">
-    <div class="topbar-brand">
-      <span class="brand-name">FirmPilot</span>
-      <span class="brand-sub">Director Paid Media OS</span>
-    </div>
-    <nav class="topbar-nav" aria-label="Page sections">
-      <a href="./" class="active">Home</a>
-      <a href="#thesis">Thesis</a>
-      <a href="#first10">First 10</a>
-      <a href="#meeting">Meeting Mode</a>
-      <a href="#reference">Reference</a>
-      <details class="nav-more">
-        <summary>Future Modules</summary>
-        <div class="nav-more-panel">
-          <a href="paid-media-os/radar.html">Radar</a>
-          <a href="paid-media-os/access.html">Access</a>
-          <a href="paid-media-os/dossier.html">Dossier</a>
-          <a href="paid-media-os/audit.html">Audit</a>
-          <a href="paid-media-os/turnaround.html">Turnaround</a>
-          <a href="paid-media-os/tracking.html">Tracking</a>
-          <a href="paid-media-os/coaching.html">Coaching</a>
-          <a href="paid-media-os/productization.html">Productization</a>
-          <a href="paid-media-os/prestart.html">Pre-Start</a>
-          <a href="paid-media-os/index.html">Full Playbook</a>
-          <a href="meeting-guide/">Full Meeting Guide</a>
-        </div>
-      </details>
-    </nav>
-  </header>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main">
+      <header class="page-head">
+        <h1>FirmPilot</h1>
+        <span class="status-chip">Pre-start</span>
+        <p class="sub-line">Director Paid Media OS · private operator cockpit</p>
+      </header>
 
-  <main class="director">
-    <header class="hero">
-      <p class="eyebrow">Private · George’s Director cockpit · not FirmPilot product</p>
-      <h1>High spend. Real call signal. Then graduate.</h1>
-      <p class="hero-one">Prove CallRail → qualified value → Smart Bidding on the accounts that can actually feed density — then expand.</p>
-      <p class="hyp-badge">George’s working hypothesis · pre-employment · validate on first accounts after access · not FirmPilot policy</p>
-    </header>
+      <div class="widget-grid dash">
+        <section class="widget">
+          <h2>Next actions</h2>
+          <ul class="check-list" id="dashActions">
+            <li><label><input type="checkbox" id="td1" /> Finish onboarding</label></li>
+            <li><label><input type="checkbox" id="td2" /> Confirm access (Ads, call platform, CRM, GTM/GA4)</label></li>
+            <li><label><input type="checkbox" id="td3" /> Rank best pilot candidates</label></li>
+            <li><label><input type="checkbox" id="td4" /> Don’t rebuild or automate yet</label></li>
+          </ul>
+        </section>
 
-    <!-- OPERATING THESIS -->
-    <section class="sec" id="thesis">
-      <div class="sec-head">
-        <h2>Operating bias</h2>
-        <span class="sec-hint">Decision-first · not company doctrine</span>
-      </div>
-
-      <div class="thesis-grid">
-        <article class="thesis-card primary">
-          <h3>1 · Highest spend first</h3>
-          <p>Pilot the accounts with the <strong>most monthly spend</strong> — not the “cleanest tracking” on a tiny budget. Low-spend accounts ($1.5–5K/mo as a feel) rarely produce enough attributable outcomes for value learning / Smart Bidding density.</p>
-          <ul>
-            <li><strong>Do:</strong> Prove the signal machine on big spenders first.</li>
-            <li><strong>Low spend:</strong> Honest scope (brand + narrow test) — not the pilot for CallRail → value → graduate bidding.</li>
-            <li><strong>Caveat:</strong> High spend with garbage primary conversions is still bad. Fix signal on the big accounts; don’t ignore quality.</li>
-            <li><strong>Not policy:</strong> No hard dollar cutoff invented for FirmPilot — this is George’s first-pilot bias.</li>
-          </ul>
-        </article>
-
-        <article class="thesis-card">
-          <h3>2 · CallRail is gravity</h3>
-          <p>Connected call → AI draft score + confidence → human sample / uncertain review → <strong>CRM truth outranks AI</strong> → upload defensible lead/fee values to Google fast (not settlement theater).</p>
-          <ol class="flow-list">
-            <li>Connected / answered call lands</li>
-            <li>AI scores + flags confidence</li>
-            <li>Humans review uncertain / samples</li>
-            <li>CRM disposition wins when it conflicts</li>
-            <li>Qualified value → Google (dense, timely)</li>
-          </ol>
-        </article>
-
-        <article class="thesis-card">
-          <h3>3 · Conversion ladder (roles)</h3>
-          <ul class="role-list">
-            <li><span class="role soft">Soft / diagnostic</span> 60s or connected — density &amp; diagnostics; <strong>not</strong> automatic primary</li>
-            <li><span class="role mid">Stronger</span> AI-qualified → human-qualified (primary candidates once proven)</li>
-            <li><span class="role top">North Star</span> Retained / fee — measure always; often too sparse to bid alone</li>
-          </ul>
-          <p class="micro tight">Torture question (“every 60s call a conversion?”): density feels necessary (George wants signal like 5–10/day when spend supports it) vs Google’s published evaluate-with-volume guidance. Prefer <em>graded</em> events + values over dumping every ring into Primary.</p>
-        </article>
-
-        <article class="thesis-card">
-          <h3>4 · Forms · bidding · expansion</h3>
-          <ul>
-            <li><strong>Forms:</strong> Gate / score (light qualifying quiz). Raw form ≠ primary — bots spam.</li>
-            <li><strong>Graduate bidding</strong> only after density + quality gates on a defensible primary (or value).</li>
-            <li><strong>Expand after signal kicks:</strong> mid-intent → broad / AI Max → competitors → PMax / Display / YouTube.</li>
-            <li>Still build clean: search terms, ads, LPs, conversions, offline values — on the high-spend pilots.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- 1. TODAY -->
-    <section class="sec" id="today">
-      <div class="sec-head">
-        <h2>Today</h2>
-        <span class="sec-hint">Pre-start · until access lands</span>
-      </div>
-      <ul class="check-cards" id="todayChecks">
-        <li>
-          <label><input type="checkbox" id="td1" /> Finish onboarding</label>
-        </li>
-        <li>
-          <label><input type="checkbox" id="td2" /> Confirm access (Ads, CallRail, CRM, GTM/GA4, pages)</label>
-        </li>
-        <li>
-          <label><input type="checkbox" id="td3" /> Rank candidates by monthly spend for first pilots</label>
-        </li>
-        <li>
-          <label><input type="checkbox" id="td4" /> Don’t rebuild or automate yet</label>
-        </li>
-      </ul>
-      <p class="micro">After access exists, this slot becomes daily priorities on the high-spend pilots.</p>
-    </section>
-
-    <!-- 2. FIRST 10 -->
-    <section class="sec" id="first10">
-      <div class="sec-head">
-        <h2>First 10</h2>
-        <span class="sec-hint">Click a step · prove the OS on high-spend pilots</span>
-      </div>
-      <ol class="step-rail" id="first10Steps">
-        <li>
-          <details class="step">
-            <summary><span class="n">1</span> Access</summary>
-            <div class="step-body">
-              <ul>
-                <li>Map company vs client systems; read vs write</li>
-                <li>MCC, CallRail, CRM, GTM/GA4, LP tools — owners + path</li>
-                <li>Never store credentials here</li>
-              </ul>
-              <a class="deep" href="paid-media-os/access.html">Full Access map →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">2</span> Pick pilots (spend)</summary>
-            <div class="step-body">
-              <ul>
-                <li>Sort by monthly spend first — that’s “strongest signal” for learning density</li>
-                <li>Park tiny budgets in honest scope (brand + narrow) — not the signal-machine pilot</li>
-                <li>If a high spender’s primary is junk, fix that account’s signal — don’t skip it for a pretty $2K account</li>
-              </ul>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">3</span> Baseline</summary>
-            <div class="step-body">
-              <div class="mini-split">
-                <div><strong>Google</strong><ul><li>Spend · clicks · CPC</li><li>Ads conversions · CPA</li><li>Structure · keywords · LPs</li></ul></div>
-                <div><strong>Business</strong><ul><li>Calls · forms</li><li>Qualified · consults</li><li>Retained cases · real CPA</li></ul></div>
-              </div>
-              <p class="callout-line">Never conflate Google “conversions” with retained cases.</p>
-              <a class="deep" href="paid-media-os/index.html#s-baseline">Playbook → Baseline →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">4</span> Conversions</summary>
-            <div class="step-body">
-              <ul>
-                <li>Primary vs Secondary · what trains Smart Bidding</li>
-                <li>60s / connected = diagnostic or soft secondary until proven — not auto-primary</li>
-                <li>Duplicates · micro-conversions · GA4 imports · raw forms</li>
-                <li>Decision: Trust / Modify / Secondary / Replace / Investigate</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-conversion">Playbook → Conversion audit →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">5</span> CallRail signal machine</summary>
-            <div class="step-body">
-              <ul>
-                <li>DNI · pools · source · recording · answer/missed · GCLID</li>
-                <li>AI draft score + confidence; human review on uncertain</li>
-                <li>CRM outcomes outrank AI transcript guesses</li>
-                <li>Upload defensible qualified values quickly for density</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-callrail">Playbook → CallRail →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">6</span> CRM</summary>
-            <div class="step-body">
-              <ul>
-                <li>Stages · update quality · GCLID/source/campaign</li>
-                <li>Normalize: Lead → Qualified → Consultation → Retained</li>
-                <li>Different CRMs OK — unnormalized reporting across 100 firms is not</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-crm">Playbook → CRM →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">7</span> GTM / GA4 / LP</summary>
-            <div class="step-body">
-              <ul>
-                <li>Ownership · duplicates · click-ID capture · CallRail swap</li>
-                <li>Forms gated/scored before they count as serious signal</li>
-                <li>Speed · mobile · message match — keep / improve / new paid page</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-gtm">Playbook → GTM →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">8</span> Campaign hygiene</summary>
-            <div class="step-body">
-              <ul>
-                <li>Search terms · ads · structure · match · negatives · geo</li>
-                <li>Ugly naming ≠ bad performance — don’t burn inherited systems for aesthetics</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-campaign">Playbook → Campaign →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">9</span> Graduate bidding</summary>
-            <div class="step-body">
-              <ul>
-                <li>Only after density + quality gates on the chosen primary / value</li>
-                <li>Max Conv / tCPA / value — pick after the event is defensible</li>
-                <li>See Reference → Google volume (cited) for published baselines</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-bidding">Playbook → Bidding →</a>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details class="step">
-            <summary><span class="n">10</span> Expand after signal</summary>
-            <div class="step-body">
-              <ul>
-                <li>Mid-intent → broad / AI Max → competitors → PMax / Display / YouTube</li>
-                <li>Earned by signal — not Google’s pitch alone</li>
-                <li>Don’t change five variables at once</li>
-              </ul>
-              <a class="deep" href="paid-media-os/index.html#s-bidding">Playbook → Expansion →</a>
-            </div>
-          </details>
-        </li>
-      </ol>
-    </section>
-
-    <!-- 3. SIGNAL LADDER -->
-    <section class="sec" id="ladder">
-      <div class="sec-head">
-        <h2>Signal Ladder</h2>
-        <span class="sec-hint">Volume + quality · not depth alone</span>
-      </div>
-      <ol class="ladder" aria-label="Signal strength ladder">
-        <li><span>Traffic</span></li>
-        <li><span>Lead</span></li>
-        <li><span>Legitimate Prospect</span></li>
-        <li><span>Qualified Lead</span></li>
-        <li><span>Consultation</span></li>
-        <li class="top"><span>Retained Case</span></li>
-      </ol>
-      <p class="ladder-rule">Bid toward the strongest <em>reliable</em> signal that still has enough volume on that account’s spend.</p>
-      <details class="panel ref-panel">
-        <summary>Why this matters</summary>
-        <div class="body">
-          <ul>
-            <li>A call or form is <strong>not</strong> automatically valuable (junk, wrong practice, existing client, vendor…).</li>
-            <li>60s / connected helps density and diagnostics; qualified + CRM-backed events should carry bidding.</li>
-            <li>Retained is the North Star but often too sparse in legal to be the only biddable event.</li>
-            <li>AI must not invent conversion values because a transcript “sounds good.”</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-signal">Full signal &amp; measurement depth →</a>
-        </div>
-      </details>
-    </section>
-
-    <!-- 4. ACCOUNT TRIAGE -->
-    <section class="sec" id="triage">
-      <div class="sec-head">
-        <h2>Account Triage</h2>
-        <span class="sec-hint future">Future · activates after MCC / API / CallRail / CRM access</span>
-      </div>
-      <div class="banner info">
-        Sort attention by spend first, then signal health. A few high-spend accounts get Director depth; tiny budgets get honest scope — not permanent babysitting.
-      </div>
-      <div class="triage-cats">
-        <div class="cat"><span class="dot ok"></span> Healthy</div>
-        <div class="cat"><span class="dot warn"></span> Watch</div>
-        <div class="cat"><span class="dot action"></span> Action</div>
-        <div class="cat"><span class="dot bad"></span> Critical</div>
-        <div class="cat"><span class="dot dim"></span> Unknown</div>
-      </div>
-      <div class="empty-state compact">
-        No real portfolio loaded. Empty on purpose until authorized access.
-      </div>
-      <details class="panel ref-panel" id="demoTriage">
-        <summary>Show DEMO sketch <span class="tag demo-tag">DEMO</span></summary>
-        <div class="body">
-          <p class="callout-line"><strong>DEMO ONLY</strong> — fictional firms. Never real FirmPilot data.</p>
-          <ul class="demo-list">
-            <li><strong>[DEMO] Northbridge Injury</strong> — Critical · high spend + broken primary conversions</li>
-            <li><strong>[DEMO] Harbor Family Law</strong> — Watch · low spend · not a signal-machine pilot</li>
-            <li><strong>[DEMO] Ridge Estate Planning</strong> — Healthy</li>
-            <li><strong>[DEMO] Westside Criminal</strong> — Action · high spend · declining qualified</li>
-            <li><strong>[DEMO] Lakeside Workers Comp</strong> — Unknown · insufficient data</li>
-          </ul>
-          <a class="deep" href="paid-media-os/radar.html">Open Portfolio Radar (empty + DEMO toggle) →</a>
-        </div>
-      </details>
-    </section>
-
-    <!-- 5. MEETING MODE -->
-    <section class="sec" id="meeting">
-      <div class="sec-head">
-        <h2>Meeting Mode</h2>
-        <span class="sec-hint">Listen first · pick one room</span>
-      </div>
-      <div class="meet-grid">
-        <details class="meet-card">
-          <summary>
-            <span class="meet-label">Executive</span>
-            <span class="meet-sub">Owner / leadership</span>
-          </summary>
-          <ul>
-            <li>Why paid in-house now — fill gaps, defend brand, replace outside PPC, or own acquisition?</li>
-            <li>What does a successful first quarter look like in your words?</li>
-            <li>Can we pilot high-spend accounts before touching the long tail?</li>
-            <li>What does “7–8× return” mean — numerator, lag, paid-only vs blended?</li>
-            <li>Who decides budgets, conversion goals, bid strategy, engineering priority?</li>
-          </ul>
-        </details>
-        <details class="meet-card">
-          <summary>
-            <span class="meet-label">Paid Media</span>
-            <span class="meet-sub">PPC / operators</span>
-          </summary>
-          <ul>
-            <li>What conversion actions train bidding today — and are they Primary?</li>
-            <li>CallRail → offline value path: how fast? how reliable?</li>
-            <li>Manual vs Smart Bidding / PMax / AI Max — where and why?</li>
-            <li>Listen for: every phone call as primary · Max Clicks everywhere · $2K across 10 campaigns.</li>
-          </ul>
-        </details>
-        <details class="meet-card">
-          <summary>
-            <span class="meet-label">Engineering · AI</span>
-            <span class="meet-sub">Product / data / skills</span>
-          </summary>
-          <ul>
-            <li>CallRail APIs/webhooks? Transcripts? Offline conversion upload today?</li>
-            <li>Ads API / developer token — read vs write for agents?</li>
-            <li>Lead statuses standardized? What can agents safely WRITE vs READ?</li>
-            <li>Frame: AI scores calls; humans approve uncertain; CRM wins conflicts.</li>
-          </ul>
-        </details>
-      </div>
-      <p class="micro"><a href="meeting-guide/">Full Meeting Guide</a> (all audiences, red flags, notes)</p>
-    </section>
-
-    <!-- 6. REFERENCE -->
-    <section class="sec" id="reference">
-      <div class="sec-head">
-        <h2>Reference</h2>
-        <span class="sec-hint">Collapsed depth · cite before inventing</span>
-      </div>
-
-      <details class="panel ref-panel" open>
-        <summary>Google Ads · conversion volume (cited)</summary>
-        <div class="body">
-          <p class="micro tight">Pulled from Google Ads Help (Oct 2026 fetch). Legal PPC is sparse vs ecommerce — treat published numbers as <em>evaluation / eligibility baselines</em>, not a promise that retained-case bidding will work at low spend.</p>
-          <ul>
-            <li><strong>Smart Bidding (overview):</strong> You can turn strategies on without prior conversion data; Google recommends evaluating performance over periods with <strong>at least 30 conversions</strong> (e.g. a month or longer); <strong>50 conversions</strong> called out for Target ROAS evaluation. Baselines vary by campaign type — check each strategy article. <a href="https://support.google.com/google-ads/answer/7065882" target="_blank" rel="noopener">About Smart Bidding</a></li>
-            <li><strong>Target CPA:</strong> Can start with no conversion history. For evaluation, Google recommends measuring the last <strong>30 days including at least 30 conversions</strong>. <a href="https://support.google.com/google-ads/answer/6268632" target="_blank" rel="noopener">About Target CPA</a></li>
-            <li><strong>Target ROAS (Search / Shopping):</strong> At least <strong>15 conversions in the past 30 days</strong> at the conversion-tracking level (other campaign types have different floors). Prefer reporting values for <strong>4 weeks or 1–2 conversion cycles</strong> before activating value bidding. <a href="https://support.google.com/google-ads/answer/6268637" target="_blank" rel="noopener">About Target ROAS</a></li>
-            <li><strong>Value-based bidding (Search / Shopping):</strong> Same <strong>≥15 conversions / 30 days</strong> note for Target ROAS; report <strong>two or more unique values</strong>; feed conversions as soon as available (daily offline uploads called optimal); shorter delays preferred. Upload values for <strong>3 weeks or 1–2 conversion cycles</strong> before switching to value bidding. <a href="https://support.google.com/google-ads/answer/15099424" target="_blank" rel="noopener">Value-based bidding</a></li>
-            <li><strong>Display (stability guidance):</strong> If you care about consistently hitting a target over ~30 days, Google recommends driving at least <strong>30 conversions per month per ad group</strong>; lower volume → higher CPA/ROAS fluctuation. <a href="https://support.google.com/google-ads/answer/10285843" target="_blank" rel="noopener">Smart Bidding for Display</a></li>
-            <li><strong>Maximize conversions:</strong> Requires conversion tracking; aims to spend the full daily budget. Strategy-specific volume floors are pointed from the Smart Bidding overview — do not invent a number if the live Max Conv article doesn’t state one for your campaign type. <a href="https://support.google.com/google-ads/answer/7381968" target="_blank" rel="noopener">About Maximize conversions</a></li>
-          </ul>
-          <p class="callout-line"><strong>Legal caveat:</strong> Retained cases and fee realizations are delayed and sparse. Google’s “15 / 30 / 50” figures describe platform learning and evaluation windows — they do not mean a $2K/mo PI account can safely bid only to retained. Prefer qualified intermediate signals with defensible values on high-spend pilots.</p>
-        </div>
-      </details>
-
-      <details class="panel ref-panel">
-        <summary>Conversion</summary>
-        <div class="body">
-          <ul>
-            <li>Inventory Primary/Secondary; what trains Smart Bidding</li>
-            <li>60s / connected as soft secondary until proven; qualified as stronger</li>
-            <li>Duplicates, micro-conversions, GA4 imports, CallRail, raw forms</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-conversion">Open full checklist →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>CallRail</summary>
-        <div class="body">
-          <ul>
-            <li>DNI, pools, source, recording, answer/missed, GCLID → CRM</li>
-            <li>AI draft score → human uncertain review → CRM outranks AI → value upload</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-callrail">Open full checklist →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>CRM</summary>
-        <div class="body">
-          <ul>
-            <li>Stages, GCLID/source, offline upload reliability</li>
-            <li>Normalize Lead → Qualified → Consultation → Retained</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-crm">Open full checklist →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Forms / landing</summary>
-        <div class="body">
-          <ul>
-            <li>Gate / score before a form counts as a serious signal</li>
-            <li>Raw form submissions are bot-prone — not automatic primary</li>
-            <li>LP: speed, message match, CallRail, click IDs, CRM routing</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-lp">Open LP checklist →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Bidding / expansion</summary>
-        <div class="body">
-          <ul>
-            <li>Graduate bidding only after density + quality gates</li>
-            <li>Then: mid-intent → broad / AI Max → competitors → PMax / Display / YouTube</li>
-            <li>Don’t change five variables at once</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-bidding">Open bidding &amp; expansion →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Offline Conversions</summary>
-        <div class="body">
-          <ul>
-            <li>Only when CRM stages + GCLID path are reliable</li>
-            <li>Defensible lead/fee proxy values — not settlement theater</li>
-            <li>Timely uploads beat large delayed batches (see Google value-bidding notes above)</li>
-          </ul>
-          <a class="deep" href="paid-media-os/tracking.html">Tracking control →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>GTM / GA4</summary>
-        <div class="body">
-          <ul>
-            <li>Ownership, duplicates, Ads/GA4/CallRail/forms, click IDs</li>
-            <li>Don’t auto-create a new GA4 property if useful history exists</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-gtm">Open GTM →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Campaign Structure / Search Terms</summary>
-        <div class="body">
-          <ul>
-            <li>Brand Search separates demand; Nonbrand consolidates until economics earn a split</li>
-            <li>Exact + Phrase on highest-intent; three negative classes</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-structure">Open structure →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>30 / 60 / 90</summary>
-        <div class="body">
-          <div class="mini-split three">
-            <div><strong>1–30 See</strong><ul><li>Access · spend rank</li><li>High-spend audits</li><li>Failure patterns</li></ul></div>
-            <div><strong>31–60 Fix</strong><ul><li>CallRail → value loop</li><li>Primary cleanup</li><li>Graduate bidding</li></ul></div>
-            <div><strong>61–90 Scale</strong><ul><li>Compare pilots</li><li>Controlled expansion</li><li>Automate repeats</li></ul></div>
+        <section class="widget">
+          <h2>First 10 progress</h2>
+          <div class="progress-bar" aria-hidden="true"><span id="f10Progress" style="width:0%"></span></div>
+          <div class="progress-meta">
+            <span id="f10ProgressMeta">0 / 10 stages</span>
+            <a href="first-10.html">Open →</a>
           </div>
-          <a class="deep" href="paid-media-os/index.html#s-roadmap">Open roadmap →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Automation / AI Skills</summary>
-        <div class="body">
-          <ul>
-            <li>First: AI assists (exports, audits, call scoring drafts)</li>
-            <li>Then: repetitive logic becomes skills — after you’ve done it by hand enough times</li>
-          </ul>
-          <a class="deep" href="paid-media-os/index.html#s-ai">Open AI / automation →</a>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Access / Portfolio / Coaching / Productization</summary>
-        <div class="body">
-          <ul>
-            <li><a href="paid-media-os/access.html">Access map</a> · <a href="paid-media-os/radar.html">Radar</a> · <a href="paid-media-os/coaching.html">Coaching</a> · <a href="paid-media-os/productization.html">Productization</a></li>
-            <li>Empty until authorized; DEMO only to exercise UI</li>
-          </ul>
-        </div>
-      </details>
-      <details class="panel ref-panel">
-        <summary>Technical Architecture</summary>
-        <div class="body">
-          <ul>
-            <li>This cockpit is static HTML — no APIs, no SaaS</li>
-            <li>Connectors stay behind interfaces until verified</li>
-            <li>See workspace docs for history — not live FirmPilot architecture claims</li>
-          </ul>
-          <a class="deep" href="TECHNICAL_BLUEPRINT.md">Technical blueprint (markdown) →</a>
-        </div>
-      </details>
-    </section>
+        </section>
 
-    <footer class="page-foot">
-      George Aguilar · private Director OS. Working hypothesis only — not FirmPilot policy or a client deliverable. Sample / DEMO only until authorized data contracts exist.
-    </footer>
-  </main>
+        <section class="widget">
+          <h2>Systems waiting</h2>
+          <div class="sys-grid">
+            <div class="sys-row"><span class="name">Google Ads / MCC</span><span class="status-pill warn">Waiting</span></div>
+            <div class="sys-row"><span class="name">Call platform</span><span class="status-pill warn">Waiting</span></div>
+            <div class="sys-row"><span class="name">CRM / intake</span><span class="status-pill warn">Waiting</span></div>
+            <div class="sys-row"><span class="name">GTM / GA4</span><span class="status-pill warn">Waiting</span></div>
+          </div>
+          <p class="micro"><a href="setup.html">Setup checklist →</a></p>
+        </section>
 
+        <section class="widget">
+          <h2>Signal ladder</h2>
+          <ol class="ladder mini" aria-label="Signal strength">
+            <li><span>Lead</span></li>
+            <li><span>Prospect</span></li>
+            <li><span>Qualified</span></li>
+            <li><span>Consult</span></li>
+            <li class="top"><span>Retained</span></li>
+          </ol>
+          <p class="micro"><a href="conversions.html">Conversions →</a></p>
+        </section>
+
+        <section class="widget">
+          <h2>Needs attention</h2>
+          <ul class="attention-list">
+            <li><span>No live portfolio</span><span class="chip dim">empty</span></li>
+            <li><span>No authorized data contracts</span><span class="chip dim">pre-start</span></li>
+          </ul>
+          <p class="micro">Activates after MCC / API / call platform / CRM.</p>
+        </section>
+
+        <section class="widget">
+          <h2>Operating principles</h2>
+          <ul class="principle-list">
+            <li><strong>Best pilots first</strong> — spend, volume, tracking, call/CRM availability, business importance.</li>
+            <li><strong>Qualified signal is gravity</strong> — calls, forms, CRM; vendor-agnostic.</li>
+            <li><strong>CRM truth &gt; AI</strong> — AI drafts; humans review uncertain; CRM wins conflicts.</li>
+            <li><strong>Strongest reliable signal</strong> — enough volume to bid; Retained is North Star, often too sparse alone.</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer class="page-foot">
+        George Aguilar · private Director OS. Working hypothesis only — not FirmPilot product or policy.
+      </footer>
+    </main>
+  </div>
   <script src="assets/os.js"></script>
   <script>
-    FirmPilotOS.bindAccordions();
+    FirmPilotOS.injectNav("dashboard");
     FirmPilotOS.bindLocalPersistence("director-today", null);
-    (function () {
-      var rail = document.getElementById("first10Steps");
-      if (!rail) return;
-      rail.addEventListener("toggle", function (e) {
-        var t = e.target;
-        if (!t.classList || !t.classList.contains("step") || !t.open) return;
-        rail.querySelectorAll("details.step").forEach(function (d) {
-          if (d !== t) d.open = false;
-        });
-      }, true);
-    })();
+    FirmPilotOS.updateFirst10Progress();
   </script>
 </body>
 </html>

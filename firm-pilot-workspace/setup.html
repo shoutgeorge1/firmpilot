@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Setup — FirmPilot Director OS</title>
+  <link rel="stylesheet" href="assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main">
+      <header class="page-head">
+        <h1>Setup</h1>
+        <span class="status-chip">Pre-start</span>
+        <p class="sub-line">Access readiness · systems · quiet future modules</p>
+      </header>
+
+      <div class="widget-grid two">
+        <section class="widget">
+          <h2>Systems waiting</h2>
+          <div class="sys-grid">
+            <div class="sys-row"><span class="name">Google Ads / MCC</span><span class="status-pill warn">Waiting</span></div>
+            <div class="sys-row"><span class="name">Call platform</span><span class="status-pill warn">Waiting</span></div>
+            <div class="sys-row"><span class="name">CRM / intake</span><span class="status-pill warn">Waiting</span></div>
+            <div class="sys-row"><span class="name">GTM / GA4</span><span class="status-pill warn">Waiting</span></div>
+          </div>
+        </section>
+        <section class="widget">
+          <h2>Day-one blockers</h2>
+          <ul class="check-list">
+            <li><label><input type="checkbox" id="ax_email" /> Company email / Workspace</label></li>
+            <li><label><input type="checkbox" id="ax_mcc" /> MCC invite accepted</label></li>
+            <li><label><input type="checkbox" id="ax_call" /> Call platform path identified</label></li>
+            <li><label><input type="checkbox" id="ax_crm" /> CRM / intake path identified</label></li>
+            <li><label><input type="checkbox" id="ax_gtm" /> GTM / GA4 owners known</label></li>
+          </ul>
+          <p class="micro" id="saveStatus">Saves in this browser</p>
+        </section>
+      </div>
+
+      <section class="ref-cat" style="margin-top:1rem">
+        <h2>Deep modules (quiet)</h2>
+        <div class="link-row">
+          <a class="chip primary" href="paid-media-os/access.html">Access map</a>
+          <a class="chip" href="paid-media-os/prestart.html">Pre-Start</a>
+          <a class="chip" href="paid-media-os/radar.html">Radar</a>
+          <a class="chip" href="paid-media-os/dossier.html">Dossier</a>
+          <a class="chip" href="paid-media-os/audit.html">Audit</a>
+          <a class="chip" href="paid-media-os/turnaround.html">Turnaround</a>
+          <a class="chip" href="paid-media-os/tracking.html">Tracking</a>
+          <a class="chip" href="paid-media-os/coaching.html">Coaching</a>
+          <a class="chip" href="paid-media-os/productization.html">Productization</a>
+          <a class="chip" href="paid-media-os/index.html">Full playbook</a>
+        </div>
+        <p class="micro">Not top-nav competitors. Reachable when you need them.</p>
+      </section>
+
+      <div class="banner warn">
+        Never store credentials here. Prefer FirmPilot’s existing sources when access exists. Status vocabulary on Access map: Confirmed · Requested · Available but disconnected · Unknown · Not available · Not needed.
+      </div>
+
+      <footer class="page-foot">
+        Private Director OS · no live writes · no invented APIs.
+      </footer>
+    </main>
+  </div>
+  <script src="assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("setup");
+    FirmPilotOS.bindLocalPersistence("director-setup", "#saveStatus");
+  </script>
+</body>
+</html>
