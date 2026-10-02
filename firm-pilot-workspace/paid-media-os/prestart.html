@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pre-Start / 30-Day — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Modules 25–26 · Pre-Start &amp; First 30 Days</div>
+        <h1>Pre-Start / 30-Day Plan</h1>
+        <p class="sub">October 19 readiness so week one is not wasted waiting for logins. Plan is flexible until internal systems are seen.</p>
+        <div class="link-row">
+          <a class="chip primary" href="access.html">Access map</a>
+          <a class="chip" href="radar.html">Portfolio Radar</a>
+          <a class="chip" href="index.html#s-roadmap">Playbook 30/60/90</a>
+        </div>
+      </header>
+
+      <div class="banner warn"><strong>Target start:</strong> October 19 (confirm). This page is a private checklist — not a FirmPilot onboarding doc.</div>
+      <div class="board-meta"><span class="status-pill" id="saveStatus">Saves in this browser only</span></div>
+
+      <section class="section-block">
+        <h2 class="sec">Technical readiness</h2>
+        <ul class="checks">
+          <li><input type="checkbox" id="ps_net" /><label for="ps_net">Internet + backup connection</label><select class="badge-select" data-badge data-for="ps_net"><option value="unknown">UNKNOWN</option><option value="healthy">READY</option><option value="warning">GAP</option><option value="broken">BLOCKED</option></select></li>
+          <li><input type="checkbox" id="ps_sso" /><label for="ps_sso">SSO / MFA / VPN tested</label><select class="badge-select" data-badge data-for="ps_sso"><option value="unknown">UNKNOWN</option><option value="healthy">READY</option><option value="warning">GAP</option><option value="broken">BLOCKED</option></select></li>
+          <li><input type="checkbox" id="ps_mail" /><label for="ps_mail">Company email · Slack · Calendar</label><select class="badge-select" data-badge data-for="ps_mail"><option value="unknown">UNKNOWN</option><option value="healthy">READY</option><option value="warning">GAP</option><option value="broken">BLOCKED</option></select></li>
+          <li><input type="checkbox" id="ps_mcc" /><label for="ps_mcc">MCC · GA4 · GTM path</label><select class="badge-select" data-badge data-for="ps_mcc"><option value="unknown">UNKNOWN</option><option value="healthy">READY</option><option value="warning">GAP</option><option value="broken">BLOCKED</option></select></li>
+          <li><input type="checkbox" id="ps_call" /><label for="ps_call">Call platform · CRM · WordPress/LP tools</label><select class="badge-select" data-badge data-for="ps_call"><option value="unknown">UNKNOWN</option><option value="healthy">READY</option><option value="warning">GAP</option><option value="broken">BLOCKED</option></select></li>
+          <li><input type="checkbox" id="ps_docs" /><label for="ps_docs">Product / AI / internal tool docs located</label><select class="badge-select" data-badge data-for="ps_docs"><option value="unknown">UNKNOWN</option><option value="healthy">READY</option><option value="warning">GAP</option><option value="broken">BLOCKED</option></select></li>
+        </ul>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">People readiness</h2>
+        <p class="lede">Names stay blank until confirmed internally. Roles are a working model only.</p>
+        <div class="grid-cards two">
+          <div class="card"><h4>Manager / sponsor</h4><input type="text" id="ps_mgr" data-note placeholder="TBD" style="width:100%;font:inherit;padding:0.45rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text)" /></div>
+          <div class="card"><h4>Assoc. Director / senior PPC</h4><input type="text" id="ps_ad" data-note placeholder="TBD" style="width:100%;font:inherit;padding:0.45rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text)" /></div>
+          <div class="card"><h4>PPC owners / contractors</h4><input type="text" id="ps_ppc" data-note placeholder="TBD" style="width:100%;font:inherit;padding:0.45rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text)" /></div>
+          <div class="card"><h4>Client Success · Impl · Product · Eng</h4><input type="text" id="ps_others" data-note placeholder="TBD" style="width:100%;font:inherit;padding:0.45rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text)" /></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">First-week questions</h2>
+        <details class="panel" data-panel data-accordion="ps" open>
+          <summary>Ask before prescribing<span class="tag">discover</span></summary>
+          <div class="body">
+            <ul>
+              <li>What data is already centralized? What is the source of truth?</li>
+              <li>Which CRM systems / call platforms are supported?</li>
+              <li>How is GTM / WordPress managed? What internal APIs exist?</li>
+              <li>What existing AI skills exist? What does Product vs Engineering own?</li>
+              <li>Which clients are unhappy / urgent / highest spend / strongest economics?</li>
+              <li>How are retained cases tracked? What does the existing dashboard expose?</li>
+            </ul>
+            <div class="field"><label class="field-label" for="psQ">My answers / notes</label><textarea id="psQ" data-note class="tall"></textarea></div>
+          </div>
+        </details>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">First 30 days (flexible)</h2>
+        <div class="phase-grid">
+          <div class="phase"><div class="ph">Phase 1</div><h4>Discover</h4><ul><li>Validate access</li><li>Infra · team · portfolio</li><li>Source of truth · Product/AI</li></ul></div>
+          <div class="phase"><div class="ph">Phase 2</div><h4>Radar</h4><ul><li>Portfolio-level audit</li><li>Fires + healthy exemplars</li><li>Intervention queue</li></ul></div>
+          <div class="phase"><div class="ph">Phase 3</div><h4>Intervene</h4><ul><li>Priority deep-dives</li><li>Repair/rebuild as justified</li><li>QA measurement · calls · CRM</li></ul></div>
+          <div class="phase"><div class="ph">Phase 4</div><h4>Teach</h4><ul><li>Owner reviews</li><li>Monitoring assignments</li><li>Weekly on active turnarounds</li></ul></div>
+          <div class="phase"><div class="ph">Phase 5</div><h4>Extract patterns</h4><ul><li>Failure modes</li><li>Prototype detection</li><li>Product candidates</li></ul></div>
+        </div>
+        <p class="lede" style="margin-top:1rem">Also see Playbook Days 31–90 for signal-loop → prove &amp; scale.</p>
+      </section>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("prestart");
+    FirmPilotOS.bindAccordions();
+    FirmPilotOS.bindLocalPersistence("prestart", "#saveStatus");
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Account Dossier — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 7 · Account Dossier</div>
+        <h1>Account Dossier</h1>
+        <p class="sub">Working surface during intervention. Skeleton only until real accounts exist. Pseudonyms OK.</p>
+        <div class="flow">
+          <a href="radar.html">Radar</a><span class="arrow">→</span>
+          <a class="active" href="dossier.html">Dossier</a><span class="arrow">→</span>
+          <a href="audit.html">Audit</a><span class="arrow">→</span>
+          <a href="turnaround.html">Intervention</a>
+        </div>
+      </header>
+
+      <div class="banner warn" id="demoNote">Empty dossier — not linked to live FirmPilot accounts.</div>
+      <div class="board-meta"><span class="status-pill" id="saveStatus">Saves in this browser only</span></div>
+
+      <section class="section-block">
+        <h2 class="sec">Overview</h2>
+        <div class="grid-cards two">
+          <div class="field"><label class="field-label" for="dFirm">Firm</label><input type="text" id="dFirm" data-note placeholder="Pseudonym until authorized" /></div>
+          <div class="field"><label class="field-label" for="dPractice">Practice · geography</label><input type="text" id="dPractice" data-note /></div>
+          <div class="field"><label class="field-label" for="dSpend">Spend / budget</label><input type="text" id="dSpend" data-note /></div>
+          <div class="field"><label class="field-label" for="dOwners">PPC owner · CS</label><input type="text" id="dOwners" data-note /></div>
+          <div class="field" style="grid-column:1/-1"><label class="field-label" for="dWhy">Why reviewing</label><textarea id="dWhy" data-note></textarea></div>
+          <div class="field"><label class="field-label" for="dStatus">Status</label>
+            <select id="dStatus" data-select-persist>
+              <option value="">—</option>
+              <option>Healthy</option><option>Watch</option><option>Action Required</option><option>Critical</option><option>Unknown</option>
+            </select>
+          </div>
+          <div class="field"><label class="field-label" for="dLevel">Intervention level</label>
+            <select id="dLevel" data-select-persist>
+              <option value="">—</option>
+              <option>Optimize existing</option><option>Partial rebuild</option><option>Full clean-room rebuild</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Working notes</h2>
+        <details class="panel" data-panel data-accordion="dos" open>
+          <summary>Business outcomes<span class="tag">CRM truth</span></summary>
+          <div class="body"><textarea id="dBiz" data-note class="tall" placeholder="Qualified · consult · retained · intake notes"></textarea></div>
+        </details>
+        <details class="panel" data-panel data-accordion="dos">
+          <summary>Google Ads</summary>
+          <div class="body"><textarea id="dAds" data-note class="tall" placeholder="Structure · bidding · queries · negatives · geo · IS"></textarea></div>
+        </details>
+        <details class="panel" data-panel data-accordion="dos">
+          <summary>Measurement</summary>
+          <div class="body"><textarea id="dMeas" data-note class="tall" placeholder="Conversion actions · GTM · GA4 · call tracking · offline"></textarea></div>
+        </details>
+        <details class="panel" data-panel data-accordion="dos">
+          <summary>Landing page / CRO</summary>
+          <div class="body"><textarea id="dLp" data-note class="tall"></textarea></div>
+        </details>
+        <details class="panel" data-panel data-accordion="dos">
+          <summary>Hypothesis · next actions · rollback</summary>
+          <div class="body"><textarea id="dNext" data-note class="tall"></textarea></div>
+        </details>
+      </section>
+
+      <div class="link-row">
+        <a class="chip primary" href="audit.html">Open Audit Engine</a>
+        <a class="chip" href="turnaround.html">Add to Turnaround</a>
+        <a class="chip" href="coaching.html">Coaching handoff</a>
+      </div>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("dossier");
+    FirmPilotOS.bindAccordions();
+
+    FirmPilotOS.bindLocalPersistence("dossier", "#saveStatus");
+    var params = new URLSearchParams(location.search);
+    var demoId = params.get("demo");
+    if (demoId) {
+      fetch("../data/portfolio-demo.json").then(function(r){return r.json()}).then(function(d){
+        var a = (d.accounts||[]).find(function(x){return x.id===demoId});
+        if (!a) return;
+        document.getElementById("demoNote").className = "banner demo";
+        document.getElementById("demoNote").innerHTML = "<strong>DEMO account prefilled from Radar.</strong> Not real FirmPilot data. Clear fields before real work.";
+        var firm = document.getElementById("dFirm");
+        if (!firm.value) firm.value = a.firm;
+        var pr = document.getElementById("dPractice");
+        if (!pr.value) pr.value = (a.practice_area||"")+" · "+(a.geography||"");
+        var sp = document.getElementById("dSpend");
+        if (!sp.value) sp.value = a.monthly_spend||"";
+        var wh = document.getElementById("dWhy");
+        if (!wh.value) wh.value = (a.priority_reasons||[]).join("; ");
+      });
+    }
+
+  </script>
+</body>
+</html>

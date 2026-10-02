@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Radar — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 6 · Portfolio Radar</div>
+        <h1>Portfolio Radar</h1>
+        <p class="sub">Tell me <strong>where to look</strong> — not vanity metrics. Schema ready for ~100 accounts. No fake “real” data.</p>
+        <div class="flow" aria-label="Work flow">
+          <a class="active" href="radar.html">Radar</a><span class="arrow">→</span>
+          <a href="dossier.html">Dossier</a><span class="arrow">→</span>
+          <a href="audit.html">Audit</a><span class="arrow">→</span>
+          <a href="turnaround.html">Intervention</a>
+        </div>
+      </header>
+
+      <div class="banner info" id="modeBanner">Mode: <strong>Empty</strong> — waiting for authorized FirmPilot access. Optional demo is clearly labeled.</div>
+
+      <div class="toolbar">
+        <button type="button" class="primary" id="btnEmpty">Show empty (real mode)</button>
+        <button type="button" class="ghost" id="btnDemo">Load DEMO accounts</button>
+        <input type="search" id="radarFilter" placeholder="Filter firms…" aria-label="Filter" />
+      </div>
+
+      <section class="section-block">
+        <h2 class="sec">Triage categories</h2>
+        <div class="grid-cards" id="triageCards" style="grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))"></div>
+        <p class="lede">Priority can have multiple reasons (spend + tracking, complaint + quality, etc.). Do not collapse portfolio health into one silly score.</p>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Accounts</h2>
+        <div id="radarEmpty" class="empty-state">
+          <strong>No portfolio data loaded.</strong><br />
+          After approved access, adapters can fill <code>data/portfolio-empty.json</code> (or a future API). Use DEMO only to exercise the UI.
+        </div>
+        <div id="radarTable" class="table-wrap" hidden></div>
+      </section>
+
+      <details class="panel" data-panel data-accordion="radar">
+        <summary>Field schema (for future ingest)<span class="tag">adapter</span></summary>
+        <div class="body">
+          <p id="schemaList"></p>
+          <div class="why">Clean JSON now → swap adapter later. Do not invent FirmPilot schemas from this list.</div>
+        </div>
+      </details>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("radar");
+    FirmPilotOS.bindAccordions();
+
+    var mode = "empty";
+    var accounts = [];
+    var schema = [];
+
+    function pill(status) {
+      var cls = FirmPilotOS.healthClass(status);
+      return '<span class="status-pill '+cls+'">'+(status||"unknown")+"</span>";
+    }
+
+    function render() {
+      var banner = document.getElementById("modeBanner");
+      var empty = document.getElementById("radarEmpty");
+      var table = document.getElementById("radarTable");
+      var q = (document.getElementById("radarFilter").value||"").toLowerCase();
+      if (mode === "empty" || !accounts.length) {
+        banner.className = "banner info";
+        banner.innerHTML = 'Mode: <strong>Empty</strong> — waiting for authorized FirmPilot access. Optional demo is clearly labeled.';
+        empty.hidden = false;
+        table.hidden = true;
+        return;
+      }
+      banner.className = "banner demo";
+      banner.innerHTML = '<strong>DEMO ONLY — fictional accounts. NEVER real FirmPilot data.</strong> Switch back to empty before any stakeholder review.';
+      empty.hidden = true;
+      table.hidden = false;
+      var rows = accounts.filter(function(a){
+        var blob = (a.firm+" "+(a.practice_area||"")+" "+(a.health_status||"")).toLowerCase();
+        return !q || blob.indexOf(q) !== -1;
+      }).map(function(a){
+        var reasons = (a.priority_reasons||[]).join("; ") || "—";
+        var link = "dossier.html?demo="+encodeURIComponent(a.id||"");
+        return "<tr><td class=\"firm\"><a href=\""+link+"\">"+a.firm+"</a></td><td>"+(a.practice_area||"—")+"</td><td>"+(a.monthly_spend||"—")+"</td><td>"+pill(a.health_status)+"</td><td>"+reasons+"</td><td>"+(a.tracking_confidence||"—")+"</td></tr>";
+      }).join("");
+      table.innerHTML = "<table class=\"data\"><thead><tr><th>Firm</th><th>Practice</th><th>Spend</th><th>Health</th><th>Why look</th><th>Tracking</th></tr></thead><tbody>"+rows+"</tbody></table>";
+    }
+
+    Promise.all([
+      fetch("../data/triage-categories.json").then(function(r){return r.json()}),
+      fetch("../data/portfolio-empty.json").then(function(r){return r.json()})
+    ]).then(function(pair){
+      var triage = pair[0], empty = pair[1];
+      schema = empty.field_schema || [];
+      document.getElementById("schemaList").textContent = schema.join(" · ");
+      document.getElementById("triageCards").innerHTML = (triage.categories||[]).map(function(c){
+        return '<div class="hub-card"><div class="meta">'+c.id+'</div><h3>'+c.name+'</h3><p>'+c.desc+'</p></div>';
+      }).join("");
+    }).catch(function(){});
+
+    document.getElementById("btnEmpty").addEventListener("click", function(){
+      mode = "empty"; accounts = []; render();
+    });
+    document.getElementById("btnDemo").addEventListener("click", function(){
+      fetch("../data/portfolio-demo.json").then(function(r){return r.json()}).then(function(d){
+        mode = "demo"; accounts = d.accounts || []; render();
+      });
+    });
+    document.getElementById("radarFilter").addEventListener("input", render);
+    render();
+
+  </script>
+</body>
+</html>

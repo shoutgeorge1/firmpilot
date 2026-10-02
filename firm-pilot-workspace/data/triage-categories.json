@@ -1,0 +1,40 @@
+{
+  "label": "Triage categories \u2014 framework only",
+  "categories": [
+    {
+      "id": "healthy",
+      "name": "Healthy",
+      "desc": "Producing qualified outcomes; leave alone or light improve"
+    },
+    {
+      "id": "watch",
+      "name": "Watch",
+      "desc": "Soft risk; schedule review"
+    },
+    {
+      "id": "action",
+      "name": "Action Required",
+      "desc": "Known issue needing intervention queue"
+    },
+    {
+      "id": "critical",
+      "name": "Critical",
+      "desc": "High spend or complaint + broken signal / severe failure"
+    },
+    {
+      "id": "unknown",
+      "name": "Unknown / insufficient data",
+      "desc": "Cannot triage until access + baselines"
+    }
+  ],
+  "priority_reasons_examples": [
+    "High spend + broken tracking",
+    "Client complaint + declining qualified leads",
+    "Strong lead quality + budget-limited opportunity",
+    "Good Ads CPL but terrible CRM outcomes",
+    "Sudden call-quality collapse",
+    "Huge negative library + weak query coverage",
+    "Conversion volume collapse",
+    "Policy issue"
+  ]
+}

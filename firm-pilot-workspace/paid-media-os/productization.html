@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Productization Registry — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 19 · Productization</div>
+        <h1>Productization Registry</h1>
+        <p class="sub">Record recurring processes without forcing them into Product early. Specialists discover → Product validates → Engineering builds.</p>
+        <div class="flow">
+          <a href="coaching.html">Coaching</a><span class="arrow">→</span>
+          <a class="active" href="productization.html">Productization</a>
+        </div>
+      </header>
+
+      <div class="banner info">Do not assume 10/50/100 thresholds unless FirmPilot confirms them. Empty registry is the honest default.</div>
+      <div class="board-meta"><span class="status-pill" id="saveStatus">Saves in this browser only</span></div>
+
+      <section class="section-block">
+        <h2 class="sec">Maturity stages</h2>
+        <div class="grid-cards" id="stages" style="grid-template-columns:repeat(auto-fit,minmax(10rem,1fr))"></div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">New candidate</h2>
+        <div class="field"><label class="field-label" for="prName">Pattern name</label><input type="text" id="prName" data-note /></div>
+        <div class="field"><label class="field-label" for="prDesc">Description</label><textarea id="prDesc" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="prAccounts">Accounts observed (pseudonyms)</label><input type="text" id="prAccounts" data-note /></div>
+        <div class="field"><label class="field-label" for="prImpact">Business impact</label><textarea id="prImpact" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="prManual">Current manual solution</label><textarea id="prManual" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="prRules">Decision rules · exceptions · human judgment</label><textarea id="prRules" data-note class="tall"></textarea></div>
+        <div class="field"><label class="field-label" for="prStage">Maturity</label>
+          <select id="prStage" data-select-persist>
+            <option>Observation</option>
+            <option>Repeated pattern</option>
+            <option>Prototype</option>
+            <option>Validating</option>
+            <option>Ready for Product review</option>
+            <option>Product testing</option>
+            <option>Engineering candidate</option>
+            <option>Productionized</option>
+          </select>
+        </div>
+        <div class="field"><label class="field-label" for="prNext">Next step</label><textarea id="prNext" data-note></textarea></div>
+      </section>
+
+      <div class="empty-state" id="emptyReg">
+        No productionized candidates yet — expected before Oct 19 access and first pattern extractions.
+      </div>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("productization");
+    FirmPilotOS.bindAccordions();
+
+    FirmPilotOS.bindLocalPersistence("productization", "#saveStatus");
+    fetch("../data/productization-empty.json").then(function(r){return r.json()}).then(function(d){
+      document.getElementById("stages").innerHTML = (d.maturity_stages||[]).map(function(s){
+        return '<div class="hub-card"><h3 style="font-size:1rem">'+s+'</h3></div>';
+      }).join("");
+    }).catch(function(){});
+
+  </script>
+</body>
+</html>

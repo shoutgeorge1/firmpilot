@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coaching / Handoff — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Modules 16–18 · Coaching &amp; briefs</div>
+        <h1>Coaching / Handoff</h1>
+        <p class="sub">Every meaningful intervention leaves: better account · smarter owner · reusable knowledge. Budget 30–60 minutes for transfer.</p>
+        <div class="flow">
+          <a href="turnaround.html">Intervention</a><span class="arrow">→</span>
+          <a class="active" href="coaching.html">Coaching</a><span class="arrow">→</span>
+          <a href="productization.html">Productization</a>
+        </div>
+      </header>
+
+      <div class="board-meta"><span class="status-pill" id="saveStatus">Saves in this browser only</span></div>
+
+      <section class="section-block">
+        <h2 class="sec">Owner review template</h2>
+        <div class="field"><label class="field-label" for="coAccount">Account · owner</label><input type="text" id="coAccount" data-note /></div>
+        <div class="field"><label class="field-label" for="coFound">What I found</label><textarea id="coFound" data-note class="tall"></textarea></div>
+        <div class="field"><label class="field-label" for="coChanged">What I changed · why</label><textarea id="coChanged" data-note class="tall"></textarea></div>
+        <div class="field"><label class="field-label" for="coLeft">What I deliberately left alone</label><textarea id="coLeft" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="coMonitor">What to monitor</label><textarea id="coMonitor" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="coReverse">What would reverse the change</label><textarea id="coReverse" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="coOwnerNext">Owner next actions</label><textarea id="coOwnerNext" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="coOpen">Open questions</label><textarea id="coOpen" data-note></textarea></div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Coaching questions (teach thinking)</h2>
+        <div class="grid-cards two">
+          <div class="card"><h4>Demand</h4><ul><li>What changed in query mix?</li><li>What does search terms tell you?</li><li>What is Google being taught to pursue?</li></ul></div>
+          <div class="card"><h4>Quality</h4><ul><li>Which conversions are actually valuable?</li><li>More leads or better leads?</li><li>CPC move vs quality move?</li></ul></div>
+          <div class="card"><h4>Auction</h4><ul><li>Impression share?</li><li>Where would incremental penetration come from?</li></ul></div>
+          <div class="card"><h4>Business</h4><ul><li>Is intake the constraint?</li><li>Client rejection / capacity / geo?</li></ul></div>
+        </div>
+        <div class="why">Goal is not clones — identify who thinks strategically, executes, follows production tasks, needs coaching, or requires escalation.</div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Layered briefs (keep short)</h2>
+        <details class="panel" data-panel data-accordion="co" open>
+          <summary>Executive / leadership<span class="tag">very short</span></summary>
+          <div class="body">
+            <p>Found · Changed · Result being watched.</p>
+            <textarea id="coExec" data-note placeholder="3 bullets max"></textarea>
+          </div>
+        </details>
+        <details class="panel" data-panel data-accordion="co">
+          <summary>PPC owner</summary>
+          <div class="body"><textarea id="coPpc" data-note class="tall" placeholder="Operational handoff detail"></textarea></div>
+        </details>
+        <details class="panel" data-panel data-accordion="co">
+          <summary>Client manager</summary>
+          <div class="body"><p>Only what affects client relationship / business.</p><textarea id="coCs" data-note></textarea></div>
+        </details>
+        <details class="panel" data-panel data-accordion="co">
+          <summary>Product / Engineering</summary>
+          <div class="body"><p>Only repeated validated patterns — not tactical trivia.</p><textarea id="coProd" data-note></textarea>
+          <p><a href="productization.html">→ Productization registry</a></p></div>
+        </details>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Meeting cadence (map)</h2>
+        <div class="split two">
+          <div class="card"><h4>Individual account review</h4><ul><li>Me + owner (+ Assoc Dir)</li><li>~30 min · 60 for rebuilds</li><li>Transfer reasoning · assign monitoring</li></ul></div>
+          <div class="card"><h4>Performance team</h4><ul><li>Likely weekly</li><li>Patterns / escalations — not 100 accounts one-by-one</li></ul></div>
+          <div class="card"><h4>CS escalation</h4><ul><li>Only when client/business involvement needed</li></ul></div>
+          <div class="card"><h4>Product / AI</h4><ul><li>Repeated patterns only</li></ul></div>
+        </div>
+        <p class="lede" style="margin-top:1rem"><a href="../meeting-guide/">Meeting guide</a> remains the interview / audience companion.</p>
+      </section>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("coaching");
+    FirmPilotOS.bindAccordions();
+    FirmPilotOS.bindLocalPersistence("coaching", "#saveStatus");
+  </script>
+</body>
+</html>

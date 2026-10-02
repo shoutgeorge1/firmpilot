@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turnaround Board — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 15 · Intervention / Turnaround</div>
+        <h1>Turnaround Workflow</h1>
+        <p class="sub">Rescue sequence with a board. Owners keep day-to-day; Director intervenes on leverage, then hands back.</p>
+        <div class="flow">
+          <a href="radar.html">Radar</a><span class="arrow">→</span>
+          <a href="dossier.html">Dossier</a><span class="arrow">→</span>
+          <a href="audit.html">Audit</a><span class="arrow">→</span>
+          <a class="active" href="turnaround.html">Intervention</a><span class="arrow">→</span>
+          <a href="coaching.html">Coaching</a>
+        </div>
+      </header>
+
+      <div class="board-meta"><span class="status-pill" id="saveStatus">Saves in this browser only</span></div>
+
+      <section class="section-block">
+        <h2 class="sec">Sequence</h2>
+        <ol class="walk-list">
+          <li><span class="n">1</span><span>Radar identifies candidate</span></li>
+          <li><span class="n">2</span><span>Open Dossier · deep audit</span></li>
+          <li><span class="n">3</span><span>Repair vs partial vs clean-room</span></li>
+          <li><span class="n">4</span><span>Highest-leverage changes · QA</span></li>
+          <li><span class="n">5</span><span>Owner review · monitor · weekly until stable</span></li>
+          <li><span class="n">6</span><span>Record outcomes · extract pattern if it repeats</span></li>
+        </ol>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Turnaround board</h2>
+        <p class="lede">Local notes per column. Empty = honest. No fake FirmPilot queue.</p>
+        <div class="kanban wide">
+          <div class="kanban-col"><h3>Waiting review</h3><textarea id="tb_wait" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>In diagnosis</h3><textarea id="tb_diag" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>Rebuild in progress</h3><textarea id="tb_rebuild" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>QA</h3><textarea id="tb_qa" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>Monitoring</h3><textarea id="tb_mon" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>Stabilized</h3><textarea id="tb_stab" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>Handed back</h3><textarea id="tb_hand" data-note placeholder="—" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+          <div class="kanban-col"><h3>Escalated</h3><textarea id="tb_esc" data-note placeholder="CS / policy / capacity" style="width:100%;min-height:6rem;font:inherit;font-size:0.98rem;background:var(--bg);color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:0.5rem"></textarea></div>
+        </div>
+      </section>
+
+      <div class="link-row">
+        <a class="chip primary" href="coaching.html">Coaching template</a>
+        <a class="chip" href="productization.html">Log pattern → Productization</a>
+      </div>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("turnaround");
+    FirmPilotOS.bindAccordions();
+    FirmPilotOS.bindLocalPersistence("turnaround", "#saveStatus");
+  </script>
+</body>
+</html>

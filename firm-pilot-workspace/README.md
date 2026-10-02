@@ -1,31 +1,38 @@
 # FirmPilot — personal paid media operating system workspace
 
-**Status:** interview and discovery, 28 September 2026 (Pacific). This is George Aguilar's private working brief for Cursor. It is not a FirmPilot repository, an approved company architecture, or a claim of access to client accounts.
+**Status:** private Director cockpit (expanded 2 Oct 2026). Interview/discovery context from late September. This is George Aguilar's private working brief — not a FirmPilot repository, approved company architecture, or claim of client-account access.
+
+**Live:** https://firmpilot-ivory.vercel.app/
 
 ## Start here
 
-1. Read `PROJECT_BRIEF.md` for the consolidated history, business goals, decisions, and uncertainties.
-2. Read `TECHNICAL_BLUEPRINT.md` for the proposed system, signal contract, account model, safeguards, and first vertical slice.
-3. Read `DISCOVERY_AND_DELIVERY.md` before the Aaron conversation or any implementation commitment.
-4. Read `PRIVATE_STRATEGY.md` for George's personal role and compensation strategy. **Do not put this file in a company repository or share it with FirmPilot.**
-5. Cursor should read `AGENTS.md` before making changes. Start a separate implementation repository only after ownership, access, data handling, and scope are settled.
+1. Open the **Command Center** (`index.html` / live `/`).
+2. Read `IMPLEMENTATION_MAP.md` for inventory ↔ mega-prompt module mapping.
+3. Read `PROJECT_BRIEF.md`, `TECHNICAL_BLUEPRINT.md`, `DISCOVERY_AND_DELIVERY.md` for history.
+4. Read `PRIVATE_STRATEGY.md` for personal role strategy. **Do not put that file in a company repo or public deploy.**
+5. Cursor: follow `AGENTS.md`.
 
-## One-sentence thesis
+## Cockpit map
 
-Build a portfolio intelligence and execution system that links paid media to **verified new legal matters and eventually retained-case economics**, while keeping account decisions tied to practice area, market, client appetite, auction behavior, and human judgment.
+| Surface | Path |
+| --- | --- |
+| Command Center | `/` |
+| Access · Pre-Start / 30-Day | `/paid-media-os/access/` · `/paid-media-os/prestart/` |
+| Portfolio Radar · Dossier · Audit · Turnarounds | `/paid-media-os/radar/` … |
+| Tracking · Coaching · Productization | under `/paid-media-os/` |
+| Playbook (thesis, First 10, structure/bidding depth) | `/paid-media-os/` |
+| Meeting guide | `/meeting-guide/` |
 
-## Immediate next move
+Mock/demo portfolio rows are labeled **DEMO ONLY**. Empty states are intentional until authorized data.
 
-Use the discovery questions with Aaron. Request a read-only view of two representative accounts and the corresponding call/intake/CRM data **through FirmPilot-approved access**. Deliver a short diagnostic and a proposed pilot agreement before requesting write access or shipping automation.
+## Rules that stay true
 
-## What is in the package
+- No credentials in the workspace or pages.
+- No live Google Ads mutations from this cockpit.
+- Do not invent FirmPilot APIs, CRM schemas, people, or real account data.
+- Prefer FirmPilot’s existing sources when access exists.
+- WordPress may remain production for sites — do not assume Next.js replaces it.
 
-- `PROJECT_BRIEF.md`: chronology, agreed principles, operating model, success measures, and evidence status.
-- `TECHNICAL_BLUEPRINT.md`: proposed data and workflow architecture with acceptance criteria.
-- `DISCOVERY_AND_DELIVERY.md`: interview agenda, access checklist, phased pilot, decisions and risks.
-- `PRIVATE_STRATEGY.md`: confidential compensation, authority, IP, and workload notes.
-- `AGENTS.md`: Cursor instructions and the first implementation prompt.
+## Docs package
 
-The package contains no credentials, customer data, real call recordings, or Google Ads mutations.
-
-Local HTML cockpits (open as `file://`): `paid-media-os/index.html` and `meeting-guide/index.html`. GitHub/Vercel for these is yours when ready — not configured here.
+- `PROJECT_BRIEF.md` · `TECHNICAL_BLUEPRINT.md` · `DISCOVERY_AND_DELIVERY.md` · `PRIVATE_STRATEGY.md` · `AGENTS.md` · `IMPLEMENTATION_MAP.md`

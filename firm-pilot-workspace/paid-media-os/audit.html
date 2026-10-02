@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Audit Engine — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 8 · Audit Engine</div>
+        <h1>Audit Engine</h1>
+        <p class="sub">Legal PPC failure patterns — not generic Ads recommendations. Manual today; API later. Deep playbook checklists stay in <a href="index.html#s-signal">Playbook → Signal</a>.</p>
+        <div class="flow">
+          <a href="radar.html">Radar</a><span class="arrow">→</span>
+          <a href="dossier.html">Dossier</a><span class="arrow">→</span>
+          <a class="active" href="audit.html">Audit</a><span class="arrow">→</span>
+          <a href="turnaround.html">Intervention</a>
+        </div>
+      </header>
+
+      <div class="board-meta">
+        <span class="status-pill" id="saveStatus">Saves in this browser only</span>
+        <span class="status-pill">Prioritize Critical → High → Medium → Low</span>
+      </div>
+
+      <div class="field"><label class="field-label" for="auAccount">Account (pseudonym OK)</label><input type="text" id="auAccount" data-note /></div>
+
+      <section class="section-block">
+        <h2 class="sec">Audit categories</h2>
+
+        <details class="panel" data-panel data-accordion="au" open>
+          <summary>Measurement / signal<span class="tag">first</span></summary>
+          <div class="body">
+            <ul class="checks">
+              <li><input type="checkbox" id="au_m1" /><label for="au_m1">Duplicate / junk primaries · low-value events bidding</label><select class="badge-select" data-badge data-for="au_m1"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_m2" /><label for="au_m2">Missing call tracking / CRM reconciliation / GCLID gaps</label><select class="badge-select" data-badge data-for="au_m2"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_m3" /><label for="au_m3">Calls ≡ forms without evidence · broken offline flow</label><select class="badge-select" data-badge data-for="au_m3"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_m4" /><label for="au_m4">Spam forms · suspicious conversion volume swings</label><select class="badge-select" data-badge data-for="au_m4"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+            </ul>
+            <div class="why">Do not invent Soft Bid events just to feed Smart Bidding.</div>
+            <p><a href="tracking.html">→ Tracking Control Center</a> · <a href="index.html#s-conversion">Playbook conversion</a></p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="au">
+          <summary>Campaign architecture</summary>
+          <div class="body">
+            <ul class="checks">
+              <li><input type="checkbox" id="au_c1" /><label for="au_c1">Brand mixed with nonbrand · practice areas mixed unnecessarily</label><select class="badge-select" data-badge data-for="au_c1"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_c2" /><label for="au_c2">Legacy clutter · campaigns competing · unjustified PMax</label><select class="badge-select" data-badge data-for="au_c2"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_c3" /><label for="au_c3">Geo problems · budget fragmentation · partners issues</label><select class="badge-select" data-badge data-for="au_c3"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+            </ul>
+            <p><a href="index.html#s-structure">→ Structure rules</a></p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="au">
+          <summary>Query quality &amp; negatives</summary>
+          <div class="body">
+            <ul>
+              <li>Poor intent · jobs · DIY · wrong practice/geo · vendors · research · blocked commercial intent</li>
+              <li>Negatives: count, lists, overlaps, conflicts, legacy accumulation, strangulation — high count ≠ automatically bad</li>
+            </ul>
+            <ul class="checks">
+              <li><input type="checkbox" id="au_q1" /><label for="au_q1">Query mix reviewed against outcomes</label><select class="badge-select" data-badge data-for="au_q1"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_q2" /><label for="au_q2">Negative framework understood (or flagged incomprehensible)</label><select class="badge-select" data-badge data-for="au_q2"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+            </ul>
+            <p><a href="index.html#s-match">→ Match / negatives</a></p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="au">
+          <summary>Bidding</summary>
+          <div class="body">
+            <ul class="checks">
+              <li><input type="checkbox" id="au_b1" /><label for="au_b1">Strategy fits clean-signal volume (not contaminated objectives)</label><select class="badge-select" data-badge data-for="au_b1"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+              <li><input type="checkbox" id="au_b2" /><label for="au_b2">Traffic-oriented bidding intentional if present</label><select class="badge-select" data-badge data-for="au_b2"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+            </ul>
+            <p><a href="index.html#s-bidding">→ Bidding phases</a></p>
+          </div>
+        </details>
+
+        <details class="panel" data-panel data-accordion="au">
+          <summary>Landing page · business/intake · policy</summary>
+          <div class="body">
+            <div class="split two">
+              <div class="card"><h4>LP</h4><ul><li>Message match · mobile call</li><li>Practice/geo relevance</li><li>Trust · speed · CTA · tracking</li></ul></div>
+              <div class="card"><h4>Intake / policy</h4><ul><li>Qualified→consult→retain breaks</li><li>Answer rate · capacity · rejection</li><li>Disapprovals · identity · destinations</li></ul></div>
+            </div>
+            <ul class="checks">
+              <li><input type="checkbox" id="au_l1" /><label for="au_l1">LP / intake / policy reviewed</label><select class="badge-select" data-badge data-for="au_l1"><option value="unknown">UNKNOWN</option><option value="healthy">OK</option><option value="warning">WARN</option><option value="broken">CRIT</option></select></li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Output</h2>
+        <div class="split two">
+          <div class="card"><h4>Severity</h4><ul><li>Critical · High · Medium · Low</li></ul></div>
+          <div class="card"><h4>Action class</h4><ul><li>Observe · Recommend · Human review</li><li>Safe execution candidate</li><li>Client action · Tech implementation</li></ul></div>
+        </div>
+        <div class="field" style="margin-top:1rem"><label class="field-label" for="auOut">Prioritized findings</label><textarea id="auOut" data-note class="tall" placeholder="Critical… / Recommend… / Client action…"></textarea></div>
+        <div class="field"><label class="field-label" for="auRebuild">Repair vs rebuild</label>
+          <select id="auRebuild" data-select-persist>
+            <option value="">—</option>
+            <option>Optimize existing</option>
+            <option>Partial rebuild</option>
+            <option>Full clean-room rebuild</option>
+          </select>
+        </div>
+        <div class="callout">Clean-room: preserve history for reference; new clean structure alongside when justified; migrate spend intentionally; keep rollback.</div>
+        <div class="link-row">
+          <a class="chip primary" href="turnaround.html">Queue on Turnaround board</a>
+          <a class="chip" href="coaching.html">Draft coaching handoff</a>
+        </div>
+      </section>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("audit");
+    FirmPilotOS.bindAccordions();
+    FirmPilotOS.bindLocalPersistence("audit", "#saveStatus");
+  </script>
+</body>
+</html>

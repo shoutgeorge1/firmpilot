@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tracking Control — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 10 · Tracking &amp; Conversion</div>
+        <h1>Tracking / Conversion Control Center</h1>
+        <p class="sub">Objective: <strong>clean signal</strong>. Playbook keeps deep CallRail/CRM/GTM checklists — this page is the control surface.</p>
+        <div class="link-row">
+          <a class="chip primary" href="index.html#s-conversion">Playbook · Conversion audit</a>
+          <a class="chip" href="index.html#s-callrail">CallRail</a>
+          <a class="chip" href="index.html#s-crm">CRM</a>
+          <a class="chip" href="audit.html">Audit Engine</a>
+        </div>
+      </header>
+
+      <div class="banner warn">Do not invent engagement events as primary conversions to manufacture Smart Bidding data. Existing-client long calls ≠ new matters.</div>
+      <div class="board-meta"><span class="status-pill" id="saveStatus">Saves in this browser only</span></div>
+
+      <section class="section-block">
+        <h2 class="sec">Signal ladder</h2>
+        <div class="grid-cards" style="grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))">
+          <div class="stat-card"><h3>1</h3><p>Spend / click</p></div>
+          <div class="stat-card"><h3>2</h3><p>Inquiry (call/form)</p></div>
+          <div class="stat-card"><h3>3</h3><p>Legitimate new matter</p></div>
+          <div class="stat-card"><h3>4</h3><p>Qualified intake</p></div>
+          <div class="stat-card"><h3>5</h3><p>Retained case</p></div>
+          <div class="stat-card"><h3>6</h3><p>Economics</p></div>
+        </div>
+        <p class="lede">Promote an event to a biddable primary only after quality, volume, and bid behavior are observed.</p>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Conversion action registry (local)</h2>
+        <p class="lede">Per-account notes until real conversion inventories are authorized.</p>
+        <div class="field"><label class="field-label" for="trAccount">Account</label><input type="text" id="trAccount" data-note /></div>
+        <div class="field"><label class="field-label" for="trPrimary">Primary actions · bidding impact</label><textarea id="trPrimary" data-note class="tall" placeholder="Name · primary/secondary · volume · trust · notes"></textarea></div>
+        <div class="field"><label class="field-label" for="trSecondary">Secondary / micro · do not over-weight</label><textarea id="trSecondary" data-note></textarea></div>
+        <div class="field"><label class="field-label" for="trGaps">Gaps · duplicates · offline path</label><textarea id="trGaps" data-note class="tall"></textarea></div>
+        <ul class="checks">
+          <li><input type="checkbox" id="tr1" /><label for="tr1">Primary inventory reviewed</label><select class="badge-select" data-badge data-for="tr1"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+          <li><input type="checkbox" id="tr2" /><label for="tr2">Call vs form evidence compared</label><select class="badge-select" data-badge data-for="tr2"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+          <li><input type="checkbox" id="tr3" /><label for="tr3">GCLID / offline path mapped or gap noted</label><select class="badge-select" data-badge data-for="tr3"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+          <li><input type="checkbox" id="tr4" /><label for="tr4">CRM dispositions can outrank transcript guesses</label><select class="badge-select" data-badge data-for="tr4"><option value="unknown">UNKNOWN</option><option value="healthy">HEALTHY</option><option value="warning">WARNING</option><option value="broken">BROKEN</option></select></li>
+        </ul>
+      </section>
+
+      <details class="panel" data-panel data-accordion="tr">
+        <summary>Call / lead taxonomy (evolve after access)<span class="tag">stub</span></summary>
+        <div class="body">
+          <p>Working labels (not FirmPilot official): junk/spam · wrong practice · wrong geo · existing client · vendor/job · prospect · qualified · consult · retained.</p>
+          <div class="callout">Confirm real disposition vocabulary with intake/CRM after Oct 19. Do not invent statuses.</div>
+        </div>
+      </details>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("tracking");
+    FirmPilotOS.bindAccordions();
+    FirmPilotOS.bindLocalPersistence("tracking", "#saveStatus");
+  </script>
+</body>
+</html>

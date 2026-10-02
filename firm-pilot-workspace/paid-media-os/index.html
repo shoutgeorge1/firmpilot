@@ -29,7 +29,7 @@
       --radius: 14px;
       --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-      --nav-w: 11.5rem;
+      --nav-w: 12.75rem;
       --body: 1.3125rem; /* 21px */
     }
     * { box-sizing: border-box; }
@@ -77,11 +77,11 @@
       display: block;
       text-decoration: none;
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 500;
-      padding: 0.55rem 0.65rem;
+      padding: 0.42rem 0.55rem;
       border-radius: 8px;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.12rem;
       line-height: 1.3;
     }
     .side-nav a:hover,
@@ -160,6 +160,24 @@
       border-color: rgba(125, 180, 255, 0.45);
       color: #d4e6ff;
     }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      margin: 0.75rem 0 1.25rem;
+      font-size: 0.98rem;
+    }
+    .flow a {
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.4rem 0.7rem;
+      background: var(--bg-raise);
+    }
+    .flow a:hover { color: #d4e6ff; border-color: rgba(125, 180, 255, 0.45); background: var(--accent-soft); }
+    .flow .arrow { color: var(--dim); font-family: var(--mono); }
 
     /* —— Walk-in —— */
     .walk-in {
@@ -778,26 +796,46 @@
 <body>
   <div class="shell">
     <nav class="side-nav" aria-label="Primary">
-      <div class="brand">Private · draft</div>
-      <div class="nav-title">Paid Media OS</div>
-      <a href="#start">Start here</a>
+      <div class="brand">Private · Director OS</div>
+      <div class="nav-title">Playbook</div>
+      <a href="../index.html">Command Center</a>
+      <a href="access.html">Access</a>
+      <a href="radar.html">Radar</a>
+      <a href="dossier.html">Dossier</a>
+      <a href="audit.html">Audit</a>
+      <a href="turnaround.html">Turnarounds</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="coaching.html">Coaching</a>
+      <a href="productization.html">Productization</a>
+      <a href="prestart.html">Pre-Start</a>
+      <a href="#start">Playbook start</a>
       <a href="#s-pilot">First 10</a>
       <a href="#s-signal">Signal</a>
-      <a href="#s-access">Access</a>
       <a href="#s-roadmap">Roadmap</a>
       <a href="#findings">Notes</a>
-      <a class="cross" href="../meeting-guide/index.html">Meeting guide</a>
+      <a class="cross" href="../meeting-guide/">Meeting guide</a>
     </nav>
 
     <main class="main">
       <header id="start">
-        <div class="eyebrow">George’s private cockpit · not FirmPilot policy</div>
-        <h1>Paid Media Operating System</h1>
-        <p class="sub">Onboarding + First 10 audits. Fix signals before structure theater. Living draft from real accounts only.</p>
+        <div class="eyebrow">George’s private cockpit · Playbook depth · not FirmPilot policy</div>
+        <h1>Paid Media Playbook</h1>
+        <p class="sub">Signal thesis, First 10 board, structure/bidding rules, and deep checklists. Director modules live in the nav — this page keeps the operating substance.</p>
         <div class="link-row">
-          <a class="chip primary" href="../meeting-guide/index.html">Meeting guide</a>
+          <a class="chip primary" href="../index.html">Command Center</a>
+          <a class="chip" href="radar.html">Portfolio Radar</a>
+          <a class="chip" href="audit.html">Audit Engine</a>
+          <a class="chip" href="../meeting-guide/">Meeting guide</a>
           <a class="chip" href="#s-pilot">First 10 board</a>
           <a class="chip" href="#s-unknowns">Open unknowns</a>
+        </div>
+        <div class="flow" aria-label="Work flow" style="margin-top:0.5rem">
+          <a href="radar.html">Radar</a><span class="arrow">→</span>
+          <a href="dossier.html">Dossier</a><span class="arrow">→</span>
+          <a href="audit.html">Audit</a><span class="arrow">→</span>
+          <a href="turnaround.html">Intervention</a><span class="arrow">→</span>
+          <a href="coaching.html">Coaching</a><span class="arrow">→</span>
+          <a href="productization.html">Productization</a>
         </div>
       </header>
 
@@ -1052,7 +1090,7 @@
       <!-- ===== ACCESS ===== -->
       <section class="section-block" id="s-access">
         <h2 class="sec">Access &amp; entry</h2>
-        <p class="lede">Map owners. Ask for approved paths. Never store credentials on this page.</p>
+        <p class="lede">Map owners. Ask for approved paths. Never store credentials on this page. Full map + Oct 19 readiness: <a href="access.html">Access module</a> · <a href="prestart.html">Pre-Start</a>.</p>
 
         <details class="panel" data-panel data-accordion="access">
           <summary>Systems checklist<span class="tag">entry</span></summary>
@@ -1348,7 +1386,7 @@
 
       <footer class="page-foot">
         George Aguilar · private draft. Not a FirmPilot deliverable. No credentials or client PII.
-        Companion: <a href="../meeting-guide/index.html">Meeting guide</a>
+        <a href="../index.html">Command Center</a> · <a href="../meeting-guide/">Meeting guide</a>
       </footer>
     </main>
   </div>

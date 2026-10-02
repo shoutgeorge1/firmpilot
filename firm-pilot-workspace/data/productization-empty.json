@@ -1,0 +1,14 @@
+{
+  "label": "Productization candidates \u2014 empty until patterns observed",
+  "maturity_stages": [
+    "Observation",
+    "Repeated pattern",
+    "Prototype",
+    "Validating",
+    "Ready for Product review",
+    "Product testing",
+    "Engineering candidate",
+    "Productionized"
+  ],
+  "candidates": []
+}

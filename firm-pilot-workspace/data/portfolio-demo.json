@@ -1,0 +1,104 @@
+{
+  "mode": "demo",
+  "label": "DEMO ONLY \u2014 fictional accounts. NEVER real FirmPilot data.",
+  "accounts": [
+    {
+      "id": "demo-1",
+      "firm": "[DEMO] Northbridge Injury",
+      "practice_area": "PI / MVA",
+      "geography": "Metro A",
+      "ppc_owner": "Unassigned",
+      "client_manager": "Unassigned",
+      "monthly_spend": "~12k (fake)",
+      "budget": "fake",
+      "health_status": "critical",
+      "priority_reasons": [
+        "High spend + broken tracking (demo)"
+      ],
+      "tracking_confidence": "low",
+      "primary_conversions": "Raw calls (demo)",
+      "qualified_lead_volume": "\u2014",
+      "retained_case_volume": "\u2014",
+      "last_deep_review": "\u2014",
+      "next_review": "Demo"
+    },
+    {
+      "id": "demo-2",
+      "firm": "[DEMO] Harbor Family Law",
+      "practice_area": "Family",
+      "geography": "Metro B",
+      "ppc_owner": "Unassigned",
+      "client_manager": "Unassigned",
+      "monthly_spend": "~3k (fake)",
+      "budget": "fake",
+      "health_status": "watch",
+      "priority_reasons": [
+        "Low budget \u00b7 signal scarce (demo)"
+      ],
+      "tracking_confidence": "unknown",
+      "primary_conversions": "Forms (demo)",
+      "qualified_lead_volume": "\u2014",
+      "retained_case_volume": "\u2014",
+      "last_deep_review": "\u2014",
+      "next_review": "Demo"
+    },
+    {
+      "id": "demo-3",
+      "firm": "[DEMO] Ridge Estate Planning",
+      "practice_area": "Estate",
+      "geography": "Metro C",
+      "ppc_owner": "Unassigned",
+      "client_manager": "Unassigned",
+      "monthly_spend": "~6k (fake)",
+      "budget": "fake",
+      "health_status": "healthy",
+      "priority_reasons": [],
+      "tracking_confidence": "medium",
+      "primary_conversions": "Qualified calls (demo)",
+      "qualified_lead_volume": "demo",
+      "retained_case_volume": "demo",
+      "last_deep_review": "\u2014",
+      "next_review": "Demo"
+    },
+    {
+      "id": "demo-4",
+      "firm": "[DEMO] Westside Criminal",
+      "practice_area": "Criminal",
+      "geography": "Metro D",
+      "ppc_owner": "Unassigned",
+      "client_manager": "Unassigned",
+      "monthly_spend": "~8k (fake)",
+      "budget": "fake",
+      "health_status": "action",
+      "priority_reasons": [
+        "Client complaint + declining qualified leads (demo)"
+      ],
+      "tracking_confidence": "medium",
+      "primary_conversions": "Calls + forms (demo)",
+      "qualified_lead_volume": "\u2014",
+      "retained_case_volume": "\u2014",
+      "last_deep_review": "\u2014",
+      "next_review": "Demo"
+    },
+    {
+      "id": "demo-5",
+      "firm": "[DEMO] Lakeside Workers Comp",
+      "practice_area": "Workers Comp",
+      "geography": "Metro E",
+      "ppc_owner": "Unassigned",
+      "client_manager": "Unassigned",
+      "monthly_spend": "\u2014",
+      "budget": "\u2014",
+      "health_status": "unknown",
+      "priority_reasons": [
+        "Insufficient data (demo)"
+      ],
+      "tracking_confidence": "unknown",
+      "primary_conversions": "\u2014",
+      "qualified_lead_volume": "\u2014",
+      "retained_case_volume": "\u2014",
+      "last_deep_review": "\u2014",
+      "next_review": "Demo"
+    }
+  ]
+}

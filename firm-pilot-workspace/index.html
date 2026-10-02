@@ -3,93 +3,152 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FirmPilot — Cockpit</title>
-  <style>
-    :root {
-      --bg: #0f1419;
-      --panel: #1a2332;
-      --text: #e8eef6;
-      --muted: #9aabbc;
-      --accent: #3d8bfd;
-      --border: #2a3a4d;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, #1e3a5f 0%, transparent 55%),
-                  radial-gradient(900px 500px at 100% 0%, #1a2f28 0%, transparent 50%),
-                  var(--bg);
-      color: var(--text);
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-    }
-    main {
-      width: min(560px, 100%);
-    }
-    h1 {
-      font-size: 1.75rem;
-      font-weight: 650;
-      letter-spacing: -0.02em;
-      margin: 0 0 0.35rem;
-    }
-    p {
-      margin: 0 0 1.5rem;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.75rem;
-    }
-    a {
-      display: block;
-      padding: 1rem 1.15rem;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text);
-      text-decoration: none;
-      transition: border-color 0.15s, transform 0.15s;
-    }
-    a:hover {
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-    a strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-bottom: 0.2rem;
-    }
-    a span {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-  </style>
+  <title>Command Center — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/os.css" />
 </head>
 <body>
-  <main>
-    <h1>FirmPilot</h1>
-    <p>Personal cockpit tools for paid media and meeting prep. Sample / synthetic use only.</p>
-    <ul>
-      <li>
-        <a href="/paid-media-os/">
-          <strong>Paid Media OS</strong>
-          <span>Event lineage, reconciliation, and case-quality views</span>
-        </a>
-      </li>
-      <li>
-        <a href="/meeting-guide/">
-          <strong>Meeting Guide</strong>
-          <span>Interview and discovery meeting checklist</span>
-        </a>
-      </li>
-    </ul>
-  </main>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="root" aria-label="Primary"></nav>
+    <main class="main">
+      <header>
+        <div class="eyebrow">George’s private Director cockpit · not FirmPilot product</div>
+        <h1>Command Center</h1>
+        <p class="sub">Where am I on access? What needs attention? What’s the walk-in plan? Jump to the module that answers it.</p>
+      </header>
+
+      <div class="banner warn">
+        <strong>Private draft.</strong> No live Ads mutations. No credentials. Mock/demo rows are labeled — never present them as FirmPilot data. Start date target in this OS: <strong>October 19</strong> (confirm with FirmPilot).
+      </div>
+
+      <div class="walk-in">
+        <h2>When I walk in</h2>
+        <ol class="walk-list">
+          <li><span class="n">1</span><span>Get approved access (Ads, call platform, CRM, GTM/GA4, pages).</span></li>
+          <li><span class="n">2</span><span>Baseline ~10 accounts — Google metrics and business outcomes, separately.</span></li>
+          <li><span class="n">3</span><span>Prove whether Google is learning truth or garbage.</span></li>
+          <li><span class="n">4</span><span>Fix conversion signals before campaign cosmetics.</span></li>
+          <li><span class="n">5</span><span>Intervene → coach owner → extract patterns → productize only what repeats.</span></li>
+        </ol>
+      </div>
+
+      <section class="section-block">
+        <h2 class="sec">Status at a glance</h2>
+        <div class="board-meta">
+          <span class="status-pill warn" id="accessGlance">Access · mostly unknown</span>
+          <span class="status-pill accent">Portfolio · empty until authorized</span>
+          <span class="status-pill">Turnarounds · none queued</span>
+          <span class="status-pill">Demo mode available on Radar</span>
+        </div>
+        <p class="lede">Statuses update from your local Access checklists (this browser). They are not connected to FirmPilot systems.</p>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Needs attention</h2>
+        <div class="grid-cards two">
+          <div class="hub-card">
+            <div class="meta">Pre-start</div>
+            <h3>Oct 19 readiness gaps</h3>
+            <p>Map SSO/MFA/VPN, MCC, CRM, call platform, and people contacts before day one.</p>
+            <p style="margin-top:0.65rem"><a href="paid-media-os/prestart.html">Open Pre-Start →</a></p>
+          </div>
+          <div class="hub-card">
+            <div class="meta">Access</div>
+            <h3>Infrastructure still Unknown</h3>
+            <p>Confirm vs invent. Prefer FirmPilot’s existing dashboards/APIs when they exist.</p>
+            <p style="margin-top:0.65rem"><a href="paid-media-os/access.html">Open Access map →</a></p>
+          </div>
+          <div class="hub-card">
+            <div class="meta">Portfolio</div>
+            <h3>No real accounts loaded</h3>
+            <p>Radar schema is ready. Empty state is honest. Optional labeled demo only.</p>
+            <p style="margin-top:0.65rem"><a href="paid-media-os/radar.html">Open Portfolio Radar →</a></p>
+          </div>
+          <div class="hub-card">
+            <div class="meta">Flow</div>
+            <h3>Radar → Dossier → Audit → Intervention</h3>
+            <p>Then coaching handoff and productization when a pattern repeats.</p>
+            <p style="margin-top:0.65rem"><a href="paid-media-os/turnaround.html">Open Turnaround board →</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Director modules</h2>
+        <div class="flow" aria-label="Work flow">
+          <a href="paid-media-os/radar.html">Radar</a><span class="arrow">→</span>
+          <a href="paid-media-os/dossier.html">Dossier</a><span class="arrow">→</span>
+          <a href="paid-media-os/audit.html">Audit</a><span class="arrow">→</span>
+          <a href="paid-media-os/turnaround.html">Intervention</a><span class="arrow">→</span>
+          <a href="paid-media-os/coaching.html">Coaching</a><span class="arrow">→</span>
+          <a href="paid-media-os/productization.html">Productization</a>
+        </div>
+        <div class="grid-cards three">
+          <div class="hub-card"><a href="paid-media-os/access.html"><div class="meta">1</div><h3>Access &amp; Infrastructure</h3><p>Systems, status enum, blockers, next actions.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/radar.html"><div class="meta">2</div><h3>Portfolio Radar</h3><p>Where to look — not a vanity dashboard.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/dossier.html"><div class="meta">3</div><h3>Account Dossier</h3><p>Working surface during intervention.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/audit.html"><div class="meta">4</div><h3>Audit Engine</h3><p>Legal PPC failure patterns, prioritized.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/turnaround.html"><div class="meta">5</div><h3>Turnaround board</h3><p>Diagnosis → rebuild → QA → hand back.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/tracking.html"><div class="meta">6</div><h3>Tracking control</h3><p>Clean signal before structure theater.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/coaching.html"><div class="meta">7</div><h3>Coaching / handoff</h3><p>Transfer reasoning, not just changes.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/productization.html"><div class="meta">8</div><h3>Productization</h3><p>Repeated patterns → Product when ready.</p></a></div>
+          <div class="hub-card"><a href="paid-media-os/index.html"><div class="meta">Playbook</div><h3>Signal · First 10 · structure</h3><p>Existing depth: thesis, boards, bidding, roles.</p></a></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Thesis (don’t lose this)</h2>
+        <div class="grid-cards two">
+          <div class="t-card full">
+            <h3>Central thesis</h3>
+            <p>Biggest risk is often <strong>conversion signal quality</strong>, not campaign structure. A call or form is <strong>not</strong> automatically valuable.</p>
+          </div>
+          <div class="t-card">
+            <h3>Director leverage</h3>
+            <p>See the portfolio → triage → diagnose → fix highest leverage → coach owner → extract patterns. Do not become permanent AM for 20–30 accounts.</p>
+          </div>
+          <div class="t-card">
+            <h3>Hard rule</h3>
+            <p>AI must <strong>not</strong> invent conversion values because a transcript “sounds good.” Prefer FirmPilot sources when available.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Companions</h2>
+        <div class="link-row">
+          <a class="chip primary" href="meeting-guide/">Meeting guide</a>
+          <a class="chip" href="paid-media-os/index.html#s-pilot">First 10 board</a>
+          <a class="chip" href="paid-media-os/index.html#s-unknowns">Open unknowns</a>
+          <a class="chip" href="IMPLEMENTATION_MAP.md">Implementation map</a>
+        </div>
+        <div class="banner info">
+          <strong>Experiment lab (stub):</strong> Messy Cursor prototypes stay private and labeled Experimental — not organizational deliverables. Wire a dedicated lab page after Oct 19 if needed.
+        </div>
+      </section>
+
+      <footer class="page-foot">
+        George Aguilar · private Director OS. Not a FirmPilot deliverable. Sample / synthetic use only until authorized data contracts exist.
+      </footer>
+    </main>
+  </div>
+  <script src="assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("command");
+    (function () {
+      try {
+        var d = FirmPilotOS.loadStore("access");
+        var checks = d.checks || {};
+        var keys = Object.keys(checks);
+        var on = keys.filter(function (k) { return checks[k]; }).length;
+        var el = document.getElementById("accessGlance");
+        if (!keys.length) return;
+        el.textContent = "Access checks · " + on + " marked";
+        el.className = "status-pill " + (on >= 8 ? "ok" : "warn");
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>

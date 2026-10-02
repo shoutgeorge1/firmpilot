@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Access Map — FirmPilot Director OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/os.css" />
+</head>
+<body>
+  <div class="shell">
+    <nav class="side-nav" id="os-nav" data-depth="module" aria-label="Primary"></nav>
+    <main class="main">
+
+      <header>
+        <div class="eyebrow">Module 5 · Access &amp; Infrastructure</div>
+        <h1>Access &amp; Infrastructure Map</h1>
+        <p class="sub">Track systems required to operate. Status is local until FirmPilot confirms. Never store credentials here.</p>
+        <div class="link-row">
+          <a class="chip primary" href="prestart.html">Oct 19 Pre-Start</a>
+          <a class="chip" href="index.html#s-access">Playbook access notes</a>
+          <a class="chip" href="../meeting-guide/">Meeting guide</a>
+        </div>
+      </header>
+
+      <div class="banner warn">
+        Status vocabulary: <strong>Confirmed · Requested · Available but disconnected · Unknown · Not available · Not needed</strong>. Prefer consuming FirmPilot dashboards/APIs over recreating them.
+      </div>
+
+      <div class="board-meta">
+        <span class="status-pill" id="saveStatus">Saves in this browser only</span>
+        <span class="status-pill warn">Pre-start target · Oct 19</span>
+      </div>
+
+      <section class="section-block">
+        <h2 class="sec">Systems inventory</h2>
+        <p class="lede">Loaded from <code>data/access-systems.json</code>. Update checkboxes/notes locally; replace adapter later with authorized sources.</p>
+        <div id="accessTable" class="table-wrap"></div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="sec">Readiness checklist</h2>
+        <details class="panel" data-panel data-accordion="access" open>
+          <summary>Day-one blockers<span class="tag">local</span></summary>
+          <div class="body">
+            <ul class="checks">
+              <li><input type="checkbox" id="ax_email" /><label for="ax_email">Company email / Workspace</label><select class="badge-select" data-badge data-for="ax_email"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+              <li><input type="checkbox" id="ax_mcc" /><label for="ax_mcc">MCC invite accepted (read path clear)</label><select class="badge-select" data-badge data-for="ax_mcc"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+              <li><input type="checkbox" id="ax_call" /><label for="ax_call">Call platform access identified</label><select class="badge-select" data-badge data-for="ax_call"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+              <li><input type="checkbox" id="ax_crm" /><label for="ax_crm">CRM / intake path identified</label><select class="badge-select" data-badge data-for="ax_crm"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+              <li><input type="checkbox" id="ax_gtm" /><label for="ax_gtm">GTM / GA4 owners known</label><select class="badge-select" data-badge data-for="ax_gtm"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+              <li><input type="checkbox" id="ax_vpn" /><label for="ax_vpn">SSO / MFA / VPN path tested</label><select class="badge-select" data-badge data-for="ax_vpn"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+              <li><input type="checkbox" id="ax_roster" /><label for="ax_roster">Client roster + PPC ownership map requested</label><select class="badge-select" data-badge data-for="ax_roster"><option value="unknown">UNKNOWN</option><option value="healthy">CONFIRMED</option><option value="warning">REQUESTED</option><option value="broken">BLOCKED</option></select></li>
+            </ul>
+            <div class="callout">Do not invent FirmPilot APIs, CRM names, or people. Mark Unknown until confirmed.</div>
+            <div class="field" style="margin-top:1rem">
+              <label class="field-label" for="axNotes">Open blockers / next asks</label>
+              <textarea id="axNotes" data-note class="tall" placeholder="Who to ask · what access · by when"></textarea>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <footer class="page-foot">
+        Private Director OS · not FirmPilot product · no credentials · <a href="../index.html">Command Center</a>
+      </footer>
+    </main>
+  </div>
+  <script src="../assets/os.js"></script>
+  <script>
+    FirmPilotOS.injectNav("access");
+    FirmPilotOS.bindAccordions();
+
+    FirmPilotOS.bindLocalPersistence("access", "#saveStatus");
+    fetch("../data/access-systems.json").then(function(r){return r.json()}).then(function(data){
+      var wrap = document.getElementById("accessTable");
+      var rows = (data.systems||[]).map(function(s){
+        return "<tr><td class=\"firm\">"+s.name+"</td><td>"+s.purpose+"</td><td>"+(s.status||"unknown")+"</td><td>"+(s.next||"—")+"</td></tr>";
+      }).join("");
+      wrap.innerHTML = "<table class=\"data\"><thead><tr><th>System</th><th>Purpose</th><th>Status</th><th>Next</th></tr></thead><tbody>"+rows+"</tbody></table>";
+    }).catch(function(){
+      document.getElementById("accessTable").innerHTML = "<div class=\"empty-state\">Could not load access-systems.json (open via local server or Vercel).</div>";
+    });
+
+  </script>
+</body>
+</html>
